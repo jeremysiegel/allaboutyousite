@@ -9,16 +9,16 @@ export default class MRS extends Phaser.Scene {
 
   preload () {
 
-    this.load.image('bladder', '../../Puberty/Male-Internal/images/bladder.png');
-    this.load.image('labels', '../../Puberty/Male-Internal/images/labels.png');
-    this.load.image('labelLines', '../../Puberty/Male-Internal/images/label lines.png');
-    this.load.image('epididymis', '../../Puberty/Male-Internal/images/epididymis.png');
-    this.load.image('MRS', '../../Puberty/Male-Internal/images/MRS.png');
-    this.load.image('prostate', '../../Puberty/Male-Internal/images/prostate.png');
-    this.load.image('svesicle', '../../Puberty/Male-Internal/images/svesicle.png');
-    this.load.image('teste', '../../Puberty/Male-Internal/images/teste.png');
-    this.load.image('urethra', '../../Puberty/Male-Internal/images/urethra.png');
-    this.load.image('vasdeferens', '../../Puberty/Male-Internal/images/vasdeferens.png');
+    this.load.image('bladder', '../../Puberty/Male-internal/images/bladder.png');
+    this.load.image('labels', '../../Puberty/Male-internal/images/labels.png');
+    this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
+    this.load.image('epididymis', '../../Puberty/Male-internal/images/epididymis.png');
+    this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
+    this.load.image('prostate', '../../Puberty/Male-internal/images/prostate.png');
+    this.load.image('svesicle', '../../Puberty/Male-internal/images/svesicle.png');
+    this.load.image('teste', '../../Puberty/Male-internal/images/teste.png');
+    this.load.image('urethra', '../../Puberty/Male-internal/images/urethra.png');
+    this.load.image('vasdeferens', '../../Puberty/Male-internal/images/vasdeferens.png');
 
     this.load.image('button', '../../common/images/buttons/red_button01.png');
     this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
