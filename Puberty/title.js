@@ -7,7 +7,7 @@ export default class Title extends Phaser.Scene {
   preload () {
 
     this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
-    this.load.image('FRS', '../../Puberty/Female-internal/images/FRS diagram.png');
+    this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
 
   }
 
