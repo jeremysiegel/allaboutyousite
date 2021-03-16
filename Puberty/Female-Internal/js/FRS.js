@@ -66,6 +66,9 @@ export default class FRS extends Phaser.Scene {
     resources.explanationButton = new ToggleButton(this, 435, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Explanations', explanations);
     resources.explanationButton.visible = false;
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
+  
+    resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
+
   }
 }
 
@@ -82,6 +85,10 @@ function explanations() {
   new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
   
   resources.definitionDisplay.text = resources.definitions[resources.organ];
+}
+
+function home() {
+  this.scene.switch('title');
 }
 
 var resources = {

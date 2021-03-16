@@ -42,8 +42,6 @@ export default class MRS extends Phaser.Scene {
     resources.epididymis = this.add.image(353.55, 398.7, 'epididymis');
     resources.svesicle = this.add.image(510.4, 235.25, 'svesicle');
 
-
-
     resources.organs = [resources.maleInternal, resources.bladder, resources.prostate, resources.vasdeferens, resources.teste, resources.epididymis, resources.svesicle, resources.urethra];
 
     resources.labels = this.add.image(416.05, 321.45, 'labels');
@@ -64,7 +62,10 @@ export default class MRS extends Phaser.Scene {
     
     resources.explanationButton = new ToggleButton(this, 435, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Explanations', explanations);
     resources.explanationButton.visible = false;
+    
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
+    
+    resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
   }
 }
 
@@ -81,6 +82,10 @@ function explanations() {
   new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
   
   resources.definitionDisplay.text = resources.definitions[resources.organ];
+}
+
+function home() {
+  this.scene.switch('title');
 }
 
 var resources = {

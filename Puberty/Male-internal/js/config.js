@@ -3,7 +3,6 @@ import MRS from './MRS.js';
 var config = {
   type: Phaser.AUTO,
   transparent: true,
- // backgroundColor: 0xfffef1,
   scene: [MRS],
   scale: {
     mode: Phaser.Scale.FIT,
