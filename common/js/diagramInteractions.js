@@ -1,7 +1,8 @@
+
 export default class DiagramInteractions {
   constructor(shapes, textbox, textContent, clickObject, clickProperty, button) {
     for (let shape of shapes) {
-      shape.setInteractive()
+      shape.setInteractive({ pixelPerfect: true })
         .on('pointerover', function() {
           this.setBlendMode(Phaser.BlendModes.SCREEN);
         })
@@ -11,7 +12,7 @@ export default class DiagramInteractions {
         .on('pointerup', function() {
           textbox.setText(textContent[shape.texture.key]);
           clickObject[clickProperty] = shape.texture.key;
-          button.visible = true;
+          button.visible = true;   
       });
     }
   }

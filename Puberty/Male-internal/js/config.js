@@ -1,10 +1,10 @@
-import FRS from './FRS.js';
+import MRS from './MRS.js';
 
 var config = {
   type: Phaser.AUTO,
   transparent: true,
  // backgroundColor: 0xfffef1,
-  scene: [FRS],
+  scene: [MRS],
   scale: {
     mode: Phaser.Scale.FIT,
     width: 1280,
