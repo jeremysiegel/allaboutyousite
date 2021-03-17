@@ -2,7 +2,7 @@
 export default class DiagramInteractions {
   constructor(shapes, textbox, textContent, clickObject, clickProperty, button) {
     for (let shape of shapes) {
-      shape.setInteractive({ pixelPerfect: true })
+      shape.setInteractive({pixelPerfect: true})
         .on('pointerover', function() {
           this.setBlendMode(Phaser.BlendModes.SCREEN);
         })
