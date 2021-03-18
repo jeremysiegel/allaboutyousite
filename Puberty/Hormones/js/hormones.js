@@ -39,11 +39,11 @@ export default class Hormones extends Phaser.Scene {
 
     resources.cells.create(1057.7, 131.5, 'receptorCell').setCircle(125).setTint(0x999999);
     resources.cells.create(1052.25, 462.15, 'receptorCell2').setCircle(115).setTint(0x999999);
-    resources.cells.create(161.45, 136.2, 'signalCell');
-    resources.cells.create(162.3, 453.4, 'signalCell2');
+    resources.cells.create(161.45, 136.2, 'signalCell').setCircle(105);
+    resources.cells.create(162.3, 453.4, 'signalCell2').setCircle(105);
 
-    resources.hormones.create(188.7, 56.4, 'hormone').setInteractive({useHandCursor: true, draggable: true}).setCircle(22).setImmovable(true);
-    resources.hormones.create(213.35, 396.65, 'hormone2').setInteractive({useHandCursor: true, draggable: true}).setCircle(25).setImmovable(true);;
+    resources.hormones.create(188.7, 56.4, 'hormone').setInteractive({useHandCursor: true, draggable: true}).setCircle(22);
+    resources.hormones.create(213.35, 396.65, 'hormone2').setInteractive({useHandCursor: true, draggable: true}).setCircle(25);
 
    // resources.hormone = this.physics.add.sprite(400, 150, 'hormone').setCollideWorldBounds(true);
    // resources.hormone2 = this.physics.add.sprite(470, 450, 'hormone2').setCollideWorldBounds(true);
@@ -56,7 +56,7 @@ export default class Hormones extends Phaser.Scene {
 
       if (gameObject.texture.key === 'hormone') {
         index = 0;
-        
+
       } else if (gameObject.texture.key === 'hormone2') {
         index = 1;
       }
@@ -85,11 +85,11 @@ export default class Hormones extends Phaser.Scene {
    // resources.cells.refresh();
 
     this.physics.add.collider(resources.hormones, resources.cells);
-    this.physics.add.collider(resources.hormones, resources.hormones);
-    this.physics.add.overlap(resources.hormones, resources.receptors, (gameObject1, gameObject2) => {console.log('overlap')});
+   // this.physics.add.collider(resources.hormones, resources.hormones);
+  //  this.physics.add.overlap(resources.hormones, resources.receptors, (gameObject1, gameObject2) => {console.log('overlap')});
 
 
-   // resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
+    resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
   }
 }
 
@@ -149,10 +149,10 @@ function testOverlap(hormoneObj){
   }
 }
 
-/*
+
 function home() {
   this.scene.switch('title');
 }
 
-*/
+
 
