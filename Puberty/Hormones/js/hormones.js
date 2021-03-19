@@ -9,12 +9,15 @@ export default class Hormones extends Phaser.Scene {
 
   preload () {
 
+    this.load.image('estrogenReceptor', '../../Puberty/Changes/images/estrogenReceptor.png');
+    this.load.image('estrogen', '../../Puberty/Changes/images/estrogen.png');
+
+    this.load.image('testosteroneReceptor', '../../Puberty/Changes/images/testosteroneReceptor.png');
+    this.load.image('testosterone', '../../Puberty/Changes/images/testosterone.png');
+    
     this.load.image('receptorCell', '../../Puberty/Hormones/images/receptorCell.png');
     this.load.image('receptorCell2', '../../Puberty/Hormones/images/receptorCell2.png');
-    this.load.image('receptor', '../../Puberty/Hormones/images/receptor.png');
-    this.load.image('receptor2', '../../Puberty/Hormones/images/receptor2.png');
-    this.load.image('hormone', '../../Puberty/Hormones/images/hormone.png');
-    this.load.image('hormone2', '../../Puberty/Hormones/images/hormone2.png');
+   
     this.load.image('signalCell', '../../Puberty/Hormones/images/signalCell.png');
     this.load.image('signalCell2', '../../Puberty/Hormones/images/signalCell2.png');
 
@@ -31,65 +34,46 @@ export default class Hormones extends Phaser.Scene {
     */
     
     resources.cells = this.physics.add.staticGroup();
-    resources.hormones = this.physics.add.group({collideWorldBounds:true});
-    resources.receptors = this.physics.add.staticGroup();
+    //resources.hormones = this.physics.add.group({collideWorldBounds:true});
+    //resources.receptors = this.physics.add.staticGroup();
 
-    resources.receptors.create(920.1, 215.65, 'receptor').setCircle(30);
-    resources.receptors.create(913.5, 388.1, 'receptor2').setCircle(30);
-    //resources.receptor = this.physics.add.image(920.1, 215.65, 'receptor');
-    //resources.receptor2 = this.physics.add.image(913.5, 388.1, 'receptor2');
+    resources.estrogenReceptor = new Receptor(this, 850.1, 180.65, 'estrogenReceptor', 1, 155);
+    resources.testosteroneReceptor = new Receptor(this, 850.5, 388.1, 'testosteroneReceptor', 1, 200);
 
     resources.cells.create(1057.7, 131.5, 'receptorCell').setCircle(125).setTint(0x999999);
     resources.cells.create(1052.25, 462.15, 'receptorCell2').setCircle(115).setTint(0x999999);
     resources.cells.create(161.45, 136.2, 'signalCell').setCircle(105);
     resources.cells.create(162.3, 453.4, 'signalCell2').setCircle(105);
 
-    resources.hormones.create(188.7, 56.4, 'hormone').setInteractive({useHandCursor: true, draggable: true}).setCircle(22);
-    resources.hormones.create(213.35, 396.65, 'hormone2').setInteractive({useHandCursor: true, draggable: true}).setCircle(25);
+    resources.estrogen = new Hormone(this, 188.7, 56.4, 'estrogen');
+    resources.testosterone = new Hormone(this, 213.35, 396.65, 'testosterone');
+    resources.testosterone.angle = 200;
 
-   // resources.hormone = this.physics.add.sprite(400, 150, 'hormone').setCollideWorldBounds(true);
-   // resources.hormone2 = this.physics.add.sprite(470, 450, 'hormone2').setCollideWorldBounds(true);
-    //resources.hormones.hormone
 
-    this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
-      gameObject.x = dragX;
-      gameObject.y = dragY;
-      var index;
+  //  resources.estrogenReceptorGroup = this.physics.add.staticGroup(resources.estrogenReceptor);
+    resources.hormones = this.physics.add.group({collideWorldBounds:true});
+    resources.hormones.add(resources.estrogen);
 
-      if (gameObject.texture.key === 'hormone') {
-        index = 0;
+  //  resources.testosteroneReceptorGroup = this.physics.add.staticGroup(resources.testosteroneReceptor);
+  //  resources.testosteroneGroup = this.physics.add.group({collideWorldBounds:true});
+    resources.hormones.add(resources.testosterone);
 
-      } else if (gameObject.texture.key === 'hormone2') {
-        index = 1;
-      }
-    
-      var overlap = testOverlap(gameObject);
-
-      if (overlap === false) {
-        resources.cells.children.entries[index].setTint(0x999999);
-      }
+    this.physics.add.overlap(resources.estrogenReceptor, resources.estrogen, (receptor, hormone) => {
+      bindHormone(receptor, hormone);
     });
 
-    this.input.on('dragend', function(pointer, gameObject) {
-      
-      var index = testOverlap(gameObject);
-
-      if (index !== false) {
-        bindReceptor(gameObject, index);
-      }
+    this.physics.add.overlap(resources.testosteroneReceptor, resources.testosterone, (receptor, hormone) => {
+      bindHormone(receptor, hormone);
     });
-
-   // resources.hormone2.setInteractive({useHandCursor: true});
-
-  //  resources.hormones[hormone2].setCircle(25);
-  //  resources.hormones.hormone.setCircle(22);
-
-   // resources.cells.refresh();
 
     this.physics.add.collider(resources.hormones, resources.cells);
-   // this.physics.add.collider(resources.hormones, resources.hormones);
-  //  this.physics.add.overlap(resources.hormones, resources.receptors, (gameObject1, gameObject2) => {console.log('overlap')});
 
+    this.input.on('drag', function(pointer, hormone, dragX, dragY) {
+      hormone.x = dragX;
+      hormone.y = dragY;
+
+      unbindHormone(hormone);
+    });
 
     resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
   }
@@ -97,6 +81,33 @@ export default class Hormones extends Phaser.Scene {
 
 var resources = {};
 
+function bindHormone(receptor, hormone) {
+  var cell;
+  
+  if (hormone === resources.estrogen) {
+    cell = resources.cells.children.entries[0];
+  } else {
+    cell = resources.cells.children.entries[1];
+  }
+  
+  hormone.on('pointerup', () => {
+ 
+      hormone.bindReceptor(hormone, receptor, cell);
+    
+  });
+}
+
+function unbindHormone(hormone) {
+  var cell;
+
+  if (hormone === resources.estrogen) {
+    cell = resources.cells.children.entries[0];
+  } else {
+    cell = resources.cells.children.entries[1];
+  }
+  hormone.unbindReceptor(hormone, cell);
+}
+/*
 function bindReceptor(hormoneObj, index) {
   var cellObj = resources.cells.children.entries[index];
 
@@ -150,7 +161,7 @@ function testOverlap(hormoneObj){
     }
   }
 }
-
+*/
 
 function home() {
   this.scene.switch('title');

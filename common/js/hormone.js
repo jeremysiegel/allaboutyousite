@@ -8,11 +8,9 @@ export default class Hormone extends Phaser.GameObjects.Sprite {
 
     this.body.setCircle(36);
 
-    Hormone.prototype.getX = function () {
-      console.log(this.x);
-    }
+    Hormone.prototype.isBound = false;
 
-    Hormone.prototype.bindReceptor = function (receptor) {
+    Hormone.prototype.bindReceptor = function (hormone, receptor, cell) {
       var boundsR = receptor.returnBounds();
       var boundsH = this.getBounds();
       var overlap = Phaser.Geom.Intersects.RectangleToRectangle(boundsR, boundsH);
@@ -21,8 +19,19 @@ export default class Hormone extends Phaser.GameObjects.Sprite {
       if (overlap) {
         this.setX(bindSite.x);
         this.setY(bindSite.y);
+        hormone.isBound = true;
       }
 
+      if (cell && hormone.isBound) {
+        cell.setTint(0xffffff);
+      }
+    }
+
+    Hormone.prototype.unbindReceptor = function(hormone, cell) {
+      if (hormone.isBound) {
+        cell.setTint(0x999999);
+        hormone.isBound = false;
+      }
     }
   }
 }
