@@ -1,4 +1,6 @@
 import ToggleButton from '../../../common/js/toggleButton.js';
+import Hormone from '../../../common/js/hormone.js';
+import Receptor from '../../../common/js/receptor.js';
     
 export default class Hormones extends Phaser.Scene {
   constructor() {

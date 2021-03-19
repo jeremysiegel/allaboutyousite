@@ -1,6 +1,6 @@
 import ToggleButton from '../../../common/js/toggleButton.js';
-import Hormone from './hormone.js';
-import Receptor from './receptor.js';
+import Hormone from '../../../common/js/hormone.js';
+import Receptor from '../../../common/js/receptor.js';
     
 export default class Changes extends Phaser.Scene {
   constructor() {
@@ -24,9 +24,11 @@ export default class Changes extends Phaser.Scene {
     resources.estrogen = new Hormone(this, 100, 100, 'estrogen');
 
     resources.estrogenReceptors = this.physics.add.staticGroup([resources.estrogenReceptor1, resources.estrogenReceptor2]);
-    resources.estrogens = this.physics.add.group(resources.estrogen);
+    resources.estrogens = this.physics.add.group({collideWorldBounds:true});
 
-    this.physics.add.overlap(resources.estrogenReceptors, resources.estrogens, (gameObject1, gameObject2) => {gameObject2.bindReceptor(gameObject1.body.center)});
+    resources.estrogens.add(resources.estrogen);
+
+    this.physics.add.overlap(resources.estrogenReceptors, resources.estrogens, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(receptor)})});
 
     //resources.estrogenReceptor2.changeAngle(135);
     //resources.estrogenReceptor2.changeScale(0.5);

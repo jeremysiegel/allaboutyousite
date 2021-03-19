@@ -12,10 +12,17 @@ export default class Hormone extends Phaser.GameObjects.Sprite {
       console.log(this.x);
     }
 
-    Hormone.prototype.bindReceptor = function (bindSite) {
-      this.setX(bindSite.x);
-      this.setY(bindSite.y);
-    }
+    Hormone.prototype.bindReceptor = function (receptor) {
+      var boundsR = receptor.returnBounds();
+      var boundsH = this.getBounds();
+      var overlap = Phaser.Geom.Intersects.RectangleToRectangle(boundsR, boundsH);
+      var bindSite = receptor.body.center;
+      
+      if (overlap) {
+        this.setX(bindSite.x);
+        this.setY(bindSite.y);
+      }
 
+    }
   }
 }

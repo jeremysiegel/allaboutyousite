@@ -28,6 +28,10 @@ export default class Receptor extends Phaser.GameObjects.Container {
       this.receptor.angle = angle;
     }
 
+    Receptor.prototype.returnBounds = function () {
+      return this.receptor.getBounds();
+    }
+
    // Receptor.prototype.changeScale = function (scale) {
     //  this.receptor.setScale(scale);
     //  this.body.setCircle(radius*scale);
