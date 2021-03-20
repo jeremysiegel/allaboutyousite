@@ -11,6 +11,8 @@ export default class Title extends Phaser.Scene {
     this.load.image('hormones', '../../Puberty/Hormones/images/receptorCell.png');
     this.load.image('changes', '../../common/images/objects/estrogenReceptor.png');
     this.load.image('estrogen', '../../common/images/objects/estrogen.png');
+    this.load.image('testosteroneReceptor', '../../common/images/objects/testosteroneReceptor.png');
+    this.load.image('testosterone', '../../common/images/objects/testosterone.png');
   }
 
   create () {
