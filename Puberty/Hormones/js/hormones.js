@@ -1,4 +1,4 @@
-import ToggleButton from '../../../common/js/toggleButton.js';
+import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
     
@@ -27,15 +27,8 @@ export default class Hormones extends Phaser.Scene {
   }
 
   create () {
-    /*
-    window.addEventListener('resize', () => {
-      console.log('resize');
-    });
-    */
     
     resources.cells = this.physics.add.staticGroup();
-    //resources.hormones = this.physics.add.group({collideWorldBounds:true});
-    //resources.receptors = this.physics.add.staticGroup();
 
     resources.estrogenReceptor = new Receptor(this, 850.1, 180.65, 'estrogenReceptor', 1, 155);
     resources.testosteroneReceptor = new Receptor(this, 850.5, 388.1, 'testosteroneReceptor', 1, 200);
@@ -49,13 +42,9 @@ export default class Hormones extends Phaser.Scene {
     resources.testosterone = new Hormone(this, 213.35, 396.65, 'testosterone');
     resources.testosterone.angle = 200;
 
-
-  //  resources.estrogenReceptorGroup = this.physics.add.staticGroup(resources.estrogenReceptor);
     resources.hormones = this.physics.add.group({collideWorldBounds:true});
     resources.hormones.add(resources.estrogen);
 
-  //  resources.testosteroneReceptorGroup = this.physics.add.staticGroup(resources.testosteroneReceptor);
-  //  resources.testosteroneGroup = this.physics.add.group({collideWorldBounds:true});
     resources.hormones.add(resources.testosterone);
 
     this.physics.add.overlap(resources.estrogenReceptor, resources.estrogen, (receptor, hormone) => {
@@ -75,7 +64,7 @@ export default class Hormones extends Phaser.Scene {
       unbindHormone(hormone);
     });
 
-    resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
+    resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
 }
 
@@ -106,65 +95,6 @@ function unbindHormone(hormone) {
     cell = resources.cells.children.entries[1];
   }
   hormone.unbindReceptor(hormone, cell);
-}
-/*
-function bindReceptor(hormoneObj, index) {
-  var cellObj = resources.cells.children.entries[index];
-
-  cellObj.setTint(0xffffff);
-  var x;
-  var y;
-
-  if (index === 0) {
-    x = 895.2;
-    y = 219.9;
-  } else if (index === 1) {
-    x = 883.35;
-    y = 380.65;
-  }
-
-  hormoneObj.setX(x);
-  hormoneObj.setY(y);
-
-}
-
-function testOverlap(hormoneObj){
-
-  var receptorObj;
-  var cellObj;
-  var index;
-
-  if (hormoneObj.texture.key === 'hormone') {
-    index = 0;
-    
-  } else if (hormoneObj.texture.key === 'hormone2') {
-    index = 1;
-  }
-
-  receptorObj = resources.receptors.children.entries[index];
-
-  
-  index = checkOverlap(hormoneObj, receptorObj, index);
-
-  return index;
-
-  function checkOverlap(hormoneObj, receptorObj, index) {
-    var boundsH = hormoneObj.getBounds();
-    var boundsR = receptorObj.getBounds();
-    var overlap = Phaser.Geom.Intersects.RectangleToRectangle(boundsH, boundsR);
-
-    if (overlap) {
-      return index;
-    } else {
-
-      return false;
-    }
-  }
-}
-*/
-
-function home() {
-  this.scene.switch('title');
 }
 
 

@@ -1,4 +1,4 @@
-import ToggleButton from '../../../common/js/toggleButton.js';
+import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
     
@@ -28,7 +28,7 @@ export default class Changes extends Phaser.Scene {
 
     resources.estrogens.add(resources.estrogen);
 
-    this.physics.add.overlap(resources.estrogenReceptors, resources.estrogens, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(receptor)})});
+    this.physics.add.overlap(resources.estrogenReceptors, resources.estrogens, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(hormone, receptor)})});
 
     //resources.estrogenReceptor2.changeAngle(135);
     //resources.estrogenReceptor2.changeScale(0.5);
@@ -45,16 +45,11 @@ export default class Changes extends Phaser.Scene {
    //   resources.estrogen.bindReceptor(bindingSite);
    // })
 
-    resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
+   resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
 }
 
 var resources = {};
-
-
-function home() {
-  this.scene.switch('title');
-}
 
 
 

@@ -1,3 +1,4 @@
+import SceneButton from '../../../common/js/sceneButton.js';
 import ToggleButton from '../../../common/js/toggleButton.js';
 import MRSStrings from './MRS_strings.js';
 import DiagramInteractions from '../../../common/js/diagramInteractions.js';
@@ -61,11 +62,11 @@ export default class MRS extends Phaser.Scene {
     );
     
     resources.explanationButton = new ToggleButton(this, 435, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Explanations', explanations);
-    resources.explanationButton.visible = false;
+   // resources.explanationButton.visible = false;
     
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
     
-    resources.homeButton = new ToggleButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', home.bind(this));
+    resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
 }
 
@@ -82,10 +83,6 @@ function explanations() {
   new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
   
   resources.definitionDisplay.text = resources.definitions[resources.organ];
-}
-
-function home() {
-  this.scene.switch('title');
 }
 
 var resources = {
