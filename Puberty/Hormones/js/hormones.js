@@ -9,11 +9,12 @@ export default class Hormones extends Phaser.Scene {
 
   preload () {
 
-    this.load.image('estrogenReceptor', '../../Puberty/Changes/images/estrogenReceptor.png');
-    this.load.image('estrogen', '../../Puberty/Changes/images/estrogen.png');
+    this.load.image('estrogenReceptor', '../../common/images/objects/estrogenReceptor.png');
+    this.load.image('estrogen', '../../common/images/objects/estrogen.png');
+  
 
-    this.load.image('testosteroneReceptor', '../../Puberty/Changes/images/testosteroneReceptor.png');
-    this.load.image('testosterone', '../../Puberty/Changes/images/testosterone.png');
+    this.load.image('testosteroneReceptor', '../../common/images/objects/testosteroneReceptor.png');
+    this.load.image('testosterone', '../../common/images/objects/testosterone.png');
     
     this.load.image('receptorCell', '../../Puberty/Hormones/images/receptorCell.png');
     this.load.image('receptorCell2', '../../Puberty/Hormones/images/receptorCell2.png');
@@ -80,9 +81,7 @@ function bindHormone(receptor, hormone) {
   }
   
   hormone.on('pointerup', () => {
- 
-      hormone.bindReceptor(hormone, receptor, cell);
-    
+    hormone.bindReceptor(hormone, receptor, cell);
   });
 }
 

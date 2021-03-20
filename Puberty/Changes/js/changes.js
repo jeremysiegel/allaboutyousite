@@ -9,8 +9,8 @@ export default class Changes extends Phaser.Scene {
 
   preload () {
 
-    this.load.image('estrogenReceptor', '../../Puberty/Changes/images/estrogenReceptor.png');
-    this.load.image('estrogen', '../../Puberty/Changes/images/estrogen.png');
+    this.load.image('estrogenReceptor', '../../common/images/objects/estrogenReceptor.png');
+    this.load.image('estrogen', '../../common/images/objects/estrogen.png');
 
     this.load.image('button', '../../common/images/buttons/red_button01.png');
     this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');

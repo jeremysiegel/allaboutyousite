@@ -11,16 +11,16 @@ export default class Hormone extends Phaser.GameObjects.Sprite {
     Hormone.prototype.isBound = false;
 
     Hormone.prototype.bindReceptor = function (hormone, receptor, cell) {
-      var boundsR = receptor.returnBounds();
-      var boundsH = this.getBounds();
-      var overlap = Phaser.Geom.Intersects.RectangleToRectangle(boundsR, boundsH);
+      var boundsR = new Phaser.Geom.Circle( receptor.body.center.x, receptor.body.center.y, receptor.body.radius);
+      var boundsH = new Phaser.Geom.Circle( hormone.body.center.x, hormone.body.center.y, hormone.body.radius);
+      var overlap = Phaser.Geom.Intersects.CircleToCircle(boundsR, boundsH);
       var bindSite = receptor.body.center;
       
       if (overlap) {
         this.setX(bindSite.x);
         this.setY(bindSite.y);
         hormone.isBound = true;
-      }
+      } 
 
       if (cell && hormone.isBound) {
         cell.setTint(0xffffff);
@@ -32,6 +32,7 @@ export default class Hormone extends Phaser.GameObjects.Sprite {
         cell.setTint(0x999999);
         hormone.isBound = false;
       }
+
     }
   }
 }
