@@ -1,4 +1,4 @@
-import Changes from './changes.js';
+import Changes from './femaleChanges.js';
 
 var config = {
   type: Phaser.AUTO,

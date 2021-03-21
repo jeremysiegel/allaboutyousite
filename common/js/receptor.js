@@ -1,6 +1,6 @@
 
 export default class Receptor extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, key, scale, angle) {
+  constructor(scene, x, y, key, scale, angle, type) {
     super(scene, x, y);
 
 		this.receptor = scene.add.image(x, y, key);
@@ -12,6 +12,10 @@ export default class Receptor extends Phaser.GameObjects.Container {
 
     this.receptor.setScale(scale);
     this.receptor.angle = angle;
+
+    if (type) {
+      this.receptor.type = type;
+    }
 
 		const radius = this.receptor.height * 0.3 * scale;
 		this.body.setCircle(radius);

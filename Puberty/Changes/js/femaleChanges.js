@@ -2,7 +2,7 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
     
-export default class Changes extends Phaser.Scene {
+export default class FemaleChanges extends Phaser.Scene {
   constructor() {
     super({key: 'changes'})
   }
@@ -11,6 +11,9 @@ export default class Changes extends Phaser.Scene {
 
     this.load.image('estrogenReceptor', '../../common/images/objects/estrogenReceptor.png');
     this.load.image('estrogen', '../../common/images/objects/estrogen.png');
+    this.load.image('testosteroneReceptor', '../../common/images/objects/testosteroneReceptor.png');
+    this.load.image('testosterone', '../../common/images/objects/testosterone.png');
+    this.load.image('girl', './Puberty/Changes/images/girl.png');
 
     this.load.image('button', '../../common/images/buttons/red_button01.png');
     this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
@@ -19,11 +22,18 @@ export default class Changes extends Phaser.Scene {
 
   create () {
 
-    resources.estrogenReceptor1 = new Receptor(this, 500, 500, 'estrogenReceptor', 0.5, 135);
-    resources.estrogenReceptor2 = new Receptor(this, 300, 100, 'estrogenReceptor', 1, 45);
+    resources.girl = this.add.image(522.85, 310.25, 'girl');
+    
+    resources.estrogenReceptorBreasts = new Receptor(this, 600.75, 251.7, 'estrogenReceptor', 0.8, 12, 'breast');
+    resources.estrogenReceptorGenitals = new Receptor(this, 570.75, 384.45, 'estrogenReceptor', 0.8, 33, 'genitals');
+    resources.testosteroneReceptorHair = new Receptor(this, 601, 467, 'testosteroneReceptor', 0.8, 0, 'hair');
+    resources.estrogenReceptorGrowth = new Receptor(this, 392.55, 460.75, 'estrogenReceptor', 0.8, 180, 'growth');
+    resources.estrogenReceptorHips = new Receptor(this, 384.95, 362.9, 'estrogenReceptor', 0.8, 151, 'hips');
+    resources.testosteroneReceptorSweat = new Receptor(this, 390.65, 275.05, 'testosteroneReceptor', 0.8, 145, 'sweat');
+
     resources.estrogen = new Hormone(this, 100, 100, 'estrogen');
 
-    resources.estrogenReceptors = this.physics.add.staticGroup([resources.estrogenReceptor1, resources.estrogenReceptor2]);
+   // resources.estrogenReceptors = this.physics.add.staticGroup([resources.estrogenReceptor1, resources.estrogenReceptor2]);
     resources.estrogens = this.physics.add.group({collideWorldBounds:true});
 
     resources.estrogens.add(resources.estrogen);
