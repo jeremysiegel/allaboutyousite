@@ -39,8 +39,8 @@ export default class Hormones extends Phaser.Scene {
     resources.cells.create(161.45, 136.2, 'signalCell').setCircle(105);
     resources.cells.create(162.3, 453.4, 'signalCell2').setCircle(105);
 
-    resources.estrogen = new Hormone(this, 188.7, 56.4, 'estrogen');
-    resources.testosterone = new Hormone(this, 213.35, 396.65, 'testosterone');
+    resources.estrogen = new Hormone(this, 188.7, 56.4, 'estrogen', 1);
+    resources.testosterone = new Hormone(this, 213.35, 396.65, 'testosterone', 1);
     resources.testosterone.angle = 200;
 
     resources.hormones = this.physics.add.group({collideWorldBounds:true});

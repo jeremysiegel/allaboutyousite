@@ -5,7 +5,7 @@ export default class Receptor extends Phaser.GameObjects.Container {
 
 		this.receptor = scene.add.image(x, y, key);
 		this.receptor.setOrigin(0.9, 0.5);
-
+    
 		scene.physics.add.existing(this);
 
     this.receptor.setInteractive();
@@ -35,6 +35,8 @@ export default class Receptor extends Phaser.GameObjects.Container {
     Receptor.prototype.returnBounds = function () {
       return this.receptor.getBounds();
     }
+
+    Receptor.prototype.isBound = false;
 
    // Receptor.prototype.changeScale = function (scale) {
     //  this.receptor.setScale(scale);
