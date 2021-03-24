@@ -7,7 +7,7 @@ import FemaleChangesStrings from './femaleChangesStrings.js';
     
 export default class FemaleChanges extends Phaser.Scene {
   constructor() {
-    super({key: 'changes'})
+    super({key: 'femaleChanges'})
   }
 
   preload () {

@@ -2,8 +2,8 @@
 import MRS from './Male-internal/js/MRS.js';
 import FRS from './Female-Internal/js/FRS.js';
 import Hormones from './Hormones/js/hormones.js';
-import Male from './Changes/js/maleChanges.js';
-//import FemaleChanges from './Changes/js/femaleChanges.js';
+import MaleChanges from './Changes/js/maleChanges.js';
+import FemaleChanges from './Changes/js/femaleChanges.js';
 import Period from './Menstruation/js/period.js';
 import Pregnancy from './Pregnancy/js/pregnancy.js';
 
@@ -13,8 +13,8 @@ var title = new Title(game);
 var frs = new FRS();
 var hormones = new Hormones();
 var mrs = new MRS();
-var male = new Male();
-//var femaleChanges = new FemaleChanges();
+var maleChanges = new MaleChanges();
+var femaleChanges = new FemaleChanges();
 var period = new Period();
 var pregnancy = new Pregnancy();
 
@@ -41,8 +41,8 @@ game.scene.add('title', title);
 game.scene.add('FRS', frs);
 game.scene.add('MRS', mrs);
 game.scene.add('hormones', hormones);
-game.scene.add('male', male);
-//game.scene.add('femaleChanges', femaleChanges);
+game.scene.add('maleChanges', maleChanges);
+game.scene.add('femaleChanges', femaleChanges);
 game.scene.add('period', period);
 game.scene.add('pregnancy', pregnancy);
 

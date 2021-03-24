@@ -8,9 +8,9 @@ export default class Title extends Phaser.Scene {
 
     this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
     this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
-    this.load.image('hormones', '../../Puberty/Hormones/images/receptorCell.png');
-    this.load.image('femaleChangesPic', '../../common/images/objects/estrogenReceptor.png');
-    this.load.image('maleChangesPic', '../../common/images/objects/testosteroneReceptor.png');
+    this.load.image('receptorCell', '../../Puberty/Hormones/images/receptorCell.png');
+    this.load.image('femaleChanges', '../../common/images/objects/estrogenReceptor.png');
+    this.load.image('maleChanges', '../../common/images/objects/testosteroneReceptor.png');
     this.load.image('pregnancy', '../../Puberty/Pregnancy/images/pregnancy-9.png');
     this.load.image('period', '../../Puberty/Menstruation/images/period-3.png');
   }
@@ -24,9 +24,9 @@ export default class Title extends Phaser.Scene {
 
     this.femaleInternal = this.add.image(400, 200, 'FRS').setInteractive({useHandCursor: true}).setScale(0.4);
     this.maleInternal = this.add.image(900, 200, 'MRS').setInteractive({useHandCursor: true}).setScale(0.4);
-    this.hormones = this.add.image(400, 400, 'hormones').setInteractive({useHandCursor: true}).setScale(0.4);
-    this.male = this.add.image(900, 400, 'maleChangesPic').setInteractive({useHandCursor: true});
-   // this.femaleChanges = this.add.image(1050, 400, 'femaleChangesPic').setInteractive({useHandCursor: true});
+    this.hormones = this.add.image(400, 400, 'receptorCell').setInteractive({useHandCursor: true}).setScale(0.4);
+    this.maleChanges = this.add.image(900, 400, 'maleChanges').setInteractive({useHandCursor: true});
+    this.femaleChanges = this.add.image(1050, 400, 'femaleChanges').setInteractive({useHandCursor: true});
     this.period = this.add.image(650, 400, 'period').setInteractive({useHandCursor: true}).setScale(0.4);
     this.pregnancy = this.add.image(650, 200, 'pregnancy').setInteractive({useHandCursor: true});
 
@@ -42,13 +42,13 @@ export default class Title extends Phaser.Scene {
       this.scene.switch('hormones');
     })
 
-    this.male.on('pointerup', () => {
-      this.scene.switch('male');
+    this.maleChanges.on('pointerup', () => {
+      this.scene.switch('maleChanges');
     })
 
-   // this.femaleChanges.on('pointerup', () => {
-   //   this.scene.switch('femaleChanges');
-   // })
+    this.femaleChanges.on('pointerup', () => {
+      this.scene.switch('femaleChanges');
+    })
 
     this.period.on('pointerup', () => {
       this.scene.switch('period');
