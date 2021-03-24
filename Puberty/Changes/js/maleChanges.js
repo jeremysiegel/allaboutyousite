@@ -2,7 +2,7 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
 import ReceptorInteractions from '../../../common/js/receptorInteractions.js';
-import MaleChangesStrings from './MaleChangesStrings.js';
+import MaleChangesStrings from './maleChangesStrings.js';
 
     
 export default class MaleChanges extends Phaser.Scene {
