@@ -5,7 +5,6 @@ export default class Title extends Phaser.Scene {
   }
 
   preload () {
-
     this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
     this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
     this.load.image('receptorCell', '../../Puberty/Hormones/images/receptorCell.png');
@@ -13,6 +12,9 @@ export default class Title extends Phaser.Scene {
     this.load.image('maleChanges', '../../common/images/objects/testosteroneReceptor.png');
     this.load.image('pregnancy', '../../Puberty/Pregnancy/images/pregnancy-9.png');
     this.load.image('period', '../../Puberty/Menstruation/images/period-3.png');
+
+    this.load.scenePlugin('rexgesturesplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgesturesplugin.min.js', 'rexGestures', 'rexGestures');
+
   }
 
   create () {
@@ -21,6 +23,7 @@ export default class Title extends Phaser.Scene {
       console.log('resize');
     });
     */
+    var pinch = this.rexGestures.add.pinch();
 
     this.femaleInternal = this.add.image(400, 200, 'FRS').setInteractive({useHandCursor: true}).setScale(0.4);
     this.maleInternal = this.add.image(900, 200, 'MRS').setInteractive({useHandCursor: true}).setScale(0.4);
