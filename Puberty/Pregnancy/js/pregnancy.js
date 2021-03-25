@@ -25,8 +25,9 @@ export default class Pregnancy extends Phaser.Scene {
   }
 
   create () {
-    //const circle = new Phaser.Geom.Circle(444.7, 288.3, 230);
+   
     resources.ellipse = new Phaser.Geom.Ellipse(400, 300, 550, 460);
+    resources.rectangle = new Phaser.Geom.Rectangle(100, 100, 650, 460);
 
     resources.stages = this.add.group();
     
@@ -54,9 +55,11 @@ export default class Pregnancy extends Phaser.Scene {
 
     resources.pregnancy5.on('pointerdown', () => {console.log('click')});
 
-    // Phaser.Actions.PlaceOnCircle(resources.stages.getChildren(), circle);
-    Phaser.Actions.PlaceOnEllipse(resources.stagesBackground.getChildren(), resources.ellipse);
-    Phaser.Actions.PlaceOnEllipse(resources.stages.getChildren(), resources.ellipse);
+ 
+    // Phaser.Actions.PlaceOnEllipse(resources.stagesBackground.getChildren(), resources.ellipse);
+    //Phaser.Actions.PlaceOnEllipse(resources.stages.getChildren(), resources.ellipse);
+    Phaser.Actions.PlaceOnRectangle(resources.stagesBackground.getChildren(), resources.rectangle);
+    Phaser.Actions.PlaceOnRectangle(resources.stages.getChildren(), resources.rectangle);
 
     resources.definitionDisplay = this.add.text(820, 85, '',
       {
