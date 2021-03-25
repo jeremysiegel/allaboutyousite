@@ -16,7 +16,7 @@ export default class Period extends Phaser.Scene {
 
   create () {
     resources.stage = this.add.sprite(321.3, 277.3, 'periodSpritesheet', 0);
-    resources.hormones = this.add.image(990, 200, 'hormonesGraph').setScale(0.55);
+    resources.hormonesGraph = this.add.image(990, 200, 'hormonesGraph').setScale(0.55);
 
     resources.menstruationButton = new ToggleButton(this, 435, 200, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Menstruation', changeFRS.bind(this), 0);
     resources.follicularButton = new ToggleButton(this, 435, 220, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Follicular', changeFRS.bind(this), 1);
