@@ -13,7 +13,10 @@ export default class Title extends Phaser.Scene {
     this.load.image('pregnancy', '../../Puberty/Pregnancy/images/pregnancy-9.png');
     this.load.image('period', '../../Puberty/Menstruation/images/period-3.png');
 
-    this.load.scenePlugin('rexgesturesplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgesturesplugin.min.js', 'rexGestures', 'rexGestures');
+    var url;
+  
+    url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexpinchplugin.min.js';
+    this.load.plugin('rexpinchplugin', url, true);
 
   }
 
@@ -23,7 +26,19 @@ export default class Title extends Phaser.Scene {
       console.log('resize');
     });
     */
-    var pinch = this.rexGestures.add.pinch();
+    var dragScale = this.plugins.get('rexpinchplugin').add(this);
+
+    var camera = this.cameras.main;
+    dragScale
+        .on('drag1', function (dragScale) {
+            var drag1Vector = dragScale.drag1Vector;
+            camera.scrollX -= drag1Vector.x / camera.zoom;
+            camera.scrollY -= drag1Vector.y / camera.zoom;
+        })
+        .on('pinch', function (dragScale) {
+            var scaleFactor = dragScale.scaleFactor;
+            camera.zoom *= scaleFactor;
+        }, this);
 
     this.femaleInternal = this.add.image(400, 200, 'FRS').setInteractive({useHandCursor: true}).setScale(0.4);
     this.maleInternal = this.add.image(900, 200, 'MRS').setInteractive({useHandCursor: true}).setScale(0.4);

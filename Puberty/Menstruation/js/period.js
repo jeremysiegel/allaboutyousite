@@ -8,7 +8,7 @@ export default class Period extends Phaser.Scene {
 
   preload () {
     this.load.spritesheet('periodSpritesheet', '../../Puberty/Menstruation/images/period_spritesheet.png', { frameWidth: 489.4, frameHeight: 489.4, margin: 10, spacing: 20 });
-    this.load.image('hormonesGraph', '../../Puberty/Menstruation/images/hormones.png');
+    //this.load.image('hormonesGraph', '../../Puberty/Menstruation/images/hormones.png');
 
     this.load.image('button', '../../common/images/buttons/red_button01.png');
     this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');    
@@ -16,7 +16,7 @@ export default class Period extends Phaser.Scene {
 
   create () {
     resources.stage = this.add.sprite(321.3, 277.3, 'periodSpritesheet', 0);
-    resources.hormonesGraph = this.add.image(990, 200, 'hormonesGraph').setScale(0.55);
+    //resources.hormonesGraph = this.add.image(990, 200, 'hormonesGraph').setScale(0.55);
 
     resources.menstruationButton = new ToggleButton(this, 435, 200, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Menstruation', changeFRS.bind(this), 0);
     resources.follicularButton = new ToggleButton(this, 435, 220, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Follicular', changeFRS.bind(this), 1);
