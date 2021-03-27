@@ -10,8 +10,10 @@ export default class RSGame extends Phaser.Scene {
     this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
     this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
     this.load.image('sperm', '../../Puberty/rsGame/images/sperm.png');
-    this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm2_spritesheet.png', { frameWidth: 9, frameHeight: 69, margin: 10, spacing: 20 });
-    
+    this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm3_spritesheet.png', { frameWidth: 27, frameHeight: 214, margin: 10, spacing: 20 });
+   
+    // this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm2_spritesheet.png', { frameWidth: 9, frameHeight: 69, margin: 10, spacing: 20 });
+
    // this.load.spritesheet('spermSpritesheet2', '../../Puberty/rsGame/images/sperm_spritesheet.png', { frameWidth: 104, frameHeight: 277, margin: 10, spacing: 20 });
 
 
@@ -23,9 +25,19 @@ export default class RSGame extends Phaser.Scene {
   create () {
     resources.maleInternal = this.add.image(450.1, 289.45, 'MRS'); 
     resources.labelLines = this.add.image(435.05, 318.2, 'labelLines');
-    resources.sperm = this.add.image(346, 413, 'sperm').setAngle(60).setScale(0.65);
+   // resources.sperm = this.add.image(346, 413, 'sperm').setAngle(60).setScale(0.65);
 
+    this.anims.create({
+      key: 'swim',
+      frames: this.anims.generateFrameNumbers('spermSpritesheet', { frames: [0, 1, 2] }),
+      frameRate: 8,
+      repeat: -1
+    });
 
+    resources.sperm = this.add.sprite(346, 413, 'spermSpritesheet', 1);
+    resources.sperm.setScale(0.23);
+    resources.sperm.setAngle(315)
+    //resources.sperm.play('swim');
 
     var testicleTween = this.tweens.add({
       targets: resources.sperm,
@@ -88,17 +100,7 @@ export default class RSGame extends Phaser.Scene {
       }
     });
 
-    this.anims.create({
-      key: 'swim',
-      frames: this.anims.generateFrameNumbers('spermSpritesheet', { frames: [0, 1, 2] }),
-      frameRate: 8,
-      repeat: -1
-    });
 
-    const cody = this.add.sprite(268.5, 378.8);
-    cody.setScale(0.75);
-    cody.setAngle(173)
-    cody.play('swim');
 
     resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
@@ -111,20 +113,14 @@ var organs = {
     name: 'Testicle',
     x: 342,
     y: 573,
-    next: 'Epididymis'
-  },
-  epididymis: {
-    name: 'Epididymis',
-    x: 520.7,
-    y: 557,
-    next: 'Vas Deferens',
+    next: 'Epididymis',
     tweens: [
       {
         x: 358,
         y: 388.2,
         ease: 'Power1',      
         duration: 1500,
-        angle: 230
+        angle: 140
       },
 
       {
@@ -138,6 +134,21 @@ var organs = {
       }
     ]
   },
+  epididymis: {
+    name: 'Epididymis',
+    x: 520.7,
+    y: 557,
+    next: 'Vas Deferens',
+    tweens: [
+      {
+        x: 383.7,
+        y: 400.2,
+        ease: 'Power1',      
+        duration: 1500,
+        angle: -20
+      },
+    ]
+  },
   vdeferens: {
     name: 'Vas Deferens',
     x: 143.2,
@@ -145,11 +156,76 @@ var organs = {
     next: 'Bladder',
     tweens: [
       {
-        x: 383.7,
-        y: 400.2,
-        ease: 'Power1',      
+        x: 349.7,
+        y: 352.7,
+        ease: 'Linear',      
         duration: 1500,
-        angle: -290
+        angle: -42
+      },     
+      
+      {
+        x: 325.7,
+        y: 325.7,
+        ease: 'Linear',      
+        duration: 500,
+        angle: -10
+      },
+
+      {
+        x: 323.5,
+        y: 257.7,
+        ease: 'Linear',      
+        duration: 1500,
+        angle: -10,
+        offset: '-=100'
+      },
+      {
+        x: 310.5,
+        y: 217.7,
+        ease: 'Linear',      
+        duration: 500,
+        angle: -16,
+        offset: '-=50'
+      },
+      {
+        x: 305,
+        y: 200,
+        ease: 'Linear',      
+        duration: 500,
+        angle: -16,
+        offset: '-=100'
+      },
+      {
+        x: 310,
+        y: 170,
+        ease: 'Linear',      
+        duration: 500,
+        angle: 60,
+        offset: '-=200'
+      },
+      {
+        x: 329.5,
+        y: 155,
+        ease: 'Linear',      
+        duration: 1000,
+        angle: 60,
+        offset: '-=200'
+      },
+      {
+        x: 340.5,
+        y: 145,
+        ease: 'Linear',      
+        duration: 500,
+        angle: 75,
+        offset: '-=200'
+      },
+      {
+        x: 400,
+        y: 133,
+        ease: 'Power1',      
+        duration: 500,
+        angle: 90,
+        offset: '-=200'
       },
     ]
   },
@@ -158,42 +234,137 @@ var organs = {
     x: 298.2,
     y: 81.7,
     next: 'Seminal Vesicle',
-    tweens: []
+    tweens: [      
+      {
+        x: 477.7,
+        y: 145,
+        ease: 'Linear',      
+        duration: 1000,
+        angle: 110,
+        offset: '-=50'
+      },
+      {
+        x: 531.2,
+        y: 187,
+        ease: 'Linear',      
+        duration: 1000,
+        angle: 150,
+        offset: '-=50'
+      },
+      {
+        x: 531.2,
+        y: 215,
+        ease: 'Linear',      
+        duration: 1000,
+        angle: 210,
+        offset: '-=200'
+      },
+
+    ]
   },
   svesicle: {
     name: 'Seminal Vesicle',
     x: 708.2,
     y: 89.7,
     next: 'Prostate',
-    tweens: []
+    tweens: [
+      {
+        x: 510.2,
+        y: 245,    
+        duration: 500,
+        angle: -110,
+        offset: '-=50'
+      },
+
+      {
+        x: 490.2,
+        y: 245,    
+        duration: 500,
+        angle: -110,
+        offset: '-=50'
+      },
+      {
+        x: 456.7,
+        y: 278,    
+        duration: 500,
+        angle: -165,
+        offset: '-=50'
+      },
+    ]
   },
   prostate: {
     name: 'Prostate',
     x: 650.7,
     y: 454.2,
     next: 'Urethra',
-    tweens: []
+    tweens: [
+      {
+        x: 415,
+        y: 313,    
+        duration: 500,
+        angle: -70,
+
+      },
+      {
+        x: 370,
+        y: 294.2,    
+        duration: 1500,
+        angle: -70,
+        offset: '-=50'
+      },
+    ]
   },
   urethra: {
     name: 'Urethra',
     x: 155.7,
     y: 339.2,
     next: null,
-    tweens: []
+    tweens: [
+      {
+        x: 321,
+        y: 284,    
+        duration: 500,
+        angle: -100,
+        offset: '-=500'
+      },
+      {
+        x: 294,
+        y: 294,    
+        duration: 500,
+        angle: -140,
+        offset: '-=50'
+      },
+
+      {
+        x: 268,
+        y: 343,    
+        duration: 500,
+        angle: -165,
+        offset: '-=50'
+      },
+      {
+        x: 278,
+        y: 443,    
+        duration: 500,
+        angle: -175,
+        offset: '-=50'
+      },
+     {
+        x: 284.7,
+        y: 530,    
+        duration: 1500,
+        angle: -180,
+        offset: '-=50'
+      },
+    ]
   },
 };
 
 
 function nextOrgan(scene) {
-  if (resources.currentOrgan.next === null) {
-    return;
-  }
 
-  for (let organ in organs) {
-    if (organs[organ].name === resources.currentOrgan.next) {
-      resources.currentOrgan = organs[organ]
-      break;
-    }
+  if (resources.currentOrgan.name === 'Epididymis') {
+    resources.sperm.play('swim');
   }
 
   var tweens = scene.tweens.getTweensOf(resources.sperm);
@@ -212,9 +383,19 @@ function nextOrgan(scene) {
 
   timeline.play();
 
-  resources.hitBox.destroy();
-  resources.hitBox = scene.add.rectangle(resources.currentOrgan.x, resources.currentOrgan.y, 35, 25);
-  resources.hitBoxGroup.add(resources.hitBox);
+  if (resources.currentOrgan.next !== null) {
+    for (let organ in organs) {
+      if (organs[organ].name === resources.currentOrgan.next) {
+        resources.currentOrgan = organs[organ]
+        break;
+      }
+    }
+  
+    resources.hitBox.destroy();
+    resources.hitBox = scene.add.rectangle(resources.currentOrgan.x, resources.currentOrgan.y, 35, 25);
+    resources.hitBoxGroup.add(resources.hitBox);
+  }
+
 
 }
 
