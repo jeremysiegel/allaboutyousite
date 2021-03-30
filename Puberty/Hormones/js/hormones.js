@@ -8,11 +8,9 @@ export default class Hormones extends Phaser.Scene {
   }
 
   preload () {
-
     this.load.image('estrogenReceptor', '../../common/images/objects/estrogenReceptor.png');
     this.load.image('estrogen', '../../common/images/objects/estrogen.png');
   
-
     this.load.image('testosteroneReceptor', '../../common/images/objects/testosteroneReceptor.png');
     this.load.image('testosterone', '../../common/images/objects/testosterone.png');
     
@@ -24,11 +22,9 @@ export default class Hormones extends Phaser.Scene {
 
     this.load.image('button', '../../common/images/buttons/red_button01.png');
     this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
-    
   }
 
   create () {
-    
     resources.cells = this.physics.add.staticGroup();
 
     resources.estrogenReceptor = new Receptor(this, 850.1, 180.65, 'estrogenReceptor', 1, 155);
@@ -39,7 +35,7 @@ export default class Hormones extends Phaser.Scene {
     resources.cells.create(161.45, 136.2, 'signalCell').setCircle(105).setInteractive({useHandCursor:true});
     resources.cells.create(162.3, 453.4, 'signalCell2').setCircle(105).setInteractive({useHandCursor:true});
 
-    
+    // Tween and create-hormone-on-click for estrogen signal cell.
     resources.signalTween = this.tweens.add({
       targets: resources.cells.getChildren()[2],
       alpha: 0.65,
@@ -48,17 +44,6 @@ export default class Hormones extends Phaser.Scene {
       delay: Math.random()*1000,
       repeat: -1
     });
-
-    resources.signalTween2 = this.tweens.add({
-      targets: resources.cells.getChildren()[3],
-      alpha: 0.65,
-      duration: 1500,
-      yoyo: true,
-      delay: Math.random()*500,
-      repeat: -1
-    });
-
-    resources.hormones = this.physics.add.group({collideWorldBounds:true});
 
     resources.cells.getChildren()[2].on('pointerup', () => {
       resources.signalTween.stop();
@@ -78,6 +63,16 @@ export default class Hormones extends Phaser.Scene {
         });
       }
     })
+
+  // Tween and create-hormone-on-click for testosterone signal cell.
+    resources.signalTween2 = this.tweens.add({
+      targets: resources.cells.getChildren()[3],
+      alpha: 0.65,
+      duration: 1500,
+      yoyo: true,
+      delay: Math.random()*500,
+      repeat: -1
+    });
 
     resources.cells.getChildren()[3].on('pointerup', () => {
       resources.signalTween2.stop();
@@ -99,6 +94,8 @@ export default class Hormones extends Phaser.Scene {
       }
     })
 
+    resources.hormones = this.physics.add.group({collideWorldBounds:true});
+
     this.physics.add.collider(resources.hormones, resources.cells);
 
     this.input.on('drag', function(pointer, hormone, dragX, dragY) {
@@ -107,10 +104,6 @@ export default class Hormones extends Phaser.Scene {
     });
 
     resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
-  }
-
-  update () {
-
   }
 }
 var resources = {};

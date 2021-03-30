@@ -1,6 +1,6 @@
 
 export default class Receptor extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, key, scale, angle, type) {
+  constructor(scene, x, y, key, scale, angle, receptorType) {
     super(scene, x, y);
 
 		this.receptor = scene.add.image(x, y, key);
@@ -13,8 +13,8 @@ export default class Receptor extends Phaser.GameObjects.Container {
     this.receptor.setScale(scale);
     this.receptor.angle = angle;
 
-    if (type) {
-      this.receptor.type = type;
+    if (receptorType) {
+      this.receptor.receptorType = receptorType;
     }
 
 		const radius = this.receptor.height * 0.3 * scale;
@@ -37,6 +37,12 @@ export default class Receptor extends Phaser.GameObjects.Container {
     }
 
     Receptor.prototype.isBound = false;
+
+    Receptor.prototype.displayText = function() {
+      if (this.receptor.textbox) {
+        this.receptor.textbox.setText(this.receptor.textContent[this.receptor.receptorType]);
+      }
+    }
 
    // Receptor.prototype.changeScale = function (scale) {
     //  this.receptor.setScale(scale);

@@ -1,6 +1,6 @@
 
 export default class ReceptorInteractions {
-  constructor(shapes, textbox, textContent, clickObject, clickProperty, pixelPerfect, button) {
+  constructor(shapes, textbox, textContent, pixelPerfect, button) {
     for (let shape of shapes) {
       shape.receptor.setInteractive({pixelPerfect: pixelPerfect})
         .on('pointerover', function() {
@@ -10,12 +10,20 @@ export default class ReceptorInteractions {
           this.setBlendMode(Phaser.BlendModes.NORMAL);
         })
         .on('pointerup', function() {
-          textbox.setText(textContent[shape.receptor.type]);
-          clickObject[clickProperty] = shape.receptor.type;
           if (button) {
             button.visible = true; 
-          }  
+          }
+          if (shape.receptor.isBound){
+            shape.displayText();
+          }
+          
       });
+
+      if (textbox) {
+        shape.receptor.textbox = textbox;
+        shape.receptor.textContent = textContent;
+      }
+
     }
   }
 }

@@ -93,7 +93,7 @@ export default class FemaleChanges extends Phaser.Scene {
       }
     );
 
-  new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, resources, 'change', false);
+  new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, false);
 
 
   resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');

@@ -29,27 +29,38 @@ export default class Hormone extends Phaser.GameObjects.Sprite {
         if (cell) {
           cell.setTint(0xffffff);
         }
+        hormone.hormoneType = receptor.receptor.receptorType;
         hormone.input.draggable = false;
         receptor.receptor.isBound = true;
-        receptor.receptor.setTint(0xffffff);
-        
-        scene.tweens.add({
-          targets: hormone,
-          alpha: 0,
-          delay: 6000,
-          duration: 4000,
-          onComplete: () => {
-            hormone.unbindReceptor(hormone, receptor, cell);
-            hormone.destroy();
-            delete resources[hormone.texture.key];
-            if (hormone.texture.key === 'estrogen') {
-              resources.signalTween.restart();
-            } else {
-              resources.signalTween2.restart();
-            }
-            
-          }
+        receptor.displayText();
+
+        this.on('pointerover', () => {
+          if (this.hormoneType === receptor.receptor.receptorType) {
+            receptor.receptor.setBlendMode(Phaser.BlendModes.SCREEN);
+          } 
         });
+          
+        this.on('pointerout', () => {receptor.receptor.setBlendMode(Phaser.BlendModes.NORMAL)});
+        
+        if (resources) {
+          scene.tweens.add({
+            targets: hormone,
+            alpha: 0,
+            delay: 6000,
+            duration: 4000,
+            onComplete: () => {
+              hormone.unbindReceptor(hormone, receptor, cell);
+              hormone.destroy();
+              delete resources[hormone.texture.key];
+              if (hormone.texture.key === 'estrogen') {
+                resources.signalTween.restart();
+              } else {
+                resources.signalTween2.restart();
+              }
+              
+            }
+          });
+        }
       }
     }
 

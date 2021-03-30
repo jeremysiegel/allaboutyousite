@@ -23,11 +23,9 @@ export default class MaleChanges extends Phaser.Scene {
 
     resources.definitions = new MaleChangesStrings(false);
 
-    
   }
 
   create () {
-
     resources.boy = this.add.image(529.2, 310.5, 'boy');
 
     resources.voice2 = new Receptor(this, 428.1, 172.9, 'testosteroneReceptor', 0.8, 180, 'voice');
@@ -79,6 +77,16 @@ export default class MaleChanges extends Phaser.Scene {
       gameObject.y = dragY;
     });
 
+    this.input.on('pointerup', function(pointer, hormone) {
+      try {
+        if (hormone[0].isBound) {
+          console.log(hormone);
+        }
+      } catch (error) {
+
+      }
+    })
+
     resources.definitionDisplay = this.add.text(820, 85, '',
       {
         fontFamily: 'Assistant',
@@ -88,8 +96,7 @@ export default class MaleChanges extends Phaser.Scene {
       }
     );
 
-  new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, resources, 'change', false);
-
+  new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, false);
 
   resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
