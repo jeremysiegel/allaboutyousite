@@ -36,64 +36,100 @@ export default class Hormones extends Phaser.Scene {
 
     resources.cells.create(1057.7, 131.5, 'receptorCell').setCircle(125).setTint(0x999999);
     resources.cells.create(1052.25, 462.15, 'receptorCell2').setCircle(115).setTint(0x999999);
-    resources.cells.create(161.45, 136.2, 'signalCell').setCircle(105);
-    resources.cells.create(162.3, 453.4, 'signalCell2').setCircle(105);
+    resources.cells.create(161.45, 136.2, 'signalCell').setCircle(105).setInteractive({useHandCursor:true});
+    resources.cells.create(162.3, 453.4, 'signalCell2').setCircle(105).setInteractive({useHandCursor:true});
 
-    resources.estrogen = new Hormone(this, 188.7, 56.4, 'estrogen', 1);
-    resources.testosterone = new Hormone(this, 213.35, 396.65, 'testosterone', 1);
-    resources.testosterone.angle = 200;
+    
+    resources.signalTween = this.tweens.add({
+      targets: resources.cells.getChildren()[2],
+      alpha: 0.65,
+      duration: 1500,
+      yoyo: true,
+      delay: Math.random()*1000,
+      repeat: -1
+    });
+
+    resources.signalTween2 = this.tweens.add({
+      targets: resources.cells.getChildren()[3],
+      alpha: 0.65,
+      duration: 1500,
+      yoyo: true,
+      delay: Math.random()*500,
+      repeat: -1
+    });
 
     resources.hormones = this.physics.add.group({collideWorldBounds:true});
-    resources.hormones.add(resources.estrogen);
-    resources.hormones.add(resources.testosterone);
 
-    this.physics.add.overlap(resources.estrogenReceptor, resources.estrogen, (receptor, hormone) => {
-      bindHormone(receptor, hormone);
-    });
+    resources.cells.getChildren()[2].on('pointerup', () => {
+      resources.signalTween.stop();
+      resources.cells.getChildren()[2].setAlpha(1);
 
-    this.physics.add.overlap(resources.testosteroneReceptor, resources.testosterone, (receptor, hormone) => {
-      bindHormone(receptor, hormone);
-    });
+      if(!resources.estrogen) {
+        resources.estrogen = new Hormone(this, 238.9, 117, 'estrogen', 1).setAlpha(0);
+        this.physics.add.overlap(resources.estrogenReceptor, resources.estrogen, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(hormone, receptor, resources.cells.children.entries[0], resources)})});  
+        this.tweens.add({
+          targets: resources.estrogen,
+          x: resources.estrogen.x + 140,
+          alpha: 1,
+          duration: 1000,
+          onComplete: () => {
+            resources.hormones.add(resources.estrogen);
+          }
+        });
+      }
+    })
+
+    resources.cells.getChildren()[3].on('pointerup', () => {
+      resources.signalTween2.stop();
+      resources.cells.getChildren()[3].setAlpha(1);
+
+      if (!resources.testosterone) {
+        resources.testosterone = new Hormone(this, 252.6, 455, 'testosterone', 1).setAlpha(0).setAngle(200);
+        this.physics.add.overlap(resources.testosteroneReceptor, resources.testosterone, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(hormone, receptor, resources.cells.children.entries[1], resources)})});
+      
+        this.tweens.add({
+          targets: resources.testosterone,
+          x: resources.testosterone.x + 150,
+          alpha: 1,
+          duration: 1000,
+          onComplete: () => {
+            resources.hormones.add(resources.testosterone);
+          }
+        });
+      }
+    })
 
     this.physics.add.collider(resources.hormones, resources.cells);
 
     this.input.on('drag', function(pointer, hormone, dragX, dragY) {
       hormone.x = dragX;
       hormone.y = dragY;
-
-      unbindHormone(hormone);
     });
 
     resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
-}
 
+  update () {
+
+  }
+}
 var resources = {};
 
-function bindHormone(receptor, hormone) {
-  var cell;
-  
-  if (hormone === resources.estrogen) {
-    cell = resources.cells.children.entries[0];
-  } else {
-    cell = resources.cells.children.entries[1];
-  }
-  
-  hormone.on('pointerup', () => {
-    hormone.bindReceptor(hormone, receptor, cell);
-  });
-}
-
+// Function if you want to allow learner to remove hormone from receptor.
+/*
 function unbindHormone(hormone) {
+  var receptor;
   var cell;
 
   if (hormone === resources.estrogen) {
     cell = resources.cells.children.entries[0];
+    receptor = resources.estrogenReceptor;
   } else {
     cell = resources.cells.children.entries[1];
+    receptor = resources.testosteroneReceptor
   }
-  hormone.unbindReceptor(hormone, cell);
+  hormone.unbindReceptor(hormone, receptor, cell);
 }
-
+*/
 
 
