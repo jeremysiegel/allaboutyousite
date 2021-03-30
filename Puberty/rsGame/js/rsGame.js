@@ -9,13 +9,10 @@ export default class RSGame extends Phaser.Scene {
 
     this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
     this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
-    this.load.image('sperm', '../../Puberty/rsGame/images/sperm.png');
     this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm3_spritesheet.png', { frameWidth: 27, frameHeight: 214, margin: 10, spacing: 20 });
    
     // this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm2_spritesheet.png', { frameWidth: 9, frameHeight: 69, margin: 10, spacing: 20 });
-
    // this.load.spritesheet('spermSpritesheet2', '../../Puberty/rsGame/images/sperm_spritesheet.png', { frameWidth: 104, frameHeight: 277, margin: 10, spacing: 20 });
-
 
     this.load.image('button', '../../common/images/buttons/red_button01.png');
     this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
@@ -23,13 +20,14 @@ export default class RSGame extends Phaser.Scene {
   }
 
   create () {
+    resources.scene = this;
     resources.maleInternal = this.add.image(450.1, 289.45, 'MRS'); 
     resources.labelLines = this.add.image(435.05, 318.2, 'labelLines');
-   // resources.sperm = this.add.image(346, 413, 'sperm').setAngle(60).setScale(0.65);
-
+  
+   //Create swimming animation for sperm.
     this.anims.create({
       key: 'swim',
-      frames: this.anims.generateFrameNumbers('spermSpritesheet', { frames: [0, 1, 2] }),
+      frames: this.anims.generateFrameNumbers('spermSpritesheet', { frames: [0, 1] }),
       frameRate: 8,
       repeat: -1
     });
@@ -37,8 +35,8 @@ export default class RSGame extends Phaser.Scene {
     resources.sperm = this.add.sprite(346, 413, 'spermSpritesheet', 1);
     resources.sperm.setScale(0.23);
     resources.sperm.setAngle(315)
-    //resources.sperm.play('swim');
 
+    //Initial sperm tween -- not swimming.
     var testicleTween = this.tweens.add({
       targets: resources.sperm,
       x: 340,
@@ -49,24 +47,31 @@ export default class RSGame extends Phaser.Scene {
       repeat: -1
     });
 
+    // Create labels for user to add to diagram.
     resources.labels = this.physics.add.group({collideWorldBounds:true});
 
     resources.maleOrgans = ['Testicle', 'Epididymis', 'Vas Deferens', 'Bladder', 'Seminal Vesicle', 'Prostate', 'Urethra'];
 
-    var spacing = 100;
+    //This will randomize the order the labels appear on screen.
+    shuffle(resources.maleOrgans);
 
+    // Initial y for labels.
+    var labelY = 100;
+
+    // Create label containers.
     for (let organ in resources.maleOrgans) {
       var rect = this.add.rectangle(0, 0, 145, 25, 0x6666ff);
       var text = this.add.text(0, 0, resources.maleOrgans[organ]).setOrigin(0.5);
   
-      var container = this.add.container(900, spacing, [rect, text]);
+      var container = this.add.container(900, labelY, [rect, text]);
   
       container.setSize(rect.width, rect.height);
       container.setInteractive({draggable: true, useHandCursor:true, setCollideWorldBounds: true});
       resources.labels.add(container);
 
-      spacing += 35;
+      labelY += 35;
     }
+
 
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;
@@ -79,8 +84,10 @@ export default class RSGame extends Phaser.Scene {
 
     resources.currentOrgan = resources.testicle;
 
+    // Sets hit area where user must drop the current label.
     resources.hitBox = this.add.rectangle(resources.currentOrgan.x, resources.currentOrgan.y, 35, 25);
 
+    // Create physics group to see hitBox for debugging. Can remove for production.
     resources.hitBoxGroup = this.physics.add.staticGroup();
     resources.hitBoxGroup.add(resources.hitBox);
 
@@ -99,15 +106,14 @@ export default class RSGame extends Phaser.Scene {
         }
       }
     });
-
-
-
+    
     resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
 }
 
-var resources = {}
+var resources = {};
 
+// The x and y are the coordinates for the label hitBox.
 var organs = {
   testicle: {
     name: 'Testicle',
@@ -120,7 +126,10 @@ var organs = {
         y: 388.2,
         ease: 'Power1',      
         duration: 1500,
-        angle: 140
+        angle: 140,
+        onComplete: function () {
+          addHitBox(resources.scene);
+        },
       },
 
       {
@@ -145,7 +154,10 @@ var organs = {
         y: 400.2,
         ease: 'Power1',      
         duration: 1500,
-        angle: -20
+        angle: -20,
+        onComplete: function () {
+          addHitBox(resources.scene);
+        },
       },
     ]
   },
@@ -225,7 +237,10 @@ var organs = {
         ease: 'Power1',      
         duration: 500,
         angle: 90,
-        offset: '-=200'
+        offset: '-=200',
+        onComplete: function () {
+          addHitBox(resources.scene);
+        },
       },
     ]
   },
@@ -257,7 +272,10 @@ var organs = {
         ease: 'Linear',      
         duration: 1000,
         angle: 210,
-        offset: '-=200'
+        offset: '-=200',
+        onComplete: function () {
+          addHitBox(resources.scene);
+        },
       },
 
     ]
@@ -288,7 +306,10 @@ var organs = {
         y: 278,    
         duration: 500,
         angle: -165,
-        offset: '-=50'
+        offset: '-=50',
+        onComplete: function () {
+          addHitBox(resources.scene);
+        },
       },
     ]
   },
@@ -310,7 +331,10 @@ var organs = {
         y: 294.2,    
         duration: 1500,
         angle: -70,
-        offset: '-=50'
+        offset: '-=50',
+        onComplete: function () {
+          addHitBox(resources.scene);
+        },
       },
     ]
   },
@@ -354,7 +378,12 @@ var organs = {
         y: 530,    
         duration: 1500,
         angle: -180,
-        offset: '-=50'
+        offset: '-=50',
+        ease: 'Power1', 
+        completeDelay: 500,
+        onComplete:  () => {
+          changeScene(resources.scene);
+        },
       },
     ]
   },
@@ -362,16 +391,17 @@ var organs = {
 
 
 function nextOrgan(scene) {
-
+  // Start sperm swim animation after epididymis.
   if (resources.currentOrgan.name === 'Epididymis') {
     resources.sperm.play('swim');
   }
 
-  var tweens = scene.tweens.getTweensOf(resources.sperm);
-  if (tweens[0]) {
+  // Stops yoyo tweens for testicle and epididymis.
+  if (resources.currentOrgan.name === 'Testicle' || resources.currentOrgan.name === 'Epididymis') {
+    var tweens = scene.tweens.getTweensOf(resources.sperm);
     tweens[0].stop();
   }
-  
+
   var timeline = scene.tweens.createTimeline({
     targets: resources.sperm,
   });
@@ -391,11 +421,31 @@ function nextOrgan(scene) {
       }
     }
   
-    resources.hitBox.destroy();
-    resources.hitBox = scene.add.rectangle(resources.currentOrgan.x, resources.currentOrgan.y, 35, 25);
-    resources.hitBoxGroup.add(resources.hitBox);
+
+  } 
+}
+
+function changeScene(scene) {
+  scene.cameras.main.fadeOut(500, 0, 0, 0);
+  scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+   // scene.scene.stop('rsGame');
+    scene.scene.start('rsGame2');
+	})
+}
+
+// Use to add hitBox after previous tweens finish.
+function addHitBox(scene) {
+  resources.hitBox.destroy();
+  resources.hitBox = scene.add.rectangle(resources.currentOrgan.x, resources.currentOrgan.y, 35, 25);
+  // Add to physics group for debugging. Can remove for production.
+  resources.hitBoxGroup.add(resources.hitBox);
+}
+
+// Function to shuffle arrays.
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1)); 
+    [array[i], array[j]] = [array[j], array[i]];
   }
-
-
 }
 

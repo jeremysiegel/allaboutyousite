@@ -1,9 +1,10 @@
 import rsGame from './rsGame.js';
+import rsGame2 from './rsGame2.js';
 
 var config = {
   type: Phaser.AUTO,
   transparent: true,
-  scene: [rsGame],
+  scene: [rsGame, rsGame2],
   scale: {
     mode: Phaser.Scale.FIT,
     width: 1280,

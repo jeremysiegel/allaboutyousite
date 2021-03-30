@@ -45,7 +45,6 @@ export default class Hormones extends Phaser.Scene {
 
     resources.hormones = this.physics.add.group({collideWorldBounds:true});
     resources.hormones.add(resources.estrogen);
-
     resources.hormones.add(resources.testosterone);
 
     this.physics.add.overlap(resources.estrogenReceptor, resources.estrogen, (receptor, hormone) => {
