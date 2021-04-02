@@ -118,7 +118,7 @@ export default class Pregnancy extends Phaser.Scene {
     resources.definitionDisplay.setText(resources.definitions['0']);
 
     var month;
-    var monthX = 100
+    var monthX = 110;
     for (var i = 0; i < 10; i++) {
       month = this.add.text(monthX, 520, i, 
         {
