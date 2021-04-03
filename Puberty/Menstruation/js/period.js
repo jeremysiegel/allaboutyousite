@@ -16,6 +16,7 @@ export default class Period extends Phaser.Scene {
    // this.load.spritesheet('rightSpritesheet', '../../Puberty/Menstruation/images/right2 sprite.png', { frameWidth: 500, frameHeight: 858, margin: 0, spacing: 0 });
     this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
     this.load.image('uterusMask', '../../Puberty/Menstruation/images/uterus.png');
+    this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
 
     this.load.image('button', '../../common/images/buttons/red_button01.png');
     this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');    
@@ -25,7 +26,8 @@ export default class Period extends Phaser.Scene {
    // resources.stage = this.add.sprite(321.3, 277.3, 'periodSpritesheet', 0);
     //resources.hormonesGraph = this.add.image(990, 200, 'hormonesGraph').setScale(0.55);
     resources.femaleInternal = this.add.image(404.25, 290.55, 'FRS');
-    
+
+
     resources.left = this.add.sprite(366.3, 235, 'leftSpritesheet', 0).setScale(0.125);
     resources.right = this.add.sprite(442.2, 235, 'leftSpritesheet', 0);
     resources.right.flipX = true;
@@ -33,12 +35,9 @@ export default class Period extends Phaser.Scene {
     resources.top = this.add.sprite(406, 184, 'topSpritesheet', 0).setScale(0.125);
 
     resources.uterus = this.add.image(404.65, 248.6, 'uterusMask');
-
-//    resources.menstruationButton = new ToggleButton(this, 435, 200, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Menstruation', changeFRS.bind(this), 0);
- //   resources.follicularButton = new ToggleButton(this, 435, 220, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Follicular', changeFRS.bind(this), 1);
- //   resources.ovulationButton = new ToggleButton(this, 435, 240, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Ovulation', changeFRS.bind(this), 2);
- //   resources.lutealButton = new ToggleButton(this, 435, 260, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Luteal', changeFRS.bind(this), 3);
+    
     var circle = new Phaser.Geom.Circle(970, 300, 170);
+    
     resources.circleGroup = this.add.group(); 
 
     var fillColor = '0xff0000';
@@ -48,11 +47,20 @@ export default class Period extends Phaser.Scene {
 
       var container = this.add.container(0, 0, [dayCircle, day]);
 
-      container.setSize(dayCircle.width, dayCircle.height);
-      container.setInteractive({useHandCursor:true});
-      container.on('pointerup', function() {
-        changeDay(Number(this.list[1].text));
-      });
+      container
+        .setSize(dayCircle.width, dayCircle.height)
+        .setInteractive({useHandCursor:true})
+        .on('pointerup', function() {
+          changeDay(Number(this.list[1].text));
+        })
+        .on('pointerover', function() {
+        //  this.list[0].setStrokeStyle(3, '0xf5ce42');
+        })
+        .on('pointerout', function() {
+       //   this.list[0].setStrokeStyle(0);
+        })
+      ;
+
       resources.circleGroup.add(container);
 
       if (i === 4) {
@@ -79,6 +87,7 @@ export default class Period extends Phaser.Scene {
 
     resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
     resources.scene = this;
+    newEgg();
   }
 }
 
@@ -91,12 +100,27 @@ function changeDay(day) {
   resources.previousDay = resources.currentDay;
   resources.currentDay = day;
 
+  resources.circleGroup.getChildren()[resources.previousDay-1].list[0].setStrokeStyle(0);
+  resources.circleGroup.getChildren()[day-1].list[0].setStrokeStyle(3, '0xf5ce42');
+
   generateAnimation(resources.previousDay, resources.currentDay);
+
+  if (((resources.previousDay === 14 || resources.previousDay === 15) && (resources.currentDay !== 14 && resources.currentDay !== 15)) || (day > 15 && resources.egg)) {
+    resources.egg.destroy();
+    delete resources.egg;
+  }
+
+  if (!resources.egg && day <= 15) {
+    newEgg();
+  }
 
   if ((day >= 1 && day <= 5) || day > 27) {
     resources.stage.setText('Period');
+  } else if (day >= 6 && day <= 13) {
+    resources.stage.setText('Lining builds');
   } else if (day >= 14 && day <=15) {
     resources.stage.setText('Ovulation');
+    resources.eggTimeline.play();
   } else {
     resources.stage.setText('Lining builds');
   }
@@ -139,4 +163,24 @@ function generateAnimation(previousDay, currentDay) {
   resources.left.play('leftClick');
   resources.right.play('leftClick');
   resources.top.play('topClick');
+}
+
+function newEgg() {
+  resources.egg = resources.scene.add.image(200, 224, 'egg').setScale(1.3);
+
+  resources.eggTimeline = resources.scene.tweens.createTimeline();
+
+  resources.eggTimeline.add({
+    targets: resources.egg,
+    x: 150.5,
+    y: 172,  
+    duration: 500
+  });
+
+  resources.eggTimeline.add({
+    targets: resources.egg,
+    x: 142,
+    y: 112,
+    duration: 500
+  });
 }
