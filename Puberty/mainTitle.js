@@ -1,6 +1,6 @@
-import TitleScreen from '../../../common/js/title.js';
+import TitleScreen from '../../../common/js/titleScreen.js';
 
-export default class MainScreen extends Phaser.Scene {
+export default class MainTitle extends Phaser.Scene {
   constructor() {
     super({key: 'mainTitle'})
   }
@@ -15,25 +15,19 @@ export default class MainScreen extends Phaser.Scene {
       changesButton: {
         color: '0x7ac7a5',
         text: 'Changes',
-        nextScene: 'hormones'
+        nextScene: 'changesTitle'
       },
 
       reproductiveButton: {
         color: '0xfbae06',
         text: 'Reproductive system',
-        nextScene: 'FRS'
+        nextScene: 'reproductiveTitle'
       },
 
       periodButton: {
         color: '0x096a92',
-        text: 'Periods',
-        nextScene: 'period'
-      },
-
-      pregnancyButton: {
-        color: '0xff8736',
-        text: 'Pregnancy',
-        nextScene: 'pregnancy'
+        text: 'Periods & Pregnancy',
+        nextScene: 'periodTitle'
       }
     }
     

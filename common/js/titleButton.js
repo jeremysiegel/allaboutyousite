@@ -10,7 +10,7 @@ export default class TitleButton extends Phaser.GameObjects.Container {
 
     // Number added to x, y represent relative offset of text from top left of button box.
 
-    var buttonText = this.scene.add.text(x + 30, y + 30, text, { fontFamily: 'Assistant', fontSize: 48, color: '#ffffff', wordWrap: { width: 250, useAdvancedWrap: false }});
+    var buttonText = this.scene.add.text(x + 20, y + 20, text, { fontFamily: 'Calibri', fontSize: 48, color: '#ffffff', wordWrap: { width: 250, useAdvancedWrap: false }});
 
     var button = this.scene.add.graphics();
     button.fillRoundedRect(x, y, this.buttonWidth, this.buttonHeight, 32);

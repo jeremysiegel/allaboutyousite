@@ -6,10 +6,19 @@ import MaleChanges from './Changes/js/maleChanges.js';
 import FemaleChanges from './Changes/js/femaleChanges.js';
 import Period from './Menstruation/js/period.js';
 import Pregnancy from './Pregnancy/js/pregnancy.js';
+import RSGame from './rsGame/js/rsGame.js';
+import RSGame2 from './rsGame/js/rsGame2.js';
 
 import MainTitle from './mainTitle.js';
+import ReproductiveTitle from './reproductiveTitle.js';
+import ChangesTitle from './changesTitle.js';
+import PeriodTitle from './periodTitle.js';
 
 var title = new MainTitle();
+var reproductiveTitle = new ReproductiveTitle();
+var changesTitle = new ChangesTitle();
+var periodTitle = new PeriodTitle();
+
 var frs = new FRS();
 var hormones = new Hormones();
 var mrs = new MRS();
@@ -17,6 +26,8 @@ var maleChanges = new MaleChanges();
 var femaleChanges = new FemaleChanges();
 var period = new Period();
 var pregnancy = new Pregnancy();
+var rsGame = new RSGame();
+var rsGame2 = new RSGame2();
 
 var config = {
   type: Phaser.AUTO,
@@ -39,6 +50,9 @@ var game = new Phaser.Game(config);
 
 // load scenes
 game.scene.add('mainTitle', title);
+game.scene.add('changesTitle', changesTitle);
+game.scene.add('reproductiveTitle', reproductiveTitle);
+game.scene.add('periodTitle', periodTitle);
 game.scene.add('FRS', frs);
 game.scene.add('MRS', mrs);
 game.scene.add('hormones', hormones);
@@ -46,6 +60,8 @@ game.scene.add('maleChanges', maleChanges);
 game.scene.add('femaleChanges', femaleChanges);
 game.scene.add('period', period);
 game.scene.add('pregnancy', pregnancy);
+game.scene.add('rsGame', rsGame);
+game.scene.add('rsGame2', rsGame2);
 
-// start title
+// start mainTitle
 game.scene.start('mainTitle');
