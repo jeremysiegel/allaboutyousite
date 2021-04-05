@@ -1,62 +1,40 @@
+import TitleButton from '../../../common/js/titleButton.js';
+
+
 export default class Title extends Phaser.Scene {
-  constructor(game) {
+  constructor() {
     super({key: 'title'})
-    resources.game = game;
   }
 
   preload () {
-    this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
-    this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
-    this.load.image('receptorCell', '../../Puberty/Hormones/images/receptorCell.png');
-    this.load.image('femaleChanges', '../../common/images/objects/estrogenReceptor.png');
-    this.load.image('maleChanges', '../../common/images/objects/testosteroneReceptor.png');
-    this.load.image('pregnancy', '../../Puberty/Pregnancy/images/pregnancy-9.png');
-    this.load.image('period', '../../Puberty/Menstruation/images/uterus.png');
+  
   }
 
   create () {
-    /*
+    this.changesButton = new TitleButton(this, 0, 0, '0x7ac7a5', 'Changes', 'hormones');
+    this.reproductiveButton = new TitleButton(this, 0, 0, '0xfbae06', 'Reproductive system', 'FRS');
+    this.periodButton = new TitleButton(this, 0, 0, '0x096a92', 'Periods', 'period');
+    this.pregnancyButton = new TitleButton(this, 0, 0, '0xff8736', 'Pregnancy', 'pregnancy');
+
+    Phaser.Actions.GridAlign([this.changesButton, this.reproductiveButton, this.periodButton, this.pregnancyButton], {
+      width: 2,
+      height: 2,
+      cellWidth: 320,
+      cellHeight: 220,
+      position: Phaser.Display.Align.CENTER,
+      x: 320,
+      y: 100
+  });
+
+/*  
+    var background = this.add.rectangle(window.innerWidth/2, window.innerHeight/2, window.innerWidth, window.innerHeight, 0x7ac7a5);
+
     window.addEventListener('resize', () => {
-      console.log('resize');
+      background.width = window.innerWidth;
+      background.height = window.innerHeight;
+
     });
-    */
-
-    this.femaleInternal = this.add.image(400, 200, 'FRS').setInteractive({useHandCursor: true}).setScale(0.4);
-    this.maleInternal = this.add.image(900, 200, 'MRS').setInteractive({useHandCursor: true}).setScale(0.4);
-    this.hormones = this.add.image(400, 400, 'receptorCell').setInteractive({useHandCursor: true}).setScale(0.4);
-    this.maleChanges = this.add.image(900, 400, 'maleChanges').setInteractive({useHandCursor: true});
-    this.femaleChanges = this.add.image(1050, 400, 'femaleChanges').setInteractive({useHandCursor: true});
-    this.period = this.add.image(650, 400, 'period').setInteractive({useHandCursor: true}).setScale(0.4);
-    this.pregnancy = this.add.image(650, 200, 'pregnancy').setInteractive({useHandCursor: true});
-
-    this.femaleInternal.on('pointerup', () => {
-      this.scene.switch('FRS');
-    })
-
-    this.maleInternal.on('pointerup', () => {
-      this.scene.switch('MRS');
-    })
-
-    this.hormones.on('pointerup', () => {
-      this.scene.switch('hormones');
-    })
-
-    this.maleChanges.on('pointerup', () => {
-      this.scene.switch('maleChanges');
-    })
-
-    this.femaleChanges.on('pointerup', () => {
-      this.scene.switch('femaleChanges');
-    })
-
-    this.period.on('pointerup', () => {
-      this.scene.switch('period');
-    })
-
-    this.pregnancy.on('pointerup', () => {
-      this.scene.switch('pregnancy');
-    })
+  
+*/
   }
 }
-
-var resources = {};

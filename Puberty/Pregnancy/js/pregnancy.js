@@ -8,6 +8,7 @@ export default class Pregnancy extends Phaser.Scene {
   }
 
   preload () {
+    
     this.load.image('drawn0', '../../Puberty/Pregnancy/images/drawn0.png');
     this.load.image('drawn1', '../../Puberty/Pregnancy/images/pregnancy-1.png');
     this.load.image('drawn2', '../../Puberty/Pregnancy/images/pregnancy-2.png');

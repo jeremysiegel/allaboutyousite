@@ -114,9 +114,9 @@ function changeDay(day) {
     newEgg();
   }
 
-  if ((day >= 1 && day <= 5) || day > 27) {
+  if ((day >= 1 && day <= 4) || day > 27) {
     resources.stage.setText('Period');
-  } else if (day >= 6 && day <= 13) {
+  } else if (day >= 5 && day <= 13) {
     resources.stage.setText('Lining builds');
   } else if (day >= 14 && day <=15) {
     resources.stage.setText('Ovulation');
