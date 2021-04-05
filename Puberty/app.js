@@ -7,9 +7,9 @@ import FemaleChanges from './Changes/js/femaleChanges.js';
 import Period from './Menstruation/js/period.js';
 import Pregnancy from './Pregnancy/js/pregnancy.js';
 
-import Title from './title.js';
+import MainTitle from './mainTitle.js';
 
-var title = new Title(game);
+var title = new MainTitle();
 var frs = new FRS();
 var hormones = new Hormones();
 var mrs = new MRS();
@@ -38,7 +38,7 @@ var config = {
 var game = new Phaser.Game(config);
 
 // load scenes
-game.scene.add('title', title);
+game.scene.add('mainTitle', title);
 game.scene.add('FRS', frs);
 game.scene.add('MRS', mrs);
 game.scene.add('hormones', hormones);
@@ -48,4 +48,4 @@ game.scene.add('period', period);
 game.scene.add('pregnancy', pregnancy);
 
 // start title
-game.scene.start('title');
+game.scene.start('mainTitle');

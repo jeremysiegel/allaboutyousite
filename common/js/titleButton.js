@@ -1,12 +1,12 @@
 export default class TitleButton extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, color, text, newScene) {
+  constructor(scene, x, y, width, height, color, text, newScene) {
     super(scene);
     this.scene = scene;
     this.x = x;
     this.y = y;
 
-    this.buttonWidth = 300;
-    this.buttonHeight = 200;
+    this.buttonWidth = width;
+    this.buttonHeight = height;
 
     // Number added to x, y represent relative offset of text from top left of button box.
 
@@ -31,6 +31,6 @@ export default class TitleButton extends Phaser.GameObjects.Container {
     this.scene.add.existing(this);
 
     return this;
-      
+
   }
 }
