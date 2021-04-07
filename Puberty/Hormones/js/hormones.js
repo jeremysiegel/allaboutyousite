@@ -20,8 +20,8 @@ export default class Hormones extends Phaser.Scene {
     this.load.image('signalCell', '../../Puberty/Hormones/images/signalCell.png');
     this.load.image('signalCell2', '../../Puberty/Hormones/images/signalCell2.png');
 
-    this.load.image('button', '../../common/images/buttons/red_button01.png');
-    this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
+    this.load.image('backButton', '../../common/images/buttons/back.png');
+
   }
 
   create () {
@@ -103,7 +103,7 @@ export default class Hormones extends Phaser.Scene {
       hormone.y = dragY;
     });
 
-    resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
+    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'changesTitle');
   }
 }
 var resources = {};

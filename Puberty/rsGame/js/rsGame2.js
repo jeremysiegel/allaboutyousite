@@ -16,8 +16,7 @@ export default class RSGame extends Phaser.Scene {
     // this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm2_spritesheet.png', { frameWidth: 9, frameHeight: 69, margin: 10, spacing: 20 });
    // this.load.spritesheet('spermSpritesheet2', '../../Puberty/rsGame/images/sperm_spritesheet.png', { frameWidth: 104, frameHeight: 277, margin: 10, spacing: 20 });
 
-    this.load.image('button', '../../common/images/buttons/red_button01.png');
-    this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
+    this.load.image('backButton', '../../common/images/buttons/back.png');
     
   }
 
@@ -112,8 +111,7 @@ export default class RSGame extends Phaser.Scene {
       }
     });
     
-    resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
-  }
+    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'reproductiveTitle');  }
 }
 
 var resources = {};

@@ -3,6 +3,8 @@ import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
 import ReceptorInteractions from '../../../common/js/receptorInteractions.js';
 import MaleChangesStrings from './maleChangesStrings.js';
+import Textbox from '../../../common/js/textbox.js';
+
 
     
 export default class MaleChanges extends Phaser.Scene {
@@ -18,14 +20,15 @@ export default class MaleChanges extends Phaser.Scene {
     this.load.image('testosterone', '../../common/images/objects/testosterone.png');
     this.load.image('boy', './Puberty/Changes/images/boy.png');
 
-    this.load.image('button', '../../common/images/buttons/red_button01.png');
-    this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
+    this.load.image('backButton', '../../common/images/buttons/back.png');
 
     resources.definitions = new MaleChangesStrings(false);
 
   }
 
   create () {
+    new Textbox(this, 810, 75, 430, 400);
+
     resources.boy = this.add.image(529.2, 310.5, 'boy');
 
     resources.voice2 = new Receptor(this, 428.1, 172.9, 'testosteroneReceptor', 0.8, 180, 'voice');
@@ -87,7 +90,7 @@ export default class MaleChanges extends Phaser.Scene {
       }
     })
 
-    resources.definitionDisplay = this.add.text(820, 85, '',
+    resources.definitionDisplay = this.add.text(830, 95, 'What are the male changes of puberty? Different parts of the body are listening for the hormone messages during puberty. Drag the hormones to each body part to trigger the changes of puberty.',
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -98,7 +101,7 @@ export default class MaleChanges extends Phaser.Scene {
 
   new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, false);
 
-  resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
+  resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'changesTitle');
   }
 }
 

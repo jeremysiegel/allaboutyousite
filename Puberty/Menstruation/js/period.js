@@ -18,15 +18,15 @@ export default class Period extends Phaser.Scene {
     this.load.image('uterusMask', '../../Puberty/Menstruation/images/uterus.png');
     this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
 
-    this.load.image('button', '../../common/images/buttons/red_button01.png');
-    this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');    
+    this.load.image('backButton', '../../common/images/buttons/back.png');
+ 
   }
 
   create () {
    // resources.stage = this.add.sprite(321.3, 277.3, 'periodSpritesheet', 0);
     //resources.hormonesGraph = this.add.image(990, 200, 'hormonesGraph').setScale(0.55);
+    
     resources.femaleInternal = this.add.image(404.25, 290.55, 'FRS');
-
 
     resources.left = this.add.sprite(366.3, 235, 'leftSpritesheet', 0).setScale(0.125);
     resources.right = this.add.sprite(442.2, 235, 'leftSpritesheet', 0);
@@ -36,6 +36,7 @@ export default class Period extends Phaser.Scene {
 
     resources.uterus = this.add.image(404.65, 248.6, 'uterusMask');
     
+    resources.backgroundCircle = this.add.circle(970, 300, 200, 0xcfcffa).setStrokeStyle(2, 0xa3a3c4, 0.5);
     var circle = new Phaser.Geom.Circle(970, 300, 170);
     
     resources.circleGroup = this.add.group(); 
@@ -43,6 +44,11 @@ export default class Period extends Phaser.Scene {
     var fillColor = '0xff0000';
     for (var i = 1; i < 29; i++) {
       var dayCircle = this.add.circle(0, 0, 14, fillColor);
+
+      if (i === 1) {
+        dayCircle.setStrokeStyle(4, '0xffda61');
+      } 
+      
       var day = this.add.text(0, 0, i, {fontFamily: 'Arial'}).setOrigin(0.5);
 
       var container = this.add.container(0, 0, [dayCircle, day]);
@@ -63,15 +69,13 @@ export default class Period extends Phaser.Scene {
 
       resources.circleGroup.add(container);
 
-      if (i === 4) {
+      if (i === 5) {
         fillColor = '0x33cc33';
       } else if (i === 13) {
         fillColor = '0x0099ff';
       } else if (i === 15) {
         fillColor = '0x33cc33';
-      } else if (i === 27) {
-        fillColor = '0xff0000';
-      }
+      } 
     }
 
     resources.stage = this.add.text(circle.x, circle.y, 'Period', 
@@ -85,7 +89,7 @@ export default class Period extends Phaser.Scene {
 
     Phaser.Actions.PlaceOnCircle(resources.circleGroup.getChildren(), circle, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(270));
 
-    resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
+    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'periodTitle');
     resources.scene = this;
     newEgg();
   }
@@ -101,7 +105,7 @@ function changeDay(day) {
   resources.currentDay = day;
 
   resources.circleGroup.getChildren()[resources.previousDay-1].list[0].setStrokeStyle(0);
-  resources.circleGroup.getChildren()[day-1].list[0].setStrokeStyle(3, '0xf5ce42');
+  resources.circleGroup.getChildren()[day-1].list[0].setStrokeStyle(4, '0xffda61');
 
   generateAnimation(resources.previousDay, resources.currentDay);
 
@@ -114,9 +118,9 @@ function changeDay(day) {
     newEgg();
   }
 
-  if ((day >= 1 && day <= 4) || day > 27) {
+  if (day >= 1 && day <= 5) {
     resources.stage.setText('Period');
-  } else if (day >= 5 && day <= 13) {
+  } else if (day >= 6 && day <= 13) {
     resources.stage.setText('Lining builds');
   } else if (day >= 14 && day <=15) {
     resources.stage.setText('Ovulation');

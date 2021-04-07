@@ -15,8 +15,8 @@ export default class TitleButton extends Phaser.GameObjects.Container {
     var button = this.scene.add.graphics();
     button.fillRoundedRect(x, y, this.buttonWidth, this.buttonHeight, 32);
     button.fillStyle(color, 1);
-    button.strokeRoundedRect(x, y, this.buttonWidth, this.buttonHeight, 32);
     button.lineStyle(4, 0xffffff, 1);
+    button.strokeRoundedRect(x, y, this.buttonWidth, this.buttonHeight, 32);
     
     var hitBox = this.scene.add.rectangle(x + this.buttonWidth/2, y + this.buttonHeight/2, this.buttonWidth, this.buttonHeight).setInteractive({useHandCursor: true});
 

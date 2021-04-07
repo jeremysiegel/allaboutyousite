@@ -1,5 +1,5 @@
 import SceneButton from '../../../common/js/sceneButton.js';
-import ToggleButton from '../../../common/js/toggleButton.js';
+import Textbox from '../../../common/js/textbox.js';
 import MRSStrings from './MRS_strings.js';
 import DiagramInteractions from '../../../common/js/diagramInteractions.js';
     
@@ -21,18 +21,15 @@ export default class MRS extends Phaser.Scene {
     this.load.image('urethra', '../../Puberty/Male-internal/images/urethra.png');
     this.load.image('vasdeferens', '../../Puberty/Male-internal/images/vasdeferens.png');
 
-    this.load.image('button', '../../common/images/buttons/red_button01.png');
-    this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
+    this.load.image('backButton', '../../common/images/buttons/back.png');
+ //   this.load.image('explanationButton', '../../common/images/buttons/more.png');
+
     
-    resources.definitions = new MRSStrings(false);
+    resources.definitions = new MRSStrings(true);
   }
 
   create () {
-    /*
-    window.addEventListener('resize', () => {
-      console.log('resize');
-    });
-    */
+    new Textbox(this, 810, 75, 430, 400);
 
     resources.maleInternal = this.add.image(450.1, 289.45, 'MRS');
     resources.bladder = this.add.image(450.4, 205.45, 'bladder');
@@ -48,11 +45,11 @@ export default class MRS extends Phaser.Scene {
     resources.labels = this.add.image(416.05, 321.45, 'labels');
     resources.labelLines = this.add.image(435.05, 318.2, 'labelLines');
 
-    resources.toggleObjects = {labels: resources.labels, lines: resources.labelLines};
+  //  resources.toggleObjects = {labels: resources.labels, lines: resources.labelLines};
 
-    resources.labelButton = new ToggleButton(this, 55, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Labels', toggle, resources.toggleObjects);
+ //   resources.labelButton = new ToggleButton(this, 55, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Labels', toggle, resources.toggleObjects);
 
-    resources.definitionDisplay = this.add.text(820, 85, '',
+    resources.definitionDisplay = this.add.text(830, 95, 'Male Reproductive System. Click on each part to learn what it does.',
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -61,12 +58,12 @@ export default class MRS extends Phaser.Scene {
       }
     );
     
-    resources.explanationButton = new ToggleButton(this, 435, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Explanations', explanations);
+  //  resources.explanationButton = new ToggleButton(this, 435, 280, 'Assistant', '14px', '#f9f9f9', 'explanationButton', 'explanationButton', '', explanations);
    // resources.explanationButton.visible = false;
     
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', true, resources.explanationButton);
     
-    resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
+    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'reproductiveTitle');  
   }
 }
 

@@ -3,6 +3,8 @@ import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
 import ReceptorInteractions from '../../../common/js/receptorInteractions.js';
 import FemaleChangesStrings from './femaleChangesStrings.js';
+import Textbox from '../../../common/js/textbox.js';
+
 
     
 export default class FemaleChanges extends Phaser.Scene {
@@ -18,8 +20,7 @@ export default class FemaleChanges extends Phaser.Scene {
     this.load.image('testosterone', '../../common/images/objects/testosterone.png');
     this.load.image('girl', './Puberty/Changes/images/girl.png');
 
-    this.load.image('button', '../../common/images/buttons/red_button01.png');
-    this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
+    this.load.image('backButton', '../../common/images/buttons/back.png');
 
     resources.definitions = new FemaleChangesStrings(false);
 
@@ -27,6 +28,7 @@ export default class FemaleChanges extends Phaser.Scene {
   }
 
   create () {
+    new Textbox(this, 810, 75, 430, 400);
 
     resources.girl = this.add.image(522.85, 310.25, 'girl');
     
@@ -84,7 +86,7 @@ export default class FemaleChanges extends Phaser.Scene {
       gameObject.y = dragY;
     });
 
-    resources.definitionDisplay = this.add.text(820, 85, '',
+    resources.definitionDisplay = this.add.text(830, 95, 'What are the female changes of puberty? Different parts of the body are listening for the hormone messages during puberty. Drag the hormones to each body part to trigger the changes of puberty.',
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -95,8 +97,8 @@ export default class FemaleChanges extends Phaser.Scene {
 
   new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, false);
 
+  resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'changesTitle');
 
-  resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
   }
 }
 

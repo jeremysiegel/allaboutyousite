@@ -6,7 +6,7 @@ export default class MainTitle extends Phaser.Scene {
   }
 
   preload () {
-  
+ 
   }
 
   create () {
@@ -32,6 +32,8 @@ export default class MainTitle extends Phaser.Scene {
     }
     
     new TitleScreen(this, sceneButtons);
+
+
 
   }
 }

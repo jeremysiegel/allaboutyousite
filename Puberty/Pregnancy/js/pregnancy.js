@@ -31,8 +31,7 @@ export default class Pregnancy extends Phaser.Scene {
     this.load.spritesheet('picture8', '../../Puberty/Pregnancy/images/breathe-spritesheet.png', { frameWidth: 600, frameHeight: 338, margin: 0, spacing: 0 });
     this.load.image('picture9', '../../Puberty/Pregnancy/images/term.png');
 
-    this.load.image('button', '../../common/images/buttons/red_button01.png');
-    this.load.image('buttonPressed', '../../common/images/buttons/red_button02.png');
+    this.load.image('backButton', '../../common/images/buttons/back.png');
     
     resources.definitions = new PregnancyStrings(false);
   }
@@ -159,8 +158,8 @@ export default class Pregnancy extends Phaser.Scene {
     }
   //  new DiagramInteractions(resources.stages.children.entries, resources.definitionDisplay, resources.definitions, resources, 'stage', false);
 
-    resources.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Home', 'title');
-  }
+  resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'periodTitle');
+}
 }
 
 var resources = {

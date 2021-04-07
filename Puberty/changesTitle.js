@@ -1,4 +1,5 @@
 import TitleScreen from '../../../common/js/titleScreen.js';
+import SceneButton from '../../../common/js/sceneButton.js';
 
 export default class ChangesTitle extends Phaser.Scene {
   constructor() {
@@ -6,7 +7,8 @@ export default class ChangesTitle extends Phaser.Scene {
   }
 
   preload () {
-  
+    this.load.image('homeButton', '../../common/images/buttons/home.png');
+
   }
 
   create () {
@@ -32,6 +34,9 @@ export default class ChangesTitle extends Phaser.Scene {
     }
     
     new TitleScreen(this, sceneButtons);
+
+    this.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'homeButton', 'homeButton', '', 'mainTitle');  
+
 
   }
 }
