@@ -2,8 +2,8 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
 import InfoButton from '../../../common/js/infoButton.js';
-import Textbox from '../../../common/js/textbox.js';
-    
+import Popup from '../../../common/js/popup.js';
+
 export default class Hormones extends Phaser.Scene {
   constructor() {
     super({key: 'hormones'})
@@ -110,33 +110,14 @@ export default class Hormones extends Phaser.Scene {
     resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
     
     resources.scene = this;
+   
   }
 }
 
 var resources = {
-  infoText: 'test'
+  infoText: 'Parts of the body need to send messages to each other. They do it using hormones. Click a cell on the left to make a hormone, and drag it to a cell on the right to send a message. What needs to be true for the cell to "receive" the message? What happens if you try to send a message to the wrong cell?'
 };
 
 function infoText(resources) {
-  resources.textbox = new Textbox(resources.scene, 300, 100, 500, 400);
-  resources.scene.scene.pause();
+  new Popup(resources.scene, 300, 100, 500, 400, resources.infoText);
 }
-
-// Function if you want to allow learner to remove hormone from receptor.
-/*
-function unbindHormone(hormone) {
-  var receptor;
-  var cell;
-
-  if (hormone === resources.estrogen) {
-    cell = resources.cells.children.entries[0];
-    receptor = resources.estrogenReceptor;
-  } else {
-    cell = resources.cells.children.entries[1];
-    receptor = resources.testosteroneReceptor
-  }
-  hormone.unbindReceptor(hormone, receptor, cell);
-}
-*/
-
-
