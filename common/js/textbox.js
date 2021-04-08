@@ -8,5 +8,6 @@ export default class Textbox extends Phaser.GameObjects.Graphics {
     this.strokeRoundedRect(x, y, width, height, 20);
 
     scene.add.existing(this);
+    
   }
 }

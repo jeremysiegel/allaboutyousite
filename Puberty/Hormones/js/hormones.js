@@ -1,6 +1,8 @@
 import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
+import InfoButton from '../../../common/js/infoButton.js';
+import Textbox from '../../../common/js/textbox.js';
     
 export default class Hormones extends Phaser.Scene {
   constructor() {
@@ -21,6 +23,7 @@ export default class Hormones extends Phaser.Scene {
     this.load.image('signalCell2', '../../Puberty/Hormones/images/signalCell2.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
+    this.load.image('infoButton', '../../common/images/buttons/info.png');
 
   }
 
@@ -103,10 +106,21 @@ export default class Hormones extends Phaser.Scene {
       hormone.y = dragY;
     });
 
-    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'changesTitle');
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'changesTitle', 'backButton');
+    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
+    
+    resources.scene = this;
   }
 }
-var resources = {};
+
+var resources = {
+  infoText: 'test'
+};
+
+function infoText(resources) {
+  resources.textbox = new Textbox(resources.scene, 300, 100, 500, 400);
+  resources.scene.scene.pause();
+}
 
 // Function if you want to allow learner to remove hormone from receptor.
 /*

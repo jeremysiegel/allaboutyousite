@@ -158,7 +158,7 @@ export default class Pregnancy extends Phaser.Scene {
     }
   //  new DiagramInteractions(resources.stages.children.entries, resources.definitionDisplay, resources.definitions, resources, 'stage', false);
 
-  resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'periodTitle');
+  resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
 }
 }
 

@@ -1,5 +1,6 @@
-export default class SceneButton {
-  constructor(scene, x, y, scale, switchScene, key, key2) {
+
+export default class ResetButton {
+  constructor(scene, x, y, scale, key, key2) {
 
     const button = scene.add.image(x, y, key).setInteractive({useHandCursor: true}).setScale(scale);
 
@@ -11,7 +12,7 @@ export default class SceneButton {
 
     button.on('pointerup', () => {
       button.setTexture(key);
-      scene.sys.scenePlugin.switch(switchScene);
+      scene.scene.restart();
     });
   }
 }

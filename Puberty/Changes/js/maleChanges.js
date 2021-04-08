@@ -4,7 +4,8 @@ import Receptor from '../../../common/js/receptor.js';
 import ReceptorInteractions from '../../../common/js/receptorInteractions.js';
 import MaleChangesStrings from './maleChangesStrings.js';
 import Textbox from '../../../common/js/textbox.js';
-
+import ResetButton from '../../../common/js/resetButton.js';
+import InfoButton from '../../../common/js/infoButton.js';
 
     
 export default class MaleChanges extends Phaser.Scene {
@@ -21,6 +22,8 @@ export default class MaleChanges extends Phaser.Scene {
     this.load.image('boy', './Puberty/Changes/images/boy.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
+    this.load.image('resetButton', '../../common/images/buttons/reset.png');
+    this.load.image('infoButton', '../../common/images/buttons/info.png');
 
     resources.definitions = new MaleChangesStrings(false);
 
@@ -72,6 +75,8 @@ export default class MaleChanges extends Phaser.Scene {
     resources.testosteroneGroup.add(resources.testosterone4);
     resources.testosteroneGroup.add(resources.testosterone5);
   
+    this.physics.add.collider(resources.testosteroneGroup, resources.testosteroneGroup);
+    this.physics.add.collider(resources.testosteroneGroup, resources.estrogenGroup);
     this.physics.add.overlap(resources.estrogenReceptors, resources.estrogenGroup, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(hormone, receptor)})});
     this.physics.add.overlap(resources.testosteroneReceptors, resources.testosteroneGroup, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(hormone, receptor)})});
 
@@ -80,17 +85,7 @@ export default class MaleChanges extends Phaser.Scene {
       gameObject.y = dragY;
     });
 
-    this.input.on('pointerup', function(pointer, hormone) {
-      try {
-        if (hormone[0].isBound) {
-          console.log(hormone);
-        }
-      } catch (error) {
-
-      }
-    })
-
-    resources.definitionDisplay = this.add.text(830, 95, 'What are the male changes of puberty? Different parts of the body are listening for the hormone messages during puberty. Drag the hormones to each body part to trigger the changes of puberty.',
+    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -99,15 +94,24 @@ export default class MaleChanges extends Phaser.Scene {
       }
     );
 
-  new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, false);
+    new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, false);
 
-  resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'changesTitle');
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'changesTitle', 'backButton');
+    resources.resetButton = new ResetButton(this, 1140, 567, 0.1, 'resetButton');
+    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
+
   }
 }
 
 var resources = {
-  change: ''
+  change: '',
+  infoText: 'What are the male changes of puberty? Different parts of the body are listening for the hormone messages during puberty. Drag the hormones to each body part to trigger the changes of puberty.'
 };
+
+function infoText (resources) {
+  resources.definitionDisplay.setText(resources.infoText);
+}
+
 
 
 

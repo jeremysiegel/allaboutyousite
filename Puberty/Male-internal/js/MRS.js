@@ -2,6 +2,7 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import Textbox from '../../../common/js/textbox.js';
 import MRSStrings from './MRS_strings.js';
 import DiagramInteractions from '../../../common/js/diagramInteractions.js';
+import InfoButton from '../../../common/js/infoButton.js';
     
 export default class MRS extends Phaser.Scene {
   constructor() {
@@ -22,6 +23,8 @@ export default class MRS extends Phaser.Scene {
     this.load.image('vasdeferens', '../../Puberty/Male-internal/images/vasdeferens.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
+    this.load.image('infoButton', '../../common/images/buttons/info.png');
+
  //   this.load.image('explanationButton', '../../common/images/buttons/more.png');
 
     
@@ -49,7 +52,7 @@ export default class MRS extends Phaser.Scene {
 
  //   resources.labelButton = new ToggleButton(this, 55, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Labels', toggle, resources.toggleObjects);
 
-    resources.definitionDisplay = this.add.text(830, 95, 'Male Reproductive System. Click on each part to learn what it does.',
+    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -63,7 +66,8 @@ export default class MRS extends Phaser.Scene {
     
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', true, resources.explanationButton);
     
-    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'reproductiveTitle');  
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
+    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
   }
 }
 
@@ -84,6 +88,12 @@ function explanations() {
 
 var resources = {
   explanations: false,
-  organ: ''
+  organ: '',
+  infoText: "Male Reproductive System. Click on each part to learn what it does."
 };
+
+function infoText (resources) {
+  resources.definitionDisplay.setText(resources.infoText);
+}
+
 

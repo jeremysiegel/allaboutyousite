@@ -2,6 +2,7 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import Textbox from '../../../common/js/textbox.js';
 import FRSStrings from './FRS_strings.js';
 import DiagramInteractions from '../../../common/js/diagramInteractions.js';
+import InfoButton from '../../../common/js/infoButton.js';
     
 export default class FRS extends Phaser.Scene {
   constructor() {
@@ -20,6 +21,8 @@ export default class FRS extends Phaser.Scene {
     this.load.image('cervix', '../../Puberty/Female-Internal/images/cervix.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
+    this.load.image('infoButton', '../../common/images/buttons/info.png');
+
   //  this.load.image('explanationButton', '../../common/images/buttons/more.png');
     
     resources.definitions = new FRSStrings(true);
@@ -51,7 +54,7 @@ export default class FRS extends Phaser.Scene {
 
   //  resources.labelButton = new ToggleButton(this, 55, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Labels', toggle, resources.toggleObjects);
 
-    resources.definitionDisplay = this.add.text(830, 95, 'Female Reproductive System. Click on each part to learn what it does.',
+    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -65,9 +68,20 @@ export default class FRS extends Phaser.Scene {
     
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', true, resources.explanationButton);
   
-    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'reproductiveTitle');
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
+    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
 
   }
+}
+
+var resources = {
+  explanations: false,
+  organ: '',
+  infoText: "Female Reproductive System. Click on each part to learn what it does."
+};
+
+function infoText (resources) {
+  resources.definitionDisplay.setText(resources.infoText);
 }
 
 function toggle(toggleObjects){
@@ -85,8 +99,5 @@ function explanations() {
   resources.definitionDisplay.text = resources.definitions[resources.organ];
 }
 
-var resources = {
-  explanations: false,
-  organ: ''
-};
+
 

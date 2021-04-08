@@ -35,7 +35,8 @@ export default class ChangesTitle extends Phaser.Scene {
     
     new TitleScreen(this, sceneButtons);
 
-    this.homeButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'homeButton', 'homeButton', '', 'mainTitle');  
+    this.homeButton = new SceneButton(this, 1200, 567, 0.1, 'mainTitle', 'homeButton');
+
 
 
   }

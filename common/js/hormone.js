@@ -31,6 +31,7 @@ export default class Hormone extends Phaser.GameObjects.Sprite {
         }
         hormone.hormoneType = receptor.receptor.receptorType;
         hormone.input.draggable = false;
+        hormone.body.setImmovable(true);
         receptor.receptor.isBound = true;
         receptor.displayText();
 

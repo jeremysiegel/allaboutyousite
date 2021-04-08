@@ -15,7 +15,7 @@ export default class RSGame extends Phaser.Scene {
    // this.load.spritesheet('spermSpritesheet2', '../../Puberty/rsGame/images/sperm_spritesheet.png', { frameWidth: 104, frameHeight: 277, margin: 10, spacing: 20 });
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
-    
+
   }
 
   create () {
@@ -106,7 +106,7 @@ export default class RSGame extends Phaser.Scene {
       }
     });
     
-    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'reproductiveTitle');
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
   }
 }
 
@@ -427,7 +427,6 @@ function nextOrgan(scene) {
 function changeScene(scene) {
   scene.cameras.main.fadeOut(500, 0, 0, 0);
   scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-   // scene.scene.stop('rsGame');
     scene.scene.start('rsGame2');
 	})
 }

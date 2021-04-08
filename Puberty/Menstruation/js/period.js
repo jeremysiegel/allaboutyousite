@@ -89,7 +89,7 @@ export default class Period extends Phaser.Scene {
 
     Phaser.Actions.PlaceOnCircle(resources.circleGroup.getChildren(), circle, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(270));
 
-    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'periodTitle');
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
     resources.scene = this;
     newEgg();
   }

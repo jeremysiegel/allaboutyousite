@@ -111,7 +111,8 @@ export default class RSGame extends Phaser.Scene {
       }
     });
     
-    resources.backButton = new SceneButton(this, 600, 280, 'Assistant', '14px', '#f9f9f9', 'backButton', 'backButton', '', 'reproductiveTitle');  }
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
+   }
 }
 
 var resources = {};
