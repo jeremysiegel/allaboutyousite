@@ -13,7 +13,6 @@ export default class InfoButton {
       button.setTexture(key);
       callback(callbackParams);
     });
-  
   }
 }
 

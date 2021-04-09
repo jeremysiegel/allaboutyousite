@@ -1,9 +1,9 @@
-import Hormones from './hormones.js';
+import Start from './start.js';
 
 var config = {
   type: Phaser.AUTO,
   transparent: true,
-  scene: [Hormones],
+  scene: [Start],
   scale: {
     mode: Phaser.Scale.FIT,
     width: 1280,

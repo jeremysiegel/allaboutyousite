@@ -7,8 +7,8 @@ export default class RSGame extends Phaser.Scene {
 
   preload () {
 
-    this.load.image('labelLinesF', '../../Puberty/Female-internal/images/FRS label lines.png');
-    this.load.image('FRS', '../../Puberty/Female-internal/images/FRS diagram.png');
+    this.load.image('labelLinesF', '../../Puberty/Female-Internal/images/FRS label lines.png');
+    this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
     this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm3_spritesheet.png', { frameWidth: 27, frameHeight: 214, margin: 10, spacing: 20 });
     this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
     this.load.image('egg2', '../../Puberty/rsGame/images/egg2.png');
