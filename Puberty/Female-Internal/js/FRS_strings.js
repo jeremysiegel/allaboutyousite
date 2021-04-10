@@ -10,11 +10,11 @@ export default class FRSStrings {
     } 
 
     var explanations = {
-      fTubes: definitions.fTubes + ' They are where egg and sperm meet and the egg is fertilized.',
-      ovaries: definitions.ovaries + ' One egg is released each menstrual cycle (about once per month).',
-      uterus: definitions.uterus + ' Each cycle, a lining builds up. If the egg is fertilized, the fetus develops here. Otherwise, the lining gets shed and leaves the body during the period.',
-      vagina: definitions.vagina + ' This is where sperm enters the body.',
-      cervix: definitions.cervix + ''
+      fTubes: definitions.fTubes + '\n\nThey are where egg and sperm meet and the egg is fertilized.',
+      ovaries: definitions.ovaries + '\n\nOne egg is released each menstrual cycle (about once per month).',
+      uterus: definitions.uterus + '\n\nEach cycle, a lining builds up. If the egg is fertilized, the fetus develops here. Otherwise, the lining gets shed and leaves the body during the period.',
+      vagina: definitions.vagina + '\n\nThis is where sperm enters the body.',
+      cervix: definitions.cervix
     }
 
     if (!getExplanations) {

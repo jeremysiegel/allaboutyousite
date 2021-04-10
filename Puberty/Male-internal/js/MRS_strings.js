@@ -13,11 +13,11 @@ export default class MRSStrings {
 
     var explanations = {
       bladder: definitions.bladder + ' Sperm do not go in here.',
-      epididymis: definitions.epididymis + ' This is where sperm gain the ability to swim.',
-      prostate: definitions.prostate + ' Sperm and fluid together is called semen.',
+      epididymis: definitions.epididymis + '\n\nThis is where sperm gain the ability to swim.',
+      prostate: definitions.prostate + '\n\nSperm and fluid together is called semen.',
       svesicle: definitions.svesicle + '',
-      teste: definitions.teste + ' They are outside the body because inside it is too warm for sperm to develop.',
-      urethra: definitions.urethra + ' Sperm leaving the body is called ejaculation. Sperm and urine cannot leave the body at the same time.',
+      teste: definitions.teste + '\n\nThey are outside the body because inside it is too warm for sperm to develop.',
+      urethra: definitions.urethra + '\n\nSperm leaving the body is called ejaculation.\n\nSperm and urine cannot leave the body at the same time.',
       vasdeferens: definitions.vasdeferens + ' It brings the sperm inside the body.'
     }
 

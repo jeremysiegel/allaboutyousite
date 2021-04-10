@@ -10,7 +10,7 @@ export default class FRS extends Phaser.Scene {
   }
 
   preload () {
-
+    this.load.image('femaleBackground', '../../Puberty/Female-Internal/images/background.png');
     this.load.image('femaleInternal', '../../Puberty/Female-Internal/images/FRS diagram.png');
     this.load.image('frsLabels', '../../Puberty/Female-Internal/images/FRS labels.png');
     this.load.image('frsLabelLines', '../../Puberty/Female-Internal/images/FRS label lines.png');
@@ -22,16 +22,25 @@ export default class FRS extends Phaser.Scene {
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
-
-  //  this.load.image('explanationButton', '../../common/images/buttons/more.png');
     
     resources.definitions = new FRSStrings(true);
   }
 
   create () {
-    new Textbox(this, 810, 75, 430, 400);
-
+    resources.background = this.add.image(454.25, 365.55, 'femaleBackground').setAlpha(0.5);
     resources.femaleInternal = this.add.image(454.25, 290.55, 'femaleInternal');
+    
+    new Textbox(this, 810, 75, 430, 350);
+
+    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
+      {
+        fontFamily: 'Assistant',
+        fontSize: '30px',
+        fill: '#000',
+        wordWrap: { width: 400 }
+      }
+    );
+    
     resources.ft = this.add.image(454.6, 150.85, 'fTubes');
     resources.ovaries = this.add.image(454, 216.65, 'ovaries');
     resources.uterus = this.add.image(454.75, 248.6, 'uterus')
@@ -49,54 +58,22 @@ export default class FRS extends Phaser.Scene {
 
     resources.frsLabels = this.add.image(384.35, 374.55, 'frsLabels');
     resources.frsLabelLines = this.add.image(377.6, 299.2, 'frsLabelLines');
-
-  //  resources.toggleObjects = {labels: resources.frsLabels, lines: resources.frsLabelLines};
-
-  //  resources.labelButton = new ToggleButton(this, 55, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Labels', toggle, resources.toggleObjects);
-
-    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
-      {
-        fontFamily: 'Assistant',
-        fontSize: '30px',
-        fill: '#000',
-        wordWrap: { width: 400, useAdvancedWrap: true }
-      }
-    );
-    
- //   resources.explanationButton = new ToggleButton(this, 435, 280, 'Assistant', '14px', '#f9f9f9', 'explanationButton', 'explanationButton', '', explanations);
- //   resources.explanationButton.visible = false;
     
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', true, resources.explanationButton);
   
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
     resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
-
   }
 }
-
+ 
 var resources = {
   explanations: false,
   organ: '',
-  infoText: "Female Reproductive System. Click on each part to learn what it does."
+  infoText: "Female Reproductive System.\n\nClick on each part to learn what it does."
 };
 
 function infoText (resources) {
   resources.definitionDisplay.setText(resources.infoText);
-}
-
-function toggle(toggleObjects){
-  for (const object in toggleObjects) {
-    toggleObjects[object].visible = !toggleObjects[object].visible;
-  }
-}
-
-function explanations() {
-  resources.explanations = !resources.explanations;
-
-  resources.definitions = new FRSStrings(resources.explanations);
-  new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
-  
-  resources.definitionDisplay.text = resources.definitions[resources.organ];
 }
 
 

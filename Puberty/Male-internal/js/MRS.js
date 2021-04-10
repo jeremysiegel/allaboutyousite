@@ -10,7 +10,6 @@ export default class MRS extends Phaser.Scene {
   }
 
   preload () {
-
     this.load.image('bladder', '../../Puberty/Male-internal/images/bladder.png');
     this.load.image('labels', '../../Puberty/Male-internal/images/labels.png');
     this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
@@ -24,17 +23,32 @@ export default class MRS extends Phaser.Scene {
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
-
- //   this.load.image('explanationButton', '../../common/images/buttons/more.png');
-
-    
+ 
     resources.definitions = new MRSStrings(true);
   }
 
   create () {
-    new Textbox(this, 810, 75, 430, 400);
+    new Textbox(this, 810, 75, 430, 350);
 
-    resources.maleInternal = this.add.image(450.1, 289.45, 'MRS');
+    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
+      {
+        fontFamily: 'Assistant',
+        fontSize: '30px',
+        fill: '#000',
+        wordWrap: {width: 400}
+      }
+    );
+
+    resources.maleInternal = this.add.image(450.1, 289.45, 'MRS').setAlpha(0.5);
+    // Background images for masking.
+    resources.bladder2 = this.add.image(450.4, 205.45, 'bladder');
+    resources.prostate2 = this.add.image(454.1, 279.8, 'prostate');
+    resources.urethra2 = this.add.image(371, 361.05, 'urethra');
+    resources.vasdeferens2 = this.add.image(419.7, 276.05, 'vasdeferens');
+    resources.teste2 = this.add.image(348.9, 411.4, 'teste');
+    resources.epididymis2 = this.add.image(353.55, 398.7, 'epididymis');
+    resources.svesicle2 = this.add.image(510.4, 235.25, 'svesicle');
+    
     resources.bladder = this.add.image(450.4, 205.45, 'bladder');
     resources.prostate = this.add.image(454.1, 279.8, 'prostate');
     resources.urethra = this.add.image(371, 361.05, 'urethra');
@@ -43,27 +57,11 @@ export default class MRS extends Phaser.Scene {
     resources.epididymis = this.add.image(353.55, 398.7, 'epididymis');
     resources.svesicle = this.add.image(510.4, 235.25, 'svesicle');
 
-    resources.organs = [resources.maleInternal, resources.bladder, resources.prostate, resources.vasdeferens, resources.teste, resources.epididymis, resources.svesicle, resources.urethra];
+    resources.organs = [resources.bladder, resources.prostate, resources.vasdeferens, resources.teste, resources.epididymis, resources.svesicle, resources.urethra];
 
     resources.labels = this.add.image(416.05, 321.45, 'labels');
     resources.labelLines = this.add.image(435.05, 318.2, 'labelLines');
 
-  //  resources.toggleObjects = {labels: resources.labels, lines: resources.labelLines};
-
- //   resources.labelButton = new ToggleButton(this, 55, 280, 'Assistant', '14px', '#f9f9f9', 'button', 'buttonPressed', 'Labels', toggle, resources.toggleObjects);
-
-    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
-      {
-        fontFamily: 'Assistant',
-        fontSize: '30px',
-        fill: '#000',
-        wordWrap: { width: 400, useAdvancedWrap: true }
-      }
-    );
-    
-  //  resources.explanationButton = new ToggleButton(this, 435, 280, 'Assistant', '14px', '#f9f9f9', 'explanationButton', 'explanationButton', '', explanations);
-   // resources.explanationButton.visible = false;
-    
     new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', true, resources.explanationButton);
     
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
@@ -71,25 +69,10 @@ export default class MRS extends Phaser.Scene {
   }
 }
 
-function toggle(toggleObjects){
-  for (const object in toggleObjects) {
-    toggleObjects[object].visible = !toggleObjects[object].visible;
-  }
-}
-
-function explanations() {
-  resources.explanations = !resources.explanations;
-
-  resources.definitions = new MRSStrings(resources.explanations);
-  new DiagramInteractions(resources.organs, resources.definitionDisplay, resources.definitions, resources, 'organ', resources.explanationButton);
-  
-  resources.definitionDisplay.text = resources.definitions[resources.organ];
-}
-
 var resources = {
   explanations: false,
   organ: '',
-  infoText: "Male Reproductive System. Click on each part to learn what it does."
+  infoText: "Male Reproductive System.\n\nClick on each part to learn what it does."
 };
 
 function infoText (resources) {
