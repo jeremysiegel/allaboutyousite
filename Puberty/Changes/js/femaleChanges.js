@@ -2,7 +2,6 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
 import Receptor from '../../../common/js/receptor.js';
 import ReceptorInteractions from '../../../common/js/receptorInteractions.js';
-import FemaleChangesStrings from './femaleChangesStrings.js';
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
@@ -19,41 +18,65 @@ export default class FemaleChanges extends Phaser.Scene {
     this.load.image('estrogen', '../../common/images/objects/estrogen.png');
     this.load.image('testosteroneReceptor', '../../common/images/objects/testosteroneReceptor.png');
     this.load.image('testosterone', '../../common/images/objects/testosterone.png');
-    this.load.image('girl', './Puberty/Changes/images/girl.png');
+    this.load.image('girlChanges', './Puberty/Changes/images/girl.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('resetButton', '../../common/images/buttons/reset.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
 
-    resources.definitions = new FemaleChangesStrings(false);
   }
 
   create () {
-    new Textbox(this, 810, 75, 430, 400);
-
-    resources.girl = this.add.image(522.85, 310.25, 'girl');
+    new Textbox(this, 810, 75, 430, 390);
     
-    resources.breasts2 = new Receptor(this, 600.75, 251.7, 'estrogenReceptor', 0.8, 12, 'breasts');
-    resources.genitals2 = new Receptor(this, 570.75, 384.45, 'estrogenReceptor', 0.8, 33, 'genitals');
-    resources.hair2 = new Receptor(this, 601, 467, 'testosteroneReceptor', 0.8, 0, 'hair');
-    resources.growth2 = new Receptor(this, 392.55, 460.75, 'estrogenReceptor', 0.8, 180, 'growth');
-    resources.hips2 = new Receptor(this, 384.95, 362.9, 'estrogenReceptor', 0.8, 151, 'hips');
-    resources.sweat2 = new Receptor(this, 390.65, 275.05, 'testosteroneReceptor', 0.8, 145, 'sweat');
+    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
+      {
+        fontFamily: 'Assistant',
+        fontSize: '30px',
+        fill: '0x2E343B',
+        wordWrap: { width: 400, useAdvancedWrap: false }
+      }
+    );
 
-    resources.breasts = new Receptor(this, 600.75, 251.7, 'estrogenReceptor', 0.8, 12, 'breasts');
-    resources.genitals = new Receptor(this, 570.75, 384.45, 'estrogenReceptor', 0.8, 33, 'genitals');
-    resources.hair = new Receptor(this, 601, 467, 'testosteroneReceptor', 0.8, 0, 'hair');
-    resources.growth = new Receptor(this, 392.55, 460.75, 'estrogenReceptor', 0.8, 180, 'growth');
-    resources.hips = new Receptor(this, 384.95, 362.9, 'estrogenReceptor', 0.8, 151, 'hips');
-    resources.sweat = new Receptor(this, 390.65, 275.05, 'testosteroneReceptor', 0.8, 145, 'sweat');
+    // Hormone boxes.
+    new Textbox(this, 45.5, 141, 230, 164, '0xff9085', '0xfe7266', 4);
+    new Textbox(this, 45.5, 346, 230, 164, '0x7ac7a5', '0x13c576', 4);
 
-    resources.estrogen = new Hormone(this, 125.65, 469.8, 'estrogen', 0.8);
-    resources.estrogen2 = new Hormone(this, 161.35, 431.6, 'estrogen', 0.8);
-    resources.estrogen3 = new Hormone(this, 175.65, 487.3, 'estrogen', 0.8);
-    resources.estrogen4 = new Hormone(this, 213.15, 447.3, 'estrogen', 0.8);
+    this.add.text(55, 148, 'Testosterone', {
+      fontFamily: 'Assistant',
+      fontSize: '30px',
+      fill: '#fff'
+    });
 
-    resources.testosterone = new Hormone(this, 155.05, 296.95, 'testosterone', 0.8);
-    resources.testosterone2 = new Hormone(this, 171.45, 255.05, 'testosterone', 0.8);
+    this.add.text(55, 353, 'Estrogen', {
+      fontFamily: 'Assistant',
+      fontSize: '30px',
+      fill: '#fff'
+    });
+
+    resources.girl = this.add.image(552.85, 310.25, 'girlChanges');
+    
+    resources.breasts2 = new Receptor(this, 630.75, 251.7, 'estrogenReceptor', 0.8, 12, 'breasts');
+    resources.genitals2 = new Receptor(this, 600.75, 384.45, 'estrogenReceptor', 0.8, 33, 'genitals');
+    resources.hair2 = new Receptor(this, 631, 467, 'testosteroneReceptor', 0.8, 0, 'hair');
+    resources.growth2 = new Receptor(this, 422.55, 460.75, 'estrogenReceptor', 0.8, 180, 'growth');
+    resources.hips2 = new Receptor(this, 414.95, 362.9, 'estrogenReceptor', 0.8, 151, 'hips');
+    resources.sweat2 = new Receptor(this, 420.65, 275.05, 'testosteroneReceptor', 0.8, 145, 'sweat');
+
+    resources.breasts = new Receptor(this, 630.75, 251.7, 'estrogenReceptor', 0.8, 12, 'breasts');
+    resources.genitals = new Receptor(this, 600.75, 384.45, 'estrogenReceptor', 0.8, 33, 'genitals');
+    resources.hair = new Receptor(this, 631, 467, 'testosteroneReceptor', 0.8, 0, 'hair');
+    resources.growth = new Receptor(this, 422.55, 460.75, 'estrogenReceptor', 0.8, 180, 'growth');
+    resources.hips = new Receptor(this, 414.95, 362.9, 'estrogenReceptor', 0.8, 151, 'hips');
+    resources.sweat = new Receptor(this, 420.65, 275.05, 'testosteroneReceptor', 0.8, 145, 'sweat');
+
+    resources.estrogen = new Hormone(this, 122.65, 460.8, 'estrogen', 0.8);
+    resources.estrogen2 = new Hormone(this, 161.35, 421.6, 'estrogen', 0.8);
+    resources.estrogen3 = new Hormone(this, 175.65, 477.3, 'estrogen', 0.8);
+    resources.estrogen4 = new Hormone(this, 218.15, 437.3, 'estrogen', 0.8);
+
+    resources.testosterone = new Hormone(this, 120.05, 256.95, 'testosterone', 0.8);
+    resources.testosterone2 = new Hormone(this, 171.45, 235.05, 'testosterone', 0.8);
 
     resources.changes = [resources.breasts, resources.genitals, resources.hair, resources.growth, resources.hips, resources.sweat];
     resources.changes2 = [resources.breasts2, resources.genitals2, resources.hair2, resources.growth2, resources.hips2, resources.sweat2];
@@ -90,15 +113,6 @@ export default class FemaleChanges extends Phaser.Scene {
       gameObject.y = dragY;
     });
 
-    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
-      {
-        fontFamily: 'Assistant',
-        fontSize: '30px',
-        fill: '#000',
-        wordWrap: { width: 400, useAdvancedWrap: true }
-      }
-    );
-
   new ReceptorInteractions(resources.changes, resources.definitionDisplay, resources.definitions, false);
 
   resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'changesTitle', 'backButton');
@@ -110,7 +124,15 @@ export default class FemaleChanges extends Phaser.Scene {
 
 var resources = {
   change: '',
-  infoText: 'What are the female changes of puberty? Different parts of the body are listening for the hormone messages during puberty. Drag the hormones to each body part to trigger the changes of puberty.'
+  infoText: "What are the changes of puberty?\n\nDifferent parts of the body are \"listening\" for a hormone message.\n\nDrag the hormones to each body part to trigger the changes of puberty.",
+  definitions: {
+    breasts: 'Often, one of the first signs of puberty is a “breast bud,” a small lump behind the nipple that leads to the development of breasts.',
+    genitals: 'The vulva, or the outside part of the genitals (sometimes what gets called the vagina) gets bigger.\n\nThe vagina makes a fluid to clean itself.\n\nPeriods, or the menstrual cycle, also start.',
+    hair: 'More hair starts to grow all around the body, like the arms and legs.\n\nNew hair grows around the genitals (pubic hair), and in the armpits.',
+    growth: 'There is a "growth spurt", or a time when you get taller pretty quickly. You might notice that you need to get new clothes.',
+    hips: 'Females develop wider hips.',
+    sweat: 'Sweat changes and gets more smelly. Many people wear deoderant to stop the smell.\n\nThe new sweat causes acne or pimples, another perfectly normal part of puberty'
+  } 
 };
 
 function infoText (resources) {
