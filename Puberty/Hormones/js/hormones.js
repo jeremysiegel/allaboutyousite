@@ -1,8 +1,9 @@
 import SceneButton from '../../../common/js/sceneButton.js';
 import Hormone from '../../../common/js/hormone.js';
-import Receptor from '../../../common/js/receptor.js';
 import InfoButton from '../../../common/js/infoButton.js';
-import Popup from '../../../common/js/popup.js';
+import Textbox from '../../../common/js/textbox.js';
+import ResetButton from '../../../common/js/resetButton.js';
+
 
 export default class Hormones extends Phaser.Scene {
   constructor() {
@@ -10,114 +11,217 @@ export default class Hormones extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('estrogenReceptor', '../../common/images/objects/estrogenReceptor.png');
-    this.load.image('estrogen', '../../common/images/objects/estrogen.png');
-  
-    this.load.image('testosteroneReceptor', '../../common/images/objects/testosteroneReceptor.png');
     this.load.image('testosterone', '../../common/images/objects/testosterone.png');
-    
-    this.load.image('receptorCell', '../../Puberty/Hormones/images/receptorCell.png');
-    this.load.image('receptorCell2', '../../Puberty/Hormones/images/receptorCell2.png');
    
-    this.load.image('signalCell', '../../Puberty/Hormones/images/signalCell.png');
-    this.load.image('signalCell2', '../../Puberty/Hormones/images/signalCell2.png');
+    this.load.image('boy', '../../Puberty/Hormones/images/boy.png');
+    this.load.image('girl', '../../Puberty/Hormones/images/girl.png');
+    this.load.image('brain', '../../Puberty/Hormones/images/brain.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
-
+    this.load.image('resetButton', '../../common/images/buttons/reset.png');
   }
 
   create () {
-    resources.cells = this.physics.add.staticGroup();
-
-    resources.estrogenReceptor = new Receptor(this, 850.1, 180.65, 'estrogenReceptor', 1, 155);
-    resources.testosteroneReceptor = new Receptor(this, 850.5, 388.1, 'testosteroneReceptor', 1, 200);
-
-    resources.cells.create(1057.7, 131.5, 'receptorCell').setCircle(125).setTint(0x999999);
-    resources.cells.create(1052.25, 462.15, 'receptorCell2').setCircle(115).setTint(0x999999);
-    resources.cells.create(161.45, 136.2, 'signalCell').setCircle(105).setInteractive({useHandCursor:true});
-    resources.cells.create(162.3, 453.4, 'signalCell2').setCircle(105).setInteractive({useHandCursor:true});
-
-    // Tween and create-hormone-on-click for estrogen signal cell.
-    resources.signalTween = this.tweens.add({
-      targets: resources.cells.getChildren()[2],
-      alpha: 0.65,
-      duration: 1500,
-      yoyo: true,
-      delay: Math.random()*1000,
-      repeat: -1
-    });
-
-    resources.cells.getChildren()[2].on('pointerup', () => {
-      resources.signalTween.stop();
-      resources.cells.getChildren()[2].setAlpha(1);
-
-      if(!resources.estrogen) {
-        resources.estrogen = new Hormone(this, 238.9, 117, 'estrogen', 1).setAlpha(0);
-        this.physics.add.overlap(resources.estrogenReceptor, resources.estrogen, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(hormone, receptor, resources.cells.children.entries[0], resources)})});  
-        this.tweens.add({
-          targets: resources.estrogen,
-          x: resources.estrogen.x + 140,
-          alpha: 1,
-          duration: 1000,
-          onComplete: () => {
-            resources.hormones.add(resources.estrogen);
-          }
-        });
-      }
-    })
-
-  // Tween and create-hormone-on-click for testosterone signal cell.
-    resources.signalTween2 = this.tweens.add({
-      targets: resources.cells.getChildren()[3],
-      alpha: 0.65,
-      duration: 1500,
-      yoyo: true,
-      delay: Math.random()*500,
-      repeat: -1
-    });
-
-    resources.cells.getChildren()[3].on('pointerup', () => {
-      resources.signalTween2.stop();
-      resources.cells.getChildren()[3].setAlpha(1);
-
-      if (!resources.testosterone) {
-        resources.testosterone = new Hormone(this, 252.6, 455, 'testosterone', 1).setAlpha(0).setAngle(200);
-        this.physics.add.overlap(resources.testosteroneReceptor, resources.testosterone, (receptor, hormone) => {hormone.on('pointerup', () => {hormone.bindReceptor(hormone, receptor, resources.cells.children.entries[1], resources)})});
-      
-        this.tweens.add({
-          targets: resources.testosterone,
-          x: resources.testosterone.x + 150,
-          alpha: 1,
-          duration: 1000,
-          onComplete: () => {
-            resources.hormones.add(resources.testosterone);
-          }
-        });
-      }
-    })
-
-    resources.hormones = this.physics.add.group({collideWorldBounds:true});
-
-    this.physics.add.collider(resources.hormones, resources.cells);
-
-    this.input.on('drag', function(pointer, hormone, dragX, dragY) {
-      hormone.x = dragX;
-      hormone.y = dragY;
-    });
-
-    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'changesTitle', 'backButton');
-    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
+    resources.boy = this.add.image(1054.15, 299.95, 'boy');
+    resources.girl = this.add.image(200.15, 299.95, 'girl');
     
+    resources.boyBrain = this.add.image(1057.15, 60.6, 'brain').setInteractive({useHandCursor: true});
+    resources.girlBrain = this.add.image(198.9, 60.6, 'brain').setInteractive({useHandCursor: true});
+
+    resources.boyBrain.on('pointerup', () => {
+      brainClick();
+    });
+    
+    resources.girlBrain.on('pointerup', () => {
+      brainClick();
+    });
+
+    // Center textbox by subtractung half the width and height.
+    new Textbox(this, this.cameras.main.width/2 - 255, this.cameras.main.height/2 - 245, 510, 490);
+
+    resources.text = this.add.text(this.cameras.main.width/2 - 235, this.cameras.main.height/2 - 225, resources.startText,
+      {
+        fontFamily: 'Assistant',
+        fontSize: '30px',
+        fill: '#000',
+        wordWrap: { width: 480, useAdvancedWrap: false }
+      }
+    );
+
+    resources.backButton = new SceneButton(this, 1220, 567, 0.1, 'changesTitle', 'backButton');
     resources.scene = this;
-   
   }
 }
 
 var resources = {
-  infoText: 'Parts of the body need to send messages to each other. They do it using hormones. Click a cell on the left to make a hormone, and drag it to a cell on the right to send a message. What needs to be true for the cell to "receive" the message? What happens if you try to send a message to the wrong cell?'
+  startText: "How does the body know when to start puberty?\n\nIt all starts in the brain. The brain tells the body to start puberty by making a tiny messenger called a hormone.\n\nClick the brain to make a hormone messenger!",
+  hormoneText: "Now click on the hormones to send the message to the body to start puberty.",
+  genitalsText: "The hormones travel from the brain to the genitals: ovaries in females and testicles in males.\n\nThe genitals then send a message to the rest of the body to start the changes of puberty. How do the genitals send the message? By making hormones of their own!\n\nClick anywhere on the body to send out more hormone messengers.",
+  endText: "You're all ready for puberty!\n\nYou'll learn a lot more as you explore the app. Navigate using the buttons below:",
+  // Buttons and labels for navigating the app, to be displayed at the end of the scene in the textbox.
+  endKey: {
+    info: {
+      text: 'Instructions',
+      image: 'infoButton'
+    },
+    back: {
+      text: 'Menu',
+      image: 'backButton'
+    },
+    reset: {
+      text: 'Reset',
+      image: 'resetButton'
+    }
+  }
 };
 
+// Callback for when info button is clicked.
 function infoText(resources) {
-  new Popup(resources.scene, 300, 100, 500, 400, resources.infoText);
+  resources.text.setText(resources.genitalsText);
+  if (resources.keys) {
+    var keys = resources.keys.getChildren();
+    for (var i = keys.length - 1; i > -1; i--) {
+      keys[i].destroy();
+    }
+  }
+}
+
+function brainClick() {
+  resources.hormone = new Hormone(resources.scene, 1057.15, 60.6, 'testosterone', 0.3).setInteractive({useHandCursor: true}).setAlpha(0);
+  resources.hormone2 = new Hormone(resources.scene, 198.9, 60.6, 'testosterone', 0.3).setInteractive({useHandCursor: true}).setAlpha(0);  
+  
+  resources.scene.add.tween({
+    targets: [resources.hormone, resources.hormone2],
+    alpha: 1,
+    duration: 1000,
+    onComplete: () => {
+      resources.text.setText(resources.hormoneText);
+
+      resources.hormoneKey = new Hormone(resources.scene, 500, 250, 'testosterone', 0.7).setOrigin(0);  
+      resources.hormoneLabel = resources.scene.add.text(555, 258, '    Hormone',
+        {
+          fontFamily: 'Assistant',
+          fontSize: '30px',
+          fill: '#000',
+        });
+
+      resources.hormone.on('pointerup', () => {
+        hormoneClick();
+      });
+    
+      resources.hormone2.on('pointerup', () => {
+        hormoneClick();
+      });
+    }
+  })
+  
+  resources.boyBrain.removeInteractive();
+  resources.girlBrain.removeInteractive();
+}
+
+function hormoneClick() {
+
+  var timeline = resources.scene.tweens.createTimeline({
+    targets: [resources.hormone, resources.hormone2],
+  });
+
+  timeline.add({
+    targets: [resources.hormone, resources.hormone2],
+    y: resources.hormone.y + 280,
+    ease: 'Quad.easeInOut',
+    duration: 3000
+  });
+
+  timeline.add({
+    targets: [resources.hormone, resources.hormone2],
+    alpha: 0,
+    duration: 1000,
+    onComplete: () => {
+      resources.text.setText(resources.genitalsText);
+
+      resources.hormone.destroy();
+      resources.hormone2.destroy();
+      resources.hormoneKey.destroy();
+      resources.hormoneLabel.destroy();
+    
+      resources.boy.setInteractive({useHandCursor: true, pixelPerfect: true});
+      resources.girl.setInteractive({useHandCursor: true, pixelPerfect: true});
+    
+      resources.boy.on('pointerup', function(pointer) {
+        personClick(this, pointer);
+      });
+    
+      resources.girl.on('pointerup', function(pointer) {
+        personClick(this, pointer);
+      }); 
+    }
+  })
+  timeline.play();
+}
+
+function personClick(object, pointer) {
+  // Set hormone x based on boy or girl being clicked. y is the same.
+  var x;
+  if (object.texture.key === 'boy') {
+    x = 1057.15;
+  } else {
+    x = 198.9;
+  }
+
+  var timeline = resources.scene.tweens.createTimeline({
+    targets: [resources.hormone, resources.hormone2],
+  });
+
+  resources.hormone = new Hormone(resources.scene, x, 340.6, 'testosterone', 0.3);
+
+  var timeline = resources.scene.tweens.createTimeline({
+    targets: [resources.hormone, resources.hormone2],
+  });
+
+  timeline.add({
+    targets: [resources.hormone],
+    x: pointer.x,
+    y: pointer.y,
+    ease: 'Power1',
+    duration: 1500
+  });
+
+  timeline.add({
+    targets: [resources.hormone],
+    alpha: 0,
+    duration: 1000,
+    completeDelay: 1000,
+    onComplete: function() {
+      this.data[0].target.destroy();
+      
+      // Puts end text back up if the info button was clicked at the end of the scene.
+      if (resources.text.text !== resources.endText) {
+        resources.text.setText(resources.endText);
+
+        resources.infoButton = new InfoButton(resources.scene, 1220, 507, 0.1, infoText, resources, 'infoButton');
+        resources.resetButton = new ResetButton(resources.scene, 1160, 567, 0.1, 'resetButton');
+
+        var containerY = 292;
+        resources.keys = resources.scene.add.group();
+
+        for (let key in resources.endKey) {
+          var image = resources.scene.add.image(0, 0, resources.endKey[key].image).setScale(0.1);
+          var text = resources.scene.add.text(75, 0, resources.endKey[key].text, {
+            fontFamily: 'Assistant',
+            fontSize: '30px',
+            fill: '#000'
+          }).setOrigin(0, 0.5);
+      
+          var container = resources.scene.add.container(500, containerY, [image, text]);
+          container.setSize(image.width, image.height);
+
+          resources.keys.add(container);
+          containerY += 64;
+        }
+      }
+    }
+  });
+
+  timeline.play();
 }
