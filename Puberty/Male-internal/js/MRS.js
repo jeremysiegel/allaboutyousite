@@ -21,6 +21,9 @@ export default class MRS extends Phaser.Scene {
     this.load.image('urethra', '../../Puberty/Male-internal/images/urethra.png');
     this.load.image('vasdeferens', '../../Puberty/Male-internal/images/vasdeferens.png');
 
+    this.load.image('mrsBackground', '../../Puberty/Male-internal/images/MRSBackground.png');
+    this.load.image('mrsInternal', '../../Puberty/Male-internal/images/MRSInternal.png');
+
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
  
@@ -39,16 +42,10 @@ export default class MRS extends Phaser.Scene {
       }
     );
 
-    resources.maleInternal = this.add.image(450.1, 289.45, 'MRS').setAlpha(0.5);
-    // Background images for masking.
-    resources.bladder2 = this.add.image(450.4, 205.45, 'bladder');
-    resources.prostate2 = this.add.image(454.1, 279.8, 'prostate');
-    resources.urethra2 = this.add.image(371, 361.05, 'urethra');
-    resources.vasdeferens2 = this.add.image(419.7, 276.05, 'vasdeferens');
-    resources.teste2 = this.add.image(348.9, 411.4, 'teste');
-    resources.epididymis2 = this.add.image(353.55, 398.7, 'epididymis');
-    resources.svesicle2 = this.add.image(510.4, 235.25, 'svesicle');
-    
+    resources.maleInternalBackground = this.add.image(450.1, 289.45, 'mrsBackground').setAlpha(0.5);
+    // Background image for masking.
+    resources.maleInternal = this.add.image(408.75, 317.2, 'mrsInternal'); 
+   
     resources.bladder = this.add.image(450.4, 205.45, 'bladder');
     resources.prostate = this.add.image(454.1, 279.8, 'prostate');
     resources.urethra = this.add.image(371, 361.05, 'urethra');

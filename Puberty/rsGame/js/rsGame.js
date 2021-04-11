@@ -8,19 +8,19 @@ export default class RSGame extends Phaser.Scene {
   preload () {
 
     this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
-    this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
+    this.load.image('mrsBackground', '../../Puberty/Male-internal/images/MRSBackground.png');
+    this.load.image('mrsInternal', '../../Puberty/Male-internal/images/MRSInternal.png');
     this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm3_spritesheet.png', { frameWidth: 27, frameHeight: 214, margin: 10, spacing: 20 });
-   
-    // this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm2_spritesheet.png', { frameWidth: 9, frameHeight: 69, margin: 10, spacing: 20 });
-   // this.load.spritesheet('spermSpritesheet2', '../../Puberty/rsGame/images/sperm_spritesheet.png', { frameWidth: 104, frameHeight: 277, margin: 10, spacing: 20 });
-
     this.load.image('backButton', '../../common/images/buttons/back.png');
 
   }
 
   create () {
     resources.scene = this;
-    resources.maleInternal = this.add.image(450.1, 289.45, 'MRS'); 
+
+    resources.maleInternalBackground = this.add.image(450.1, 289.45, 'mrsBackground').setAlpha(0.5);
+    resources.maleInternal = this.add.image(408.75, 317.2, 'mrsInternal'); 
+ 
     resources.labelLines = this.add.image(435.05, 318.2, 'labelLines');
   
    //Create swimming animation for sperm.
@@ -59,8 +59,9 @@ export default class RSGame extends Phaser.Scene {
 
     // Create label containers.
     for (let organ in resources.maleOrgans) {
-      var rect = this.add.rectangle(0, 0, 145, 25, 0x6666ff);
-      var text = this.add.text(0, 0, resources.maleOrgans[organ]).setOrigin(0.5);
+      var rect = this.add.rectangle(0, 0, 145, 28, 0xf4bda8);
+      rect.setStrokeStyle(2, '0xf58b62')
+      var text = this.add.text(0, 0, resources.maleOrgans[organ], {fontFamily: 'Open Sans', fontStyle: '', fontSize: '18px', color: '#000000'}).setOrigin(0.5);
   
       var container = this.add.container(900, labelY, [rect, text]);
   
