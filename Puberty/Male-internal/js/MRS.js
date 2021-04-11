@@ -21,8 +21,8 @@ export default class MRS extends Phaser.Scene {
     this.load.image('urethra', '../../Puberty/Male-internal/images/urethra.png');
     this.load.image('vasdeferens', '../../Puberty/Male-internal/images/vasdeferens.png');
 
-    this.load.image('mrsBackground', '../../Puberty/Male-internal/images/MRSBackground.png');
-    this.load.image('mrsInternal', '../../Puberty/Male-internal/images/MRSInternal.png');
+    this.load.image('mrsBackground', '../../Puberty/Male-internal/images/MRSbackground.png');
+    this.load.image('mrsInternal', '../../Puberty/Male-internal/images/MRSinternal.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
