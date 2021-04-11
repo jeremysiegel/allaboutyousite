@@ -1,4 +1,7 @@
 import SceneButton from '../../../common/js/sceneButton.js';
+import Textbox from '../../../common/js/textbox.js';
+import ResetButton from '../../../common/js/resetButton.js';
+
     
 export default class RSGame extends Phaser.Scene {
   constructor() {
@@ -6,6 +9,7 @@ export default class RSGame extends Phaser.Scene {
   }
 
   preload () {
+    this.load.image('femaleBackground', '../../Puberty/Female-Internal/images/background.png');
 
     this.load.image('labelLinesF', '../../Puberty/Female-Internal/images/FRS label lines.png');
     this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
@@ -13,17 +17,25 @@ export default class RSGame extends Phaser.Scene {
     this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
     this.load.image('egg2', '../../Puberty/rsGame/images/egg2.png');
 
-    // this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm2_spritesheet.png', { frameWidth: 9, frameHeight: 69, margin: 10, spacing: 20 });
-   // this.load.spritesheet('spermSpritesheet2', '../../Puberty/rsGame/images/sperm_spritesheet.png', { frameWidth: 104, frameHeight: 277, margin: 10, spacing: 20 });
-
     this.load.image('backButton', '../../common/images/buttons/back.png');
-    
+    this.load.image('resetButton', '../../common/images/buttons/reset.png');    
   }
 
   create () {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
     resources.scene = this;
+
+    new Textbox(this, 790, 75, 430, 210);
+    resources.guide = this.add.text(810, 95, resources.infoText,
+      {
+        fontFamily: 'Assistant',
+        fontSize: '30px',
+        fill: '#000',
+        wordWrap: {width: 400}
+      }
+    );
+
+    resources.background = this.add.image(454.25, 310.35, 'femaleBackground').setAlpha(0.3);
     resources.femaleInternal = this.add.image(454.25, 290.55, 'FRS'); 
     resources.labelLines = this.add.image(377.6, 299.2, 'labelLinesF');
     resources.egg = this.add.image (249, 224, 'egg2');
@@ -47,7 +59,7 @@ export default class RSGame extends Phaser.Scene {
       repeat: -1
     });
 
-    resources.sperm = this.add.sprite(454.2, 585, 'spermSpritesheet');
+    resources.sperm = this.add.sprite(454.2, 505, 'spermSpritesheet');
     resources.sperm.setScale(0.25).setAlpha(0);
     resources.sperm.play('swim');
 
@@ -59,21 +71,36 @@ export default class RSGame extends Phaser.Scene {
     // This will randomize the order the labels appear on screen.
     shuffle(resources.femaleOrgans);
 
-    // Initial y for labels.
-    var labelY = 100;
+    // Initial x y for labels.
+    var labelX = 920;
+    var labelY = 350;
+    var labelCount = 1;
 
-    //Create label containers.
+    // Create label containers.
     for (let organ in resources.femaleOrgans) {
-      var rect = this.add.rectangle(0, 0, 145, 25, 0x6666ff);
-      var text = this.add.text(0, 0, resources.femaleOrgans[organ]).setOrigin(0.5);
+      var rect = this.add.rectangle(0, 0, 145, 28, 0xf4bda8);
+      rect.setStrokeStyle(2, 0xf58b62)
+      var text = this.add.text(0, 0, resources.femaleOrgans[organ], {
+        fontFamily: 'Open Sans', 
+        fontStyle: '', 
+        fontSize: '18px', 
+        color: '#050709'
+      }).setOrigin(0.5);
   
-      var container = this.add.container(900, labelY, [rect, text]);
+      var container = this.add.container(labelX, labelY, [rect, text]);
   
       container.setSize(rect.width, rect.height);
       container.setInteractive({draggable: true, useHandCursor:true, setCollideWorldBounds: true});
       resources.labels.add(container);
 
-      labelY += 35;
+      if (labelCount === Math.ceil(resources.femaleOrgans.length / 2)) {
+        labelX = labelX + rect.width + 20;
+        labelY = 350;
+      } else {
+        labelY += 35;
+      }
+
+      labelCount++; 
     }
 
 
@@ -112,17 +139,28 @@ export default class RSGame extends Phaser.Scene {
     });
     
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
+    resources.resetButton = new ResetButton(this, 1140, 567, 0.1, 'resetButton');
+
    }
 }
 
-var resources = {};
+var resources = {
+  infoText: 'Good job! Now it is time to guide the egg.\n\nWhere do eggs get made?',
+  organText: {
+    fTube: 'This is where the egg and sperm meet.',
+    uterus: 'The egg has been fertilized!\n\nWhere will the baby develop?',
+    cervix: 'Next is the gateway to the uterus.',
+    vagina: 'Now guide the sperm to the egg.\n\nThis is where sperm enter the body.',
+    end: 'Nice work!\n\nThe baby will grow in the uterus for the next 9 months until it is ready to be born.'
+  }
+};
 
 // The organ x and y are the coordinates for the label hitBox.
 var organs = {
   ovary: {
     name: 'Ovary',
     x: 224,
-    y: 365,
+    y: 345,
     next: 'Fallopian Tube',
     tweens: [
       {
@@ -139,6 +177,7 @@ var organs = {
         offset: '-=100',
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.fTube);
         },
       },
     ]
@@ -146,7 +185,7 @@ var organs = {
   fTube: {
     name: 'Fallopian Tube',
     x: 127.2,
-    y: 265,
+    y: 245,
     next: 'Vagina',
     tweens: [
       {
@@ -160,7 +199,7 @@ var organs = {
   uterus: {
     name: 'Uterus',
     x: 639.7,
-    y: 322,
+    y: 317,
     next: null,
     tweens: [
       {
@@ -174,24 +213,25 @@ var organs = {
         x: 327,
         y: 94,
         ease: 'Linear',      
-        duration: 500
+        duration: 700
       },
 
       {
         x: 356,
-        y: 151,
+        y: 154,
         ease: 'Linear',      
-        duration: 1500
+        duration: 700
       },
       
       {
         x: 410.5,
         y: 190.7,
         ease: 'Linear',      
-        duration: 500,
+        duration: 800,
         angle: -16,
-        offset: '-=50'
+        offset: '-=0'
       },
+      
       {
         x: 437,
         y: 241,
@@ -206,9 +246,11 @@ var organs = {
         ease: 'Sine.easeInOut',      
         duration: 1000,
         angle: -16,
-        offset: '-=20'
+        offset: '-=20',
+        onComplete: () => {
+          resources.guide.setText(resources.organText.end);
+        }      
       },
-
     ]
   },
   cervix: {
@@ -250,13 +292,14 @@ function nextOrgan(scene) {
     scene.tweens.add({
       targets: resources.sperm,
       x: 454.2,
-      y: 565,
+      y: 485,
       ease: 'Quad.easeInOut',      
       duration: 1500,
       alpha: 1,
-      delay: 1500,
+      delay: 1000,
       onComplete: function () {
         addHitBox(resources.scene);
+        resources.guide.setText(resources.organText.vagina);
       },
     });
   }
@@ -270,6 +313,7 @@ function nextOrgan(scene) {
       duration: 1500,
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.cervix);
         },
     });
   }
@@ -340,6 +384,7 @@ function nextOrgan(scene) {
       duration: 500,
       onComplete: function () {
         addHitBox(resources.scene);
+        resources.guide.setText(resources.organText.uterus);
       },
     });
     spermTimeline.play();
@@ -352,8 +397,6 @@ function nextOrgan(scene) {
         break;
       }
     }
-  
-
   } 
 }
 

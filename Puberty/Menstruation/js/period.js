@@ -36,7 +36,7 @@ export default class Period extends Phaser.Scene {
 
     resources.uterus = this.add.image(404.65, 248.6, 'uterusMask');
     
-    resources.backgroundCircle = this.add.circle(970, 300, 200, 0xcfcffa).setStrokeStyle(2, 0xa3a3c4, 0.5);
+    resources.backgroundCircle = this.add.circle(970, 300, 200, 0xcfcffa).setStrokeStyle(5, 0xa3a3c4, 1);
     var circle = new Phaser.Geom.Circle(970, 300, 170);
     
     resources.circleGroup = this.add.group(); 

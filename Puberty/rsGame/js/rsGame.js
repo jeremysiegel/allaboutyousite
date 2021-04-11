@@ -1,5 +1,7 @@
 import SceneButton from '../../../common/js/sceneButton.js';
-    
+import ResetButton from '../../../common/js/resetButton.js';
+import Textbox from '../../../common/js/textbox.js';
+
 export default class RSGame extends Phaser.Scene {
   constructor() {
     super({key: 'rsGame'})
@@ -10,13 +12,24 @@ export default class RSGame extends Phaser.Scene {
     this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
     this.load.image('mrsBackground', '../../Puberty/Male-internal/images/MRSbackground.png');
     this.load.image('mrsInternal', '../../Puberty/Male-internal/images/MRSinternal.png');
-    this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm3_spritesheet.png', { frameWidth: 27, frameHeight: 214, margin: 10, spacing: 20 });
+    this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm4_spritesheet.png', { frameWidth: 28, frameHeight: 215, margin: 10, spacing: 20 });
+    
     this.load.image('backButton', '../../common/images/buttons/back.png');
-
+    this.load.image('resetButton', '../../common/images/buttons/reset.png');
   }
 
   create () {
     resources.scene = this;
+
+    new Textbox(this, 770, 75, 430, 210);
+    resources.guide = this.add.text(790, 95, resources.infoText,
+      {
+        fontFamily: 'Assistant',
+        fontSize: '30px',
+        fill: '#000',
+        wordWrap: {width: 400}
+      }
+    );
 
     resources.maleInternalBackground = this.add.image(450.1, 289.45, 'mrsBackground').setAlpha(0.5);
     resources.maleInternal = this.add.image(408.75, 317.2, 'mrsInternal'); 
@@ -54,22 +67,37 @@ export default class RSGame extends Phaser.Scene {
     //This will randomize the order the labels appear on screen.
     shuffle(resources.maleOrgans);
 
-    // Initial y for labels.
-    var labelY = 100;
+    // Initial x y for labels.
+    var labelX = 900;
+    var labelY = 350;
+    var labelCount = 1;
 
     // Create label containers.
     for (let organ in resources.maleOrgans) {
       var rect = this.add.rectangle(0, 0, 145, 28, 0xf4bda8);
-      rect.setStrokeStyle(2, '0xf58b62')
-      var text = this.add.text(0, 0, resources.maleOrgans[organ], {fontFamily: 'Open Sans', fontStyle: '', fontSize: '18px', color: '#000000'}).setOrigin(0.5);
+      rect.setStrokeStyle(2, 0xf58b62)
+      var text = this.add.text(0, 0, resources.maleOrgans[organ], {
+        fontFamily: 'Open Sans', 
+        fontStyle: '', 
+        fontSize: '18px', 
+        color: '#050709'
+      }).setOrigin(0.5);
   
-      var container = this.add.container(900, labelY, [rect, text]);
+      var container = this.add.container(labelX, labelY, [rect, text]);
   
       container.setSize(rect.width, rect.height);
       container.setInteractive({draggable: true, useHandCursor:true, setCollideWorldBounds: true});
       resources.labels.add(container);
 
-      labelY += 35;
+      if (labelCount === Math.ceil(resources.maleOrgans.length / 2)) {
+        labelX = labelX + rect.width + 20;
+        labelY = 350;
+      } else {
+        labelY += 35;
+      }
+
+      labelCount++;
+      
     }
 
 
@@ -108,10 +136,22 @@ export default class RSGame extends Phaser.Scene {
     });
     
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
+    resources.resetButton = new ResetButton(this, 1140, 567, 0.1, 'resetButton');
+
   }
 }
 
-var resources = {};
+var resources = {
+  infoText: 'Guide the sperm through the reproductive system by labelling each organ correctly.\n\nFirst, where are sperm made?',
+  organText: {
+    epididymis: 'This is where the sperm learn to swim.',
+    vdeferens: 'This tube brings sperm into the body.',
+    bladder: 'Swim around this part, sperm do not go in here.',
+    svesicle: 'This makes fluid to protect the sperm.',
+    prostate: 'The next part makes food for the sperm.',
+    urethra: 'This tube transports sperm out of the body.'
+  }
+};
 
 // The x and y are the coordinates for the label hitBox.
 var organs = {
@@ -129,6 +169,7 @@ var organs = {
         angle: 140,
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.epididymis);
         },
       },
 
@@ -150,28 +191,37 @@ var organs = {
     next: 'Vas Deferens',
     tweens: [
       {
+        x: 368,
+        y: 430.2,
+        ease: 'Linear',      
+        duration: 800,
+        angle: 70,
+      },
+      {
         x: 383.7,
         y: 400.2,
         ease: 'Power1',      
-        duration: 1500,
+        duration: 1000,
         angle: -20,
+        offset: '-=200',
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.vdeferens);
         },
       },
     ]
   },
   vdeferens: {
     name: 'Vas Deferens',
-    x: 143.2,
-    y: 214.2,
+    x: 169.2,
+    y: 216.2,
     next: 'Bladder',
     tweens: [
       {
         x: 349.7,
         y: 352.7,
         ease: 'Linear',      
-        duration: 1500,
+        duration: 500,
         angle: -42
       },     
       
@@ -187,7 +237,7 @@ var organs = {
         x: 323.5,
         y: 257.7,
         ease: 'Linear',      
-        duration: 1500,
+        duration: 500,
         angle: -10,
         offset: '-=100'
       },
@@ -219,7 +269,7 @@ var organs = {
         x: 329.5,
         y: 155,
         ease: 'Linear',      
-        duration: 1000,
+        duration: 500,
         angle: 60,
         offset: '-=200'
       },
@@ -240,6 +290,7 @@ var organs = {
         offset: '-=200',
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.bladder);
         },
       },
     ]
@@ -252,38 +303,37 @@ var organs = {
     tweens: [      
       {
         x: 477.7,
-        y: 145,
+        y: 143,
         ease: 'Linear',      
-        duration: 1000,
-        angle: 110,
-        offset: '-=50'
+        duration: 600,
+        angle: 110
       },
       {
         x: 531.2,
         y: 187,
         ease: 'Linear',      
-        duration: 1000,
+        duration: 600,
         angle: 150,
-        offset: '-=50'
+        offset: '-=0'
       },
       {
         x: 531.2,
         y: 215,
         ease: 'Linear',      
-        duration: 1000,
+        duration: 600,
         angle: 210,
-        offset: '-=200',
+        offset: '-=100',
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.svesicle);
         },
       },
-
     ]
   },
   svesicle: {
     name: 'Seminal Vesicle',
-    x: 708.2,
-    y: 89.7,
+    x: 678.2,
+    y: 85.7,
     next: 'Prostate',
     tweens: [
       {
@@ -309,6 +359,7 @@ var organs = {
         offset: '-=50',
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.prostate);
         },
       },
     ]
@@ -316,24 +367,24 @@ var organs = {
   prostate: {
     name: 'Prostate',
     x: 650.7,
-    y: 454.2,
+    y: 451.2,
     next: 'Urethra',
     tweens: [
       {
         x: 415,
-        y: 313,    
+        y: 315,    
         duration: 500,
         angle: -70,
-
       },
       {
         x: 370,
-        y: 294.2,    
-        duration: 1500,
+        y: 293.2,    
+        duration: 1100,
         angle: -70,
         offset: '-=50',
         onComplete: function () {
           addHitBox(resources.scene);
+          resources.guide.setText(resources.organText.urethra);
         },
       },
     ]
@@ -363,14 +414,14 @@ var organs = {
         x: 268,
         y: 343,    
         duration: 500,
-        angle: -165,
+        angle: -170,
         offset: '-=50'
       },
       {
         x: 278,
         y: 443,    
         duration: 500,
-        angle: -175,
+        angle: -180,
         offset: '-=50'
       },
      {

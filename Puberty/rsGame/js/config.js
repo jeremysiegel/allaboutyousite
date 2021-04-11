@@ -4,7 +4,7 @@ import rsGame2 from './rsGame2.js';
 var config = {
   type: Phaser.AUTO,
   transparent: true,
-  scene: [rsGame, rsGame2],
+  scene: [rsGame2],
   scale: {
     mode: Phaser.Scale.FIT,
     width: 1280,
@@ -13,7 +13,7 @@ var config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: false
+      debug: true
     }
   }
 };

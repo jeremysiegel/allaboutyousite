@@ -27,7 +27,7 @@ export default class FRS extends Phaser.Scene {
   }
 
   create () {
-    resources.background = this.add.image(454.25, 365.55, 'femaleBackground').setAlpha(0.5);
+    resources.background = this.add.image(454.25, 310.35, 'femaleBackground').setAlpha(0.5);
     resources.femaleInternal = this.add.image(454.25, 290.55, 'femaleInternal');
     
     new Textbox(this, 810, 75, 430, 350);
