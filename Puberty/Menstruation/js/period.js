@@ -1,5 +1,6 @@
 import SceneButton from '../../../common/js/sceneButton.js';
-import ToggleButton from '../../../common/js/toggleButton.js';
+import InfoButton from '../../../common/js/infoButton.js';
+import Popup from '../../../common/js/popup.js';
     
 export default class Period extends Phaser.Scene {
   constructor() {
@@ -7,47 +8,55 @@ export default class Period extends Phaser.Scene {
   }
 
   preload () {
-  //  this.load.spritesheet('periodSpritesheet', '../../Puberty/Menstruation/images/period_spritesheet.png', { frameWidth: 489.4, frameHeight: 489.4, margin: 10, spacing: 20 });
-    //this.load.image('hormonesGraph', '../../Puberty/Menstruation/images/hormones.png');
-   // this.load.spritesheet('topSpritesheet', '../../Puberty/Menstruation/images/top sprite.png', { frameWidth: 1200, frameHeight: 277, margin: 0, spacing: 0 });
-   // this.load.spritesheet('leftSpritesheet', '../../Puberty/Menstruation/images/left sprite.png', { frameWidth: 480, frameHeight: 858, margin: 0, spacing: 0 });
-    this.load.spritesheet('topSpritesheet', '../../Puberty/Menstruation/images/top3 sprite.png', { frameWidth: 300, frameHeight: 69.25, margin: 0, spacing: 0 });
-    this.load.spritesheet('leftSpritesheet', '../../Puberty/Menstruation/images/left3 sprite.png', { frameWidth: 120, frameHeight: 214.5, margin: 0, spacing: 0 });
+    this.load.spritesheet('topSpritesheet', '../../Puberty/Menstruation/images/top4 sprite.png', { frameWidth: 300, frameHeight: 69, margin: 0, spacing: 0 });
+    this.load.spritesheet('leftSpritesheet', '../../Puberty/Menstruation/images/left4 sprite.png', { frameWidth: 120, frameHeight: 214.5, margin: 0, spacing: 0 });
 
-    //  this.load.spritesheet('leftSpritesheet', '../../Puberty/Menstruation/images/left sprite.png', { frameWidth: 395, frameHeight: 664, margin: 0, spacing: 0 });
-   // this.load.spritesheet('rightSpritesheet', '../../Puberty/Menstruation/images/right2 sprite.png', { frameWidth: 500, frameHeight: 858, margin: 0, spacing: 0 });
     this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
     this.load.image('uterusMask', '../../Puberty/Menstruation/images/uterus.png');
     this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
- 
+    this.load.image('infoButton', '../../common/images/buttons/info.png');
   }
 
   create () {
+    resources.scene = this;
     resources.femaleInternal = this.add.image(404.25, 290.55, 'FRS');
 
+    // Endometrium spritesheets
     resources.left = this.add.sprite(366.3, 235, 'leftSpritesheet', 0).setScale(0.5);
     resources.right = this.add.sprite(442.2, 235, 'leftSpritesheet', 0);
     resources.right.flipX = true;
     resources.right.setScale(0.5);
     resources.top = this.add.sprite(406, 184, 'topSpritesheet', 0).setScale(0.5);
 
+    // This covers the endometrium animations so they appear to emerge from the uterus.
     resources.uterus = this.add.image(404.65, 248.6, 'uterusMask');
     
+    // This sets up the interactive cycle calendar
+    var circle = new Phaser.Geom.Circle(970, 300, 170);
+
     resources.backgroundCircle = this.add.circle(970, 300, 200, 0xcfcffa).setStrokeStyle(5, 0x8e4ab3, 0.7);
+    
+    resources.stage = this.add.text(circle.x, circle.y - 20, 'Period', 
+    {
+      fontFamily: 'Assistant',
+      fontSize: '50px',
+      fill: '#000',
+      wordWrap: { width: 190, useAdvancedWrap: false }
+    }).setOrigin(0.5);
+    
     resources.dayLabel = this.add.text(resources.backgroundCircle.x, 360, 'Day 1', 
     {
       fontFamily: 'Assistant',
       fontSize: '25px',
       fill: '#000'
-    }
-  ).setOrigin(0.5, 0);
+    }).setOrigin(0.5, 0);
 
-    var circle = new Phaser.Geom.Circle(970, 300, 170);
     resources.circleGroup = this.add.group(); 
 
     var fillColor = '0xff0000';
+    
     for (var i = 1; i < 29; i++) {
       var dayCircle = this.add.circle(0, 0, 14, fillColor);
 
@@ -59,20 +68,13 @@ export default class Period extends Phaser.Scene {
         .setInteractive({useHandCursor:true})
         .on('pointerup', function() {
           changeDay(Number(this.list[1].text));
-        })
-        .on('pointerover', function() {
-        //  this.list[0].setStrokeStyle(3, '0xf5ce42');
-        })
-        .on('pointerout', function() {
-       //   this.list[0].setStrokeStyle(0);
-        })
-      ;
+        });
 
       resources.circleGroup.add(container);
 
       if (i === 5) {
         fillColor = '0x33cc33';
-      } else if (i === 13) {
+      } else if (i === 14) {
         fillColor = '0x0099ff';
       } else if (i === 15) {
         fillColor = '0x33cc33';
@@ -81,17 +83,8 @@ export default class Period extends Phaser.Scene {
 
     Phaser.Actions.PlaceOnCircle(resources.circleGroup.getChildren(), circle, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(270));
 
-    resources.stage = this.add.text(circle.x, circle.y - 20, 'Period', 
-      {
-        fontFamily: 'Assistant',
-        fontSize: '50px',
-        fill: '#000',
-        wordWrap: { width: 190, useAdvancedWrap: false }
-      }
-    ).setOrigin(0.5);
-
+    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
-    resources.scene = this;
 
     newEgg();
     changeDay(1);
@@ -100,9 +93,20 @@ export default class Period extends Phaser.Scene {
 
 var resources = {
   currentDay: 1,
-  previousDay: 1
+  previousDay: 1,
+  infoText: 'Click on a day of the menstrual cycle on the right and watch what happens on the left.\n\nThe menstrual cycle is a set of changes in the female reproductive system. Each cycle, a lining builds up on the uterus. If there is no pregnancy, the lining is shed, and some of it leaves the body during the period.\n\nJust like a day, week, or year, when one menstrual cycle ends another begins.'
 };
 
+function infoText(resources) {
+  const screenCenterX = resources.scene.cameras.main.worldView.x + resources.scene.cameras.main.width / 2;
+  const screenCenterY = resources.scene.cameras.main.worldView.y + resources.scene.cameras.main.height / 2;
+  var width = 600;
+  var height = 410;
+
+  new Popup(resources.scene, screenCenterX - width/2, screenCenterY - height/2, width, height, resources.infoText);
+}
+
+// Function to change the day when the user clicks on the cycle calendar.
 function changeDay(day) {
   resources.previousDay = resources.currentDay;
   resources.currentDay = day;
@@ -114,20 +118,27 @@ function changeDay(day) {
   
   generateAnimation(resources.previousDay, resources.currentDay);
 
-  if (((resources.previousDay === 14 || resources.previousDay === 15) && (resources.currentDay !== 14 && resources.currentDay !== 15)) || (day > 15 && resources.egg)) {
-    resources.egg.destroy();
-    delete resources.egg;
+  // Only plays destroy animation on day 16.
+  if (resources.egg) {
+    if (day === 16) {
+      resources.eggTimeline.play();
+      resources.destroyEgg.play();
+    } else if (day > 16 || resources.previousDay === 15) {
+      resources.egg.destroy();
+      delete resources.egg;
+    }
   }
-
-  if (!resources.egg && day <= 15) {
+  
+  // Creates a new egg for days <15 if there is no egg already.
+  if (day <= 15 && !resources.egg) {
     newEgg();
   }
 
   if (day >= 1 && day <= 5) {
     resources.stage.setText('Period');
-  } else if (day >= 6 && day <= 13) {
+  } else if (day >= 6 && day <= 14) {
     resources.stage.setText('Lining builds');
-  } else if (day >= 14 && day <=15) {
+  } else if (day === 15) {
     resources.stage.setText('Ovulation');
     resources.eggTimeline.play();
   } else {
@@ -135,6 +146,7 @@ function changeDay(day) {
   }
 }
 
+// Function to run endometrium animations on a day change.
 function generateAnimation(previousDay, currentDay) {
   var frames = [];
 
@@ -144,14 +156,15 @@ function generateAnimation(previousDay, currentDay) {
     }
 
     for (var j = 0; j < currentDay; j++) {
-      frames.push(j);
+        frames.push(j);
     }
   } else {
     for (var i = (previousDay - 1); i < currentDay; i++) {
       frames.push(i);
     }
   }
-
+  
+  // Stops previous animation if user changes day before the end of the previous animation.
   if (resources.scene.anims.exists('leftClick')) {
     resources.scene.anims.remove('leftClick');
     resources.scene.anims.remove('topClick');
@@ -174,6 +187,7 @@ function generateAnimation(previousDay, currentDay) {
   resources.top.play('topClick');
 }
 
+// Function to create a new egg.
 function newEgg() {
   resources.egg = resources.scene.add.image(200, 224, 'egg').setScale(1.3);
 
@@ -192,4 +206,16 @@ function newEgg() {
     y: 112,
     duration: 500
   });
+
+  resources.destroyEgg = resources.scene.tweens.createTimeline();
+  
+  resources.destroyEgg.add({
+    targets: resources.egg,
+    alpha: 0,
+    duration: 1000,
+    onComplete: () => {
+      resources.egg.destroy();
+      delete resources.egg;
+    }
+  })
 }

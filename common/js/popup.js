@@ -9,12 +9,12 @@ export default class Popup {
         fontFamily: 'Assistant',
         fontSize: '30px',
         fill: '#000',
-        wordWrap: { width: width - 20, useAdvancedWrap: true }
+        wordWrap: { width: width - 20, useAdvancedWrap: false }
       }
     );
 
     this.exitCircle = scene.add.circle(0, 0, 20, 0xffffff).setInteractive({useHandCursor: true});
-    this.exitCircleText = scene.add.text(0, 0, 'X', {fontFamily: 'Arial', fontSize: 16, color:'#000000'}).setOrigin(0.5);
+    this.exitCircleText = scene.add.text(0, 0, 'X', {fontFamily: 'Arial', fontSize: 16, color:'#000000', fontStyle: 'bold'}).setOrigin(0.5);
 
     this.exit = scene.add.container(x + width, y, [this.exitCircle, this.exitCircleText]);
     scene.add.existing(this.exit);
