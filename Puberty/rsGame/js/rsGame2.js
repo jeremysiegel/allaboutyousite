@@ -16,6 +16,7 @@ export default class RSGame extends Phaser.Scene {
     this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm3_spritesheet.png', { frameWidth: 27, frameHeight: 214, margin: 10, spacing: 20 });
     this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
     this.load.image('egg2', '../../Puberty/rsGame/images/egg2.png');
+    this.load.image('uterusMask', '../../Puberty/Menstruation/images/uterus.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('resetButton', '../../common/images/buttons/reset.png');    
@@ -62,6 +63,8 @@ export default class RSGame extends Phaser.Scene {
     resources.sperm = this.add.sprite(454.2, 505, 'spermSpritesheet');
     resources.sperm.setScale(0.25).setAlpha(0);
     resources.sperm.play('swim');
+
+    resources.uterus = this.add.image(454.65, 248.6, 'uterusMask');
 
     // Create labels for user to add to diagram.
     resources.labels = this.physics.add.group({collideWorldBounds:true});
@@ -372,10 +375,7 @@ function nextOrgan(scene) {
       ease: 'Quad.easeOut',      
       duration: 1500,
       onComplete: function () {
-        var x = resources.egg.x;
-        var y = resources.egg.y;
-        resources.egg.destroy();
-        resources.egg = scene.add.image (x, y, 'egg');
+        resources.egg.setTexture('egg');
       }
     });
     spermTimeline.add({

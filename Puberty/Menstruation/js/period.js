@@ -94,7 +94,7 @@ export default class Period extends Phaser.Scene {
 var resources = {
   currentDay: 1,
   previousDay: 1,
-  infoText: 'Click on a day of the menstrual cycle on the right and watch what happens on the left.\n\nThe menstrual cycle is a set of changes in the female reproductive system. Each cycle, a lining builds up on the uterus. If there is no pregnancy, the lining is shed, and some of it leaves the body during the period.\n\nJust like a day, week, or year, when one menstrual cycle ends another begins.'
+  infoText: 'Click on a day of the menstrual cycle on the right and watch what happens on the left.\n\nThe menstrual cycle is a set of changes in the female reproductive system. Each cycle, a lining builds up on the uterus. If there is no pregnancy, the lining is shed, and some of it leaves the body during the period.\n\nJust like a day, week, or year, when one menstrual cycle ends another begins.',
 };
 
 function infoText(resources) {
@@ -103,7 +103,9 @@ function infoText(resources) {
   var width = 600;
   var height = 410;
 
-  new Popup(resources.scene, screenCenterX - width/2, screenCenterY - height/2, width, height, resources.infoText);
+  if (!resources.popup || !resources.popup.exit) {
+    resources.popup = new Popup(resources.scene, screenCenterX - width/2, screenCenterY - height/2, width, height, resources.infoText);
+  }
 }
 
 // Function to change the day when the user clicks on the cycle calendar.
@@ -212,7 +214,7 @@ function newEgg() {
   resources.destroyEgg.add({
     targets: resources.egg,
     alpha: 0,
-    duration: 1000,
+    duration: 1500,
     onComplete: () => {
       resources.egg.destroy();
       delete resources.egg;
