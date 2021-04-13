@@ -1,6 +1,8 @@
 import SceneButton from '../../../common/js/sceneButton.js';
 import PregnancyStrings from './pregnancyStrings.js';
-import DiagramInteractions from '../../../common/js/diagramInteractions.js';
+import Textbox from '../../../common/js/textbox.js';
+import InfoButton from '../../../common/js/infoButton.js';
+
     
 export default class Pregnancy extends Phaser.Scene {
   constructor() {
@@ -8,18 +10,6 @@ export default class Pregnancy extends Phaser.Scene {
   }
 
   preload () {
-    
-    this.load.image('drawn0', '../../Puberty/Pregnancy/images/drawn0.png');
-    this.load.image('drawn1', '../../Puberty/Pregnancy/images/pregnancy-1.png');
-    this.load.image('drawn2', '../../Puberty/Pregnancy/images/pregnancy-2.png');
-    this.load.image('drawn3', '../../Puberty/Pregnancy/images/pregnancy-3.png');
-    this.load.image('drawn4', '../../Puberty/Pregnancy/images/pregnancy-4.png');
-    this.load.image('drawn5', '../../Puberty/Pregnancy/images/pregnancy-5.png');
-    this.load.image('drawn6', '../../Puberty/Pregnancy/images/pregnancy-6.png');
-    this.load.image('drawn7', '../../Puberty/Pregnancy/images/pregnancy-7.png');
-    this.load.image('drawn8', '../../Puberty/Pregnancy/images/pregnancy-8.png');
-    this.load.image('drawn9', '../../Puberty/Pregnancy/images/pregnancy-9.png');
-
     this.load.image('picture0', '../../Puberty/Pregnancy/images/embryo.png');
     this.load.image('picture1', '../../Puberty/Pregnancy/images/month 1.jpg');
     this.load.image('picture2', '../../Puberty/Pregnancy/images/month 2.jpg');
@@ -31,7 +21,14 @@ export default class Pregnancy extends Phaser.Scene {
     this.load.spritesheet('picture8', '../../Puberty/Pregnancy/images/breathe-spritesheet.png', { frameWidth: 600, frameHeight: 338, margin: 0, spacing: 0 });
     this.load.image('picture9', '../../Puberty/Pregnancy/images/term.png');
 
+    this.load.image('buttonUp', '../../common/images/buttons/grey_button_up.png');
+    this.load.image('buttonDown', '../../common/images/buttons/grey_button_down.png');
+
+    this.load.image('monitor', '../../Puberty/Pregnancy/images/monitor2.png');
+    this.load.image('ultrasound', '../../Puberty/Pregnancy/images/ultrasound2.png');
+
     this.load.image('backButton', '../../common/images/buttons/back.png');
+    this.load.image('infoButton', '../../common/images/buttons/info.png');
     
     resources.definitions = new PregnancyStrings(false);
   }
@@ -39,6 +36,9 @@ export default class Pregnancy extends Phaser.Scene {
   create () {
     resources.stages = this.add.group();
     resources.scene = this;
+
+    resources.ultrasound = this.add.image(850, 480, 'ultrasound');
+    resources.monitor = this.add.image(350, 300, 'monitor');
 
     this.anims.create({
       key: 'fingers',
@@ -76,23 +76,8 @@ export default class Pregnancy extends Phaser.Scene {
     });
 
 
-    resources.pregnancyDrawing = this.add.sprite(855, 400, 'drawn0');
-
-    resources.pregnancyDrawingNames = {
-      0: 'drawn0',
-      1: 'drawn1',
-      2: 'drawn2',
-      3: 'drawn3',
-      4: 'drawn4',
-      5: 'drawn5',
-      6: 'drawn6',
-      7: 'drawn7',
-      8: 'drawn8',
-      9: 'drawn9'
-    }
-
-    resources.pregnancyPicture = this.add.sprite(350, 250, 'picture0');
-    resources.pregnancyPicture.setScale(400/resources.pregnancyPicture.height)
+    //resources.pregnancyPicture = this.add.sprite(350, 250, 'picture0');
+   // resources.pregnancyPicture.setScale(400/resources.pregnancyPicture.height)
 
     resources.pregnancyPictureNames = {
       0: 'picture0',
@@ -106,99 +91,87 @@ export default class Pregnancy extends Phaser.Scene {
       8: 'picture8',
       9: 'picture9'
     }
+    
+    new Textbox(this, 760, 65, 470, 360);
 
-    resources.definitionDisplay = this.add.text(820, 85, '',
+    resources.definitionDisplay = this.add.text(780, 85, '',
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
         fill: '#000',
-        wordWrap: { width: 400, useAdvancedWrap: true }
+        wordWrap: { width: 440 }
       }
     );
-    resources.definitionDisplay.setText(resources.definitions['0']);
 
-    var month;
-    var monthX = 110;
+    resources.definitionDisplay.setText(resources.infoText);
+
+    var monthX = 90;
     for (var i = 0; i < 10; i++) {
-      month = this.add.text(monthX, 520, i, 
+      var monthText = this.add.text(0, 0, i, 
         {
           fontFamily: 'Assistant',
-          fontSize: '50px',
-          fill: '#000'
+          fontSize: '47px',
+          fill: '0x333333'
         }
-      );
-      monthX += 50;
-     
-      month.setInteractive({useHandCursor: true});
+      ).setOrigin(0.5);
+      
+      var monthBackgroundScale = 0.2
+      var monthBackground = this.add.image(0, 0, 'buttonUp').setScale(monthBackgroundScale);
 
-      month.on('pointerup', function() {
-        resources.definitionDisplay.setText(resources.definitions[this._text]);
-        resources.pregnancyDrawing.destroy();
-        resources.pregnancyDrawing = resources.scene.add.sprite(855, 400, resources.pregnancyDrawingNames[this._text]);
+      var month = this.add.container(monthX, 515, [monthBackground, monthText]);
+      monthX += 53;
 
-        resources.pregnancyPicture.destroy();
-        resources.pregnancyPicture = resources.scene.add.sprite(350, 250, resources.pregnancyPictureNames[this._text]);
-        var scale = 400/resources.pregnancyPicture.height;
-        resources.pregnancyPicture.setScale(scale);
+      month.setSize(monthBackground.width * monthBackgroundScale, monthBackground.height * monthBackgroundScale);
+      month.setInteractive({useHandCursor: true})
+        .on('pointerdown', function () {
+          this.list[0].setTexture('buttonDown');
+        })
+        .on('pointerup', function() {
+          resources.definitionDisplay.setText(resources.definitions[this.list[1]._text]);
 
-        if (this._text === '3') {
-          resources.pregnancyPicture.play('fingers');
-        } else if (this._text === '5') {
+          for (var j = 0; j < resources.stages.getChildren().length; j++) {
+            var monthButton = resources.stages.getChildren()[j].list[0];
+            monthButton.setTexture('buttonUp');
+          }
+          this.list[0].setTexture('buttonDown');
+
+          if (resources.pregnancyPicture) {
+            resources.pregnancyPicture.destroy();
+          }
+         
+          resources.pregnancyPicture = resources.scene.add.sprite(350, 250, resources.pregnancyPictureNames[this.list[1]._text]);
+        
+          var scale = 400/resources.pregnancyPicture.height;
+          resources.pregnancyPicture.setScale(scale);
+
+        if (this.list[1]._text === '3') {
+          resources.pregnancyPicture.setCrop(50, 0, 500, 400)
+            .play('fingers');
+        } else if (this.list[1]._text === '5') {
           resources.pregnancyPicture.play('yawn');
-        } else if (this._text === '6') {
+        } else if (this.list[1]._text === '6') {
           resources.pregnancyPicture.play('heart');
-        } else if (this._text === '7') {
-          resources.pregnancyPicture.play('kick');
-        } else if (this._text === '8') {
-          resources.pregnancyPicture.play('breathe');
+        } else if (this.list[1]._text === '7') {
+          resources.pregnancyPicture.setCrop(50, 0, 500, 400)
+            .play('kick');
+        } else if (this.list[1]._text === '8') {
+          resources.pregnancyPicture.setCrop(50, 0, 500, 400)
+            .play('breathe');
         }
       });
+      
       resources.stages.add(month);
-
     }
-  //  new DiagramInteractions(resources.stages.children.entries, resources.definitionDisplay, resources.definitions, resources, 'stage', false);
 
-  resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
-}
+    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
+    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
+  }
 }
 
 var resources = {
-  explanations: false,
-  stage: ''
+  infoText: "You can watch the baby grow during pregnancy using a device called an ultrasound.\n\nClick on each month to learn what is happening to the baby."
 };
 
-/*Legacy code
-
- 
-    resources.ellipse = new Phaser.Geom.Ellipse(400, 300, 550, 460);
-    resources.rectangle = new Phaser.Geom.Rectangle(100, 100, 650, 460);
-
-    resources.stages = this.add.group();
-    
-    resources.stagesBackground = this.add.group();
-
-    resources.stagesBackground.create(0, 0, '5');
-    resources.stagesBackground.create(0, 0, '6');
-    resources.stagesBackground.create(0, 0, '7');
-    resources.stagesBackground.create(0, 0, '8');
-    resources.stagesBackground.create(0, 0, '9');
-    resources.stagesBackground.create(0, 0, '1');
-    resources.stagesBackground.create(0, 0, '2');
-    resources.stagesBackground.create(0, 0, '3');
-    resources.stagesBackground.create(0, 0, '4');
-
-    resources.pregnancy5 = resources.stages.create(0, 0, '5');
-    resources.stages.create(0, 0, '6');
-    resources.stages.create(0, 0, '7');
-    resources.stages.create(0, 0, '8');
-    resources.stages.create(0, 0, '9');
-    resources.stages.create(0, 0, '1');
-    resources.stages.create(0, 0, '2');
-    resources.stages.create(0, 0, '3');
-    resources.stages.create(0, 0, '4');
-
-    resources.pregnancy5.on('pointerdown', () => {console.log('click')});
-
-    Phaser.Actions.PlaceOnRectangle(resources.stagesBackground.getChildren(), resources.rectangle);
-    Phaser.Actions.PlaceOnRectangle(resources.stages.getChildren(), resources.rectangle);
-*/
+function infoText (resources) {
+  resources.definitionDisplay.setText(resources.infoText);
+}

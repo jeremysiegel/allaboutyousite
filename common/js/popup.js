@@ -23,8 +23,11 @@ export default class Popup {
       this.textbox.destroy();
       this.screen.destroy();
       this.text.destroy();
-      delete this.exit;
     })
+
+    Popup.prototype.isVisible = function() {
+      return this.textbox.visible;
+    }
   }
 }
 

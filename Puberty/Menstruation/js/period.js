@@ -103,7 +103,7 @@ function infoText(resources) {
   var width = 600;
   var height = 410;
 
-  if (!resources.popup || !resources.popup.exit) {
+  if (!resources.popup || !resources.popup.isVisible()) {
     resources.popup = new Popup(resources.scene, screenCenterX - width/2, screenCenterY - height/2, width, height, resources.infoText);
   }
 }
