@@ -26,7 +26,7 @@ export default class ScrollBox {
 
     var mask = new Phaser.Display.Masks.GeometryMask(scene, graphics);
 
-    var text = scene.add.text(x + 20, y + 10, content, { 
+    var text = scene.add.text(x + 20, y + 20, content, { 
       fontFamily: 'Assistant', 
       fontSize: '28px', 
       color: '#000000', 
@@ -35,31 +35,54 @@ export default class ScrollBox {
 
     text.setMask(mask);
 
+    var minY = height - text.height - 20;
+    if (text.height <= height - 20) {
+      minY = y + 20;
+    }
+
     //  The rectangle they can 'drag' within
     var zone = scene.add.zone(x, y - 3, width, height + 6).setOrigin(0).setInteractive({useHandCursor: true});
 
-    zone.on('pointermove', function (pointer, ) {
+    zone.on('pointermove', function (pointer) {
       if (pointer.isDown) {
-          text.y += (pointer.velocity.y / 10);
-          text.y = Phaser.Math.Clamp(text.y, -400, y + 20);
+        text.y += (pointer.velocity.y / 10);
+        text.y = Phaser.Math.Clamp(text.y, minY, y + 20);
       }
     });
 
-    this.exitCircle = scene.add.circle(0, 0, 20, 0xffffff).setInteractive({useHandCursor: true});
-    this.exitCircleText = scene.add.text(0, 0, 'X', {fontFamily: 'Arial', fontSize: 16, color:'#000000', fontStyle: 'bold'}).setOrigin(0.5);
+    var downKey = scene.input.keyboard.addKey('DOWN'); 
+    var upKey = scene.input.keyboard.addKey('UP'); 
+    var spaceKey = scene.input.keyboard.addKey('SPACE'); 
 
-    this.exit = scene.add.container(x + width, y, [this.exitCircle, this.exitCircleText]);
-    scene.add.existing(this.exit);
+    downKey.on('down', function() {
+      text.y = Phaser.Math.Clamp(text.y - 50, minY, y + 20);
+    });
 
-    this.exitCircle.on('pointerup', () => {
-      this.exit.destroy();
-      this.textbox.destroy();
-      this.screen.destroy();
-      text.destroy();
-      mask.destroy();
-      zone.destroy();
-      graphics.destroy();
-    })
+    spaceKey.on('down', function() {
+      text.y = Phaser.Math.Clamp(text.y - 50, minY, y + 20);
+    });
+
+    upKey.on('down', function() {
+      text.y = Phaser.Math.Clamp(text.y + 50, minY, y + 20);
+    });
+
+    if (popup) {
+      this.exitCircle = scene.add.circle(0, 0, 20, 0xffffff).setInteractive({useHandCursor: true});
+      this.exitCircleText = scene.add.text(0, 0, 'X', {fontFamily: 'Arial', fontSize: 16, color:'#000000', fontStyle: 'bold'}).setOrigin(0.5);
+  
+      this.exit = scene.add.container(x + width, y, [this.exitCircle, this.exitCircleText]);
+      scene.add.existing(this.exit);
+  
+      this.exitCircle.on('pointerup', () => {
+        this.exit.destroy();
+        this.textbox.destroy();
+        this.screen.destroy();
+        text.destroy();
+        mask.destroy();
+        zone.destroy();
+        graphics.destroy();
+      })
+    }
 
     ScrollBox.prototype.isVisible = function() {
       return this.textbox.visible;
