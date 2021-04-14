@@ -1,40 +1,38 @@
 import SceneButton from '../../../common/js/sceneButton.js';
 import Textbox from '../../../common/js/textbox.js';
-import MaleExternalStrings from './maleExternalStrings.js';
+import FemaleExternalStrings from './femaleExternalStrings.js';
 import InfoButton from '../../../common/js/infoButton.js';
     
-export default class MaleExternal extends Phaser.Scene {
+export default class FemaleExternal extends Phaser.Scene {
   constructor() {
-    super({key: 'maleExternal'})
+    super({key: 'femaleExternal'})
   }
 
   preload () {
-    this.load.image('maleExternal', '../../Puberty/External/images/maleExternal.png');
-    this.load.image('foreskin', '../../Puberty/External/images/foreskin.png');
+    this.load.image('femaleExternal', '../../Puberty/External/images/femaleExternal.png');
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
  
-   resources.definitions = new MaleExternalStrings();
+   resources.definitions = new FemaleExternalStrings();
   }
 
   create () {
-    new Textbox(this, 660, 60, 500, 200);
+    new Textbox(this, 840, 60, 400, 270);
 
-    resources.definitionDisplay = this.add.text(680, 80, resources.infoText,
+    resources.definitionDisplay = this.add.text(860, 80, resources.infoText,
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
         fill: '#000',
-        wordWrap: {width: 480}
+        wordWrap: {width: 380}
       }
     );
-    this.add.image(292.9, 293.15, 'maleExternal');
-    this.add.image(678.7, 460.8, 'foreskin');
+    this.add.image(383.4, 300.05, 'femaleExternal');
 
     for (let organ in resources.organs) {
 
-      var rect = this.add.rectangle(0, 0, 120, 38, 0xf4bda8);
+      var rect = this.add.rectangle(0, 0, 140, 38, 0xf4bda8);
       rect.setStrokeStyle(2, 0xf58b62)
       
       var text = this.add.text(0, 0, resources.organs[organ].name, {
@@ -67,37 +65,42 @@ export default class MaleExternal extends Phaser.Scene {
 }
 
 var resources = {
-  infoText: "Male reproductive system.\n\nClick on each label to learn what it does.",
+  infoText: "Female reproductive system.\n\nClick on each label to learn what it does.",
   organs: {
+    clitoris: {
+      name: 'Clitoris',
+      labelX: 92.55,
+      labelY: 150.55
+    },
     urethra: {
       name: 'Urethra',
-      labelX: 472.55,
-      labelY: 57.4
-    },
-    glans: {
-      name: 'Glans',
-      labelX: 101.8,
-      labelY: 86.05
-    },
-    shaft: {
-      name: 'Shaft',
-      labelX: 101.75,
-      labelY: 154.85
-    },
-    scrotum: {
-      name: 'Scrotum',
-      labelX: 477.8,
-      labelY: 281.45
+      labelX: 111.05,
+      labelY: 238.6
     },
     anus: {
       name: 'Anus',
-      labelX: 100.5,
-      labelY: 447.5
+      labelX: 124.9,
+      labelY: 396
     },
-    foreskin: {
-      name: 'Foreskin',
-      labelX: 859.5,
-      labelY: 442.8
+    outerLabia: {
+      name: 'Outer Labia',
+      labelX: 708.95,
+      labelY: 124.4
+    },
+    innerLabia: {
+      name: 'Inner Labia',
+      labelX: 703.8,
+      labelY: 225.7
+    },
+    vagina: {
+      name: 'Vagina',
+      labelX: 656.1,
+      labelY: 317.45
+    },
+    hymen: {
+      name: 'Hymen',
+      labelX: 111.05,
+      labelY: 318.5
     }
   }
 };

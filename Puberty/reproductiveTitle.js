@@ -30,6 +30,18 @@ export default class ReproductiveTitle extends Phaser.Scene {
         color: '0x096a92',
         text: 'Game',
         nextScene: 'rsGame'
+      },
+
+      maleExternalButton: {
+        color: '0xff8736',
+        text: 'Male External',
+        nextScene: 'maleExternal'
+      },
+
+      femaleExternalButton: {
+        color: '0xff4e3e',
+        text: 'Female External',
+        nextScene: 'femaleExternal'
       }
     }
     

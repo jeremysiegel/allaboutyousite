@@ -8,6 +8,8 @@ import Period from './Menstruation/js/period.js';
 import Pregnancy from './Pregnancy/js/pregnancy.js';
 import RSGame from './rsGame/js/rsGame.js';
 import RSGame2 from './rsGame/js/rsGame2.js';
+import MaleExternal from './External/js/maleExternal.js';
+import FemaleExternal from './External/js/femaleExternal.js';
 
 import MainTitle from './mainTitle.js';
 import ReproductiveTitle from './reproductiveTitle.js';
@@ -28,6 +30,8 @@ var period = new Period();
 var pregnancy = new Pregnancy();
 var rsGame = new RSGame();
 var rsGame2 = new RSGame2();
+var maleExternal = new MaleExternal();
+var femaleExternal = new FemaleExternal();
 
 var config = {
   type: Phaser.AUTO,
@@ -41,7 +45,7 @@ var config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true
+      debug: false
     }
   }
 };
@@ -62,6 +66,8 @@ game.scene.add('period', period);
 game.scene.add('pregnancy', pregnancy);
 game.scene.add('rsGame', rsGame);
 game.scene.add('rsGame2', rsGame2);
+game.scene.add('maleExternal', maleExternal);
+game.scene.add('femaleExternal', femaleExternal);
 
 // start mainTitle
 game.scene.start('mainTitle');
