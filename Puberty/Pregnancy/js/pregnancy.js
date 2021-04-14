@@ -2,7 +2,6 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import PregnancyStrings from './pregnancyStrings.js';
 import Textbox from '../../../common/js/textbox.js';
 import InfoButton from '../../../common/js/infoButton.js';
-
     
 export default class Pregnancy extends Phaser.Scene {
   constructor() {
