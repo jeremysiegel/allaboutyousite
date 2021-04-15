@@ -4,7 +4,7 @@ import InfoButton from '../../../common/js/infoButton.js';
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
 import QuestionButton from '../../../common/js/questionButton.js';
-import HormonesStrings from './HormonesStrings.js';
+import HormonesStrings from './hormonesStrings.js';
 
 export default class Hormones extends Phaser.Scene {
   constructor() {
