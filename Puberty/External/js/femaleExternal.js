@@ -65,12 +65,11 @@ export default class FemaleExternal extends Phaser.Scene {
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
     resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
     resources.questionButton = new QuestionButton(this, 1140, 507, 0.1, resources.questions, 'questionButton');
-
   }
 }
 
 var resources = {
-  infoText: "Female reproductive system.\n\nClick on each label to learn what it does.",
+  infoText: "Female reproductive system (vulva).\n\nClick on each label to learn what it does.",
   organs: {
     clitoris: {
       name: 'Clitoris',

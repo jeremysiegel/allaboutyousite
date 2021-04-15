@@ -24,6 +24,12 @@ export default class MaleChangesStrings {
         "\nQ: What happens if I get an erection when I don't want to?\n\nErections are a normal function of the body. Especially at the beginning of puberty, they can sometimes happen when you don't want them to. It will go away, and usually no one else notices. Once your body gets used to making them, erections will usually happen only when you want them to. They also happen naturally during sleep."
       ],
       [
+        "\nQ: What is an 'Adam's apple'?\n\nA: During puberty, a lot of males get a bump on their throat. This is because the voice box is growing to make the voice deeper."
+      ],
+      [
+        "\nQ: When will I grow a beard?\n\nA: Facial hair is one of the 'later' changes of puberty, and even once you start growing it, it may take awhile for a full beard to grow. It is up to you if you want to shave or not, both choices are normal."
+      ],
+      [
         "\nQ: What is the purpose of the new sweat?\n\nA: It is mostly there to protect your skin. Many people like to wear deoderant to stop it from smelling. No reason to wait to get into the habit!"
       ]
     ];

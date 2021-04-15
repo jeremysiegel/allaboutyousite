@@ -21,6 +21,9 @@ export default class FemaleChangesStrings {
         "\nQ: Is it normal for my breasts to be different sizes?\n\nA: Yes, breasts can be different sizes, and can grow at different rates during puberty."
       ],
       [
+        "\nQ: What is a bra?\n\nA: A bra is a piece of clothing that supports the breasts. Some people choose to wear one, and others don't. It is up to you if you choose to wear a bra, and when you decide to start."
+      ]
+      [
         "\nQ: What is the purpose of the new sweat?\n\nA: It is mostly there to protect your skin. Many people like to wear deoderant to stop it from smelling. No reason to wait to get into the habit!"
       ]
     ];

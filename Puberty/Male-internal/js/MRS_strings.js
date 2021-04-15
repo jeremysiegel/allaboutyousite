@@ -26,6 +26,9 @@ export default class MRSStrings {
         "Q: Is it normal for one testicle to be bigger than the other?\n\nA: Yes, it is normal for one testicle to be bigger and to hang lower than the other."
       ],
       [
+        "\nQ: Why does getting hit in the testicles hurt so much? How can I protect myself?\n\nA: Most of our organs are inside our bodies, but testicles are on the outside because the sperm need to be a bit cooler than the body. It hurts to be hit there because the testicles are unprotected by bone and tissue. You can protect yourself by wearing a cup or jockstrap during sports."
+      ],
+      [
         "\nQ: How do you know if you have started to produce sperm?\n\nA: Males start making sperm during puberty. You will know you are making sperm when you have an ejaculation. Sometimes this happens during sleep, in what gets called a 'wet dream.' It is perfectly normal. It might help to know that usually not a lot of semen comes out during the first ejaculation. You'll want to wash your PJs though."
       ]
     ]

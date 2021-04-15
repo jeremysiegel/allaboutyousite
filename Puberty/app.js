@@ -10,6 +10,7 @@ import RSGame from './rsGame/js/rsGame.js';
 import RSGame2 from './rsGame/js/rsGame2.js';
 import MaleExternal from './External/js/maleExternal.js';
 import FemaleExternal from './External/js/femaleExternal.js';
+import Emotions from './Emotions/js/emotions.js';
 
 import MainTitle from './mainTitle.js';
 import ReproductiveTitle from './reproductiveTitle.js';
@@ -32,6 +33,7 @@ var rsGame = new RSGame();
 var rsGame2 = new RSGame2();
 var maleExternal = new MaleExternal();
 var femaleExternal = new FemaleExternal();
+var emotions = new Emotions();
 
 var config = {
   type: Phaser.AUTO,
@@ -68,6 +70,8 @@ game.scene.add('rsGame', rsGame);
 game.scene.add('rsGame2', rsGame2);
 game.scene.add('maleExternal', maleExternal);
 game.scene.add('femaleExternal', femaleExternal);
+game.scene.add('emotions', emotions);
+
 
 // start mainTitle
 game.scene.start('mainTitle');

@@ -30,7 +30,13 @@ export default class ChangesTitle extends Phaser.Scene {
         color: '0xfbae06',
         text: 'Female',
         nextScene: 'femaleChanges'
-      }
+      },
+
+      emotionsButton: {
+        color: '0xff8736',
+        text: 'New feelings',
+        nextScene: 'emotions'
+      },
     }
     
     new TitleScreen(this, sceneButtons);

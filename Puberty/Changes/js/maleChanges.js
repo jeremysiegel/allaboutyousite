@@ -59,12 +59,13 @@ export default class MaleChanges extends Phaser.Scene {
 
     resources.boy = this.add.image(559.2, 310.5, 'boyChanges');
 
+    // Background images for screening.
     resources.voice2 = new Receptor(this, 458.1, 172.9, 'testosteroneReceptor', 0.8, 180, 'voice');
     resources.genitals2 = new Receptor(this, 607.15, 392.1, 'testosteroneReceptor', 0.8, 33, 'genitals');
     resources.hair2 = new Receptor(this, 655.1, 474.9, 'testosteroneReceptor', 0.8, 0, 'hair');
     resources.growth2 = new Receptor(this, 420.35, 463.95, 'estrogenReceptor', 0.8, 180, 'growth');
     resources.shoulders2 = new Receptor(this, 651.7, 161.75, 'testosteroneReceptor', 0.8, -12, 'shoulders');
-    resources.sweat2 = new Receptor(this, 3429.35, 250.5, 'testosteroneReceptor', 0.8, 145, 'sweat');
+    resources.sweat2 = new Receptor(this, 429.35, 250.5, 'testosteroneReceptor', 0.8, 145, 'sweat');
 
     resources.voice = new Receptor(this, 458.1, 172.9, 'testosteroneReceptor', 0.8, 180, 'voice');
     resources.genitals = new Receptor(this, 607.15, 392.1, 'testosteroneReceptor', 0.8, 33, 'genitals');
