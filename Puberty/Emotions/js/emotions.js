@@ -2,8 +2,8 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import Popup from '../../../common/js/popup.js';
 import QuestionButton from '../../../common/js/questionButton.js';
-//import EmotionsStrings from '../js/emotionsStrings.js';
-import EmotionsStrings from '../../External/js/femaleExternalStrings.js';
+import EmotionsStrings from '../emotionsStrings.js';
+//import FemaleExternalStrings from './femaleExternalStrings.js';
 
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
@@ -24,7 +24,7 @@ export default class Emotions extends Phaser.Scene {
     this.load.image('resetButton', '../../common/images/buttons/reset.png');
 
 
-    resources.emotions = new EmotionsStrings('definitions');
+    resources.emotions = new EmotionsStrings('emotions');
     resources.questions = new EmotionsStrings('questions');
   }
 

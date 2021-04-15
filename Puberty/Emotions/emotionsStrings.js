@@ -1,5 +1,6 @@
 export default class EmotionsStrings {
   constructor(get) {
+    
     var emotions = [
       'New ways of thinking',
       'New hobbies',
