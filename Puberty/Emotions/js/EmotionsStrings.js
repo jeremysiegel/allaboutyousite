@@ -1,4 +1,3 @@
-/*
 export default class EmotionsStrings {
   constructor(get) {
     var emotions = [
@@ -42,4 +41,3 @@ export default class EmotionsStrings {
     }
   }
 }
-*/

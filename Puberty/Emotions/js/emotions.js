@@ -2,7 +2,9 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import Popup from '../../../common/js/popup.js';
 import QuestionButton from '../../../common/js/questionButton.js';
-import EmotionsStrings from './emotionsStrings.js';
+import EmotionsStrings from '../js/emotionsStrings.js';
+//import FemaleExternalStrings from './femaleExternalStrings.js';
+
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
 
