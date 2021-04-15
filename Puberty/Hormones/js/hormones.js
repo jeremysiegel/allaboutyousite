@@ -3,7 +3,8 @@ import Hormone from '../../../common/js/hormone.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
-
+import QuestionButton from '../../../common/js/questionButton.js';
+import HormonesStrings from './HormonesStrings.js';
 
 export default class Hormones extends Phaser.Scene {
   constructor() {
@@ -20,6 +21,10 @@ export default class Hormones extends Phaser.Scene {
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
     this.load.image('resetButton', '../../common/images/buttons/reset.png');
+    this.load.image('questionButton', '../../common/images/buttons/question.png');
+
+    resources.questions = new HormonesStrings('questions');
+
   }
 
   create () {
@@ -72,6 +77,10 @@ var resources = {
     reset: {
       text: 'Reset',
       image: 'resetButton'
+    },
+    question: {
+      text: 'Common questions',
+      image: 'questionButton'
     }
   }
 };
@@ -201,6 +210,7 @@ function personClick(object, pointer) {
 
         resources.infoButton = new InfoButton(resources.scene, 1220, 507, 0.1, infoText, resources, 'infoButton');
         resources.resetButton = new ResetButton(resources.scene, 1160, 567, 0.1, 'resetButton');
+        resources.questionButton = new QuestionButton(resources.scene, 1160, 507, 0.1, resources.questions, 'questionButton');
 
         var containerY = 292;
         resources.keys = resources.scene.add.group();

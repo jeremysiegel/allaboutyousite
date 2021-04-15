@@ -2,6 +2,7 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import PregnancyStrings from './pregnancyStrings.js';
 import Textbox from '../../../common/js/textbox.js';
 import InfoButton from '../../../common/js/infoButton.js';
+import QuestionButton from '../../../common/js/questionButton.js';
     
 export default class Pregnancy extends Phaser.Scene {
   constructor() {
@@ -28,8 +29,11 @@ export default class Pregnancy extends Phaser.Scene {
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
+    this.load.image('questionButton', '../../common/images/buttons/question.png');
     
-    resources.definitions = new PregnancyStrings(false);
+    resources.definitions = new PregnancyStrings('definitions');
+    resources.questions = new PregnancyStrings('questions');
+
   }
 
   create () {
@@ -124,15 +128,18 @@ export default class Pregnancy extends Phaser.Scene {
       month.setInteractive({useHandCursor: true})
         .on('pointerdown', function () {
           this.list[0].setTexture('buttonDown');
+          this.list[1].y = 2;
         })
         .on('pointerup', function() {
           resources.definitionDisplay.setText(resources.definitions[this.list[1]._text]);
 
           for (var j = 0; j < resources.stages.getChildren().length; j++) {
-            var monthButton = resources.stages.getChildren()[j].list[0];
-            monthButton.setTexture('buttonUp');
+            var monthButton = resources.stages.getChildren()[j];
+            monthButton.list[0].setTexture('buttonUp');
+            monthButton.list[1].y = 0;
           }
           this.list[0].setTexture('buttonDown');
+          this.list[1].y = 2;
 
           if (resources.pregnancyPicture) {
             resources.pregnancyPicture.destroy();
@@ -164,6 +171,8 @@ export default class Pregnancy extends Phaser.Scene {
 
     resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
+    resources.questionButton = new QuestionButton(this, 1140, 507, 0.1, resources.questions, 'questionButton');
+
   }
 }
 

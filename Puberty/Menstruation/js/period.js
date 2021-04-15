@@ -1,7 +1,9 @@
 import SceneButton from '../../../common/js/sceneButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import Popup from '../../../common/js/popup.js';
-    
+import QuestionButton from '../../../common/js/questionButton.js';
+import PeriodStrings from './periodStrings.js';
+
 export default class Period extends Phaser.Scene {
   constructor() {
     super({key: 'period'})
@@ -17,6 +19,10 @@ export default class Period extends Phaser.Scene {
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
+    this.load.image('questionButton', '../../common/images/buttons/question.png');
+
+    resources.questions = new PeriodStrings();
+
   }
 
   create () {
@@ -85,6 +91,7 @@ export default class Period extends Phaser.Scene {
 
     resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
+    resources.questionButton = new QuestionButton(this, 1140, 507, 0.1, resources.questions, 'questionButton');
 
     newEgg();
     changeDay(1);
@@ -214,10 +221,13 @@ function newEgg() {
   resources.destroyEgg.add({
     targets: resources.egg,
     alpha: 0,
-    duration: 1500,
+    duration: 1100,
     onComplete: () => {
-      resources.egg.destroy();
-      delete resources.egg;
+      if (resources.egg) {
+        resources.egg.destroy();
+        delete resources.egg;
+      }
+
     }
   })
 }

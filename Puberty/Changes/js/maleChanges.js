@@ -5,7 +5,8 @@ import ReceptorInteractions from '../../../common/js/receptorInteractions.js';
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
-
+import MaleChangesStrings from './maleChangesStrings.js';
+import QuestionButton from '../../../common/js/questionButton.js';
     
 export default class MaleChanges extends Phaser.Scene {
   constructor() {
@@ -22,6 +23,10 @@ export default class MaleChanges extends Phaser.Scene {
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('resetButton', '../../common/images/buttons/reset.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
+    this.load.image('questionButton', '../../common/images/buttons/question.png');
+
+    resources.definitions = new MaleChangesStrings('definitions');
+    resources.questions = new MaleChangesStrings('questions');
   }
 
   create () {
@@ -110,21 +115,14 @@ export default class MaleChanges extends Phaser.Scene {
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'changesTitle', 'backButton');
     resources.resetButton = new ResetButton(this, 1140, 567, 0.1, 'resetButton');
     resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
-
+    resources.questionButton = new QuestionButton(this, 1140, 507, 0.1, resources.questions, 'questionButton');
   }
 }
 
 var resources = {
   change: '',
   infoText: "What are the changes of puberty?\n\nDifferent parts of the body are \"listening\" for a hormone message.\n\nDrag the hormones to each body part to trigger the changes of puberty.",
-  definitions: {
-    voice: 'The voice deepens significantly.\n\nSometimes the voice cracks when it changes, which is perfectly normal.',
-    genitals: 'The penis and testicles grow.\n\nErections and ejaculations (sperm leaving the body) begin.\n\nSometimes the first ejaculation happens during sleep (also known as a "wet dream").',
-    hair: 'Thick hair starts to grow all around the body, like the arms, legs, and face.\n\nNew hair grows around the genitals (pubic hair), and in the armpits.',
-    growth: 'There is a "growth spurt", or a time when you get taller pretty quickly.\n\nYou might notice that you need to get new clothes.',
-    shoulders: 'Males develop wider shoulders.',
-    sweat: 'Sweat changes and gets more smelly. Many people wear deoderant to stop the smell.\n\nThe new sweat causes acne or pimples, another perfectly normal part of puberty'
-  }
+
 };
 
 function infoText (resources) {

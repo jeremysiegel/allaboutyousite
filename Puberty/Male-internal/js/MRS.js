@@ -3,6 +3,7 @@ import Textbox from '../../../common/js/textbox.js';
 import MRSStrings from './MRS_strings.js';
 import DiagramInteractions from '../../../common/js/diagramInteractions.js';
 import InfoButton from '../../../common/js/infoButton.js';
+import QuestionButton from '../../../common/js/questionButton.js';
     
 export default class MRS extends Phaser.Scene {
   constructor() {
@@ -26,8 +27,11 @@ export default class MRS extends Phaser.Scene {
 
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
+    this.load.image('questionButton', '../../common/images/buttons/question.png');
+
  
-    resources.definitions = new MRSStrings(true);
+    resources.definitions = new MRSStrings('definitions');
+    resources.questions = new MRSStrings('questions');
   }
 
   create () {
@@ -63,6 +67,8 @@ export default class MRS extends Phaser.Scene {
     
     resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'reproductiveTitle', 'backButton');
     resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
+    resources.questionButton = new QuestionButton(this, 1140, 507, 0.1, resources.questions, 'questionButton');
+
   }
 }
 

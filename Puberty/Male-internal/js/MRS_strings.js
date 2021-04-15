@@ -1,5 +1,5 @@
 export default class MRSStrings {
-  constructor(getExplanations) {
+  constructor(get) {
     
     var definitions = {
       bladder: 'The bladder holds urine.',
@@ -21,11 +21,21 @@ export default class MRSStrings {
       vasdeferens: definitions.vasdeferens + ' It brings the sperm inside the body.'
     }
 
-    if (!getExplanations) {
-      return definitions;
+    var questions = [
+      [
+        "Q: Is it normal for one testicle to be bigger than the other?\n\nA: Yes, it is normal for one testicle to be bigger and to hang lower than the other."
+      ],
+      [
+        "\nQ: How do you know if you have started to produce sperm?\n\nA: Males start making sperm during puberty. You will know you are making sperm when you have an ejaculation. Sometimes this happens during sleep, in what gets called a 'wet dream.' It is perfectly normal. It might help to know that usually not a lot of semen comes out during the first ejaculation. You'll want to wash your PJs though."
+      ]
+    ]
 
-    } else {
+    if (get === 'definitions') {
+      return definitions;
+    } else if (get==='explanations') {
       return explanations;
+    } else if (get === 'questions') {
+      return questions;
     }
   }
 }

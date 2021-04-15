@@ -26,7 +26,7 @@ export default class TitleScreen {
       cellWidth: resources.width + resources.spacing,
       cellHeight: resources.height + resources.spacing,
       position: Phaser.Display.Align.CENTER,
-      x: (1280 / resources.gridWidth) - resources.width + (resources.spacing * (resources.gridWidth - 1) * Math.pow(-1, resources.gridWidth - 1)),
+      x: (1280 / Phaser.Math.Clamp(resources.gridWidth, 2, 100)) - resources.width + (resources.spacing * (resources.gridWidth - 1) * Math.pow(-1, resources.gridWidth - 1)),
       y: (609 / 2) - resources.height - (resources.spacing / 2)
   });
 

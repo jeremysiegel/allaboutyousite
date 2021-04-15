@@ -5,6 +5,9 @@ import ReceptorInteractions from '../../../common/js/receptorInteractions.js';
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
+import FemaleChangesStrings from './femaleChangesStrings.js';
+import QuestionButton from '../../../common/js/questionButton.js';
+
 
 
 export default class FemaleChanges extends Phaser.Scene {
@@ -23,6 +26,10 @@ export default class FemaleChanges extends Phaser.Scene {
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('resetButton', '../../common/images/buttons/reset.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
+    this.load.image('questionButton', '../../common/images/buttons/question.png');
+
+    resources.definitions = new FemaleChangesStrings('definitions');
+    resources.questions = new FemaleChangesStrings('questions');
 
   }
 
@@ -118,21 +125,13 @@ export default class FemaleChanges extends Phaser.Scene {
   resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'changesTitle', 'backButton');
   resources.resetButton = new ResetButton(this, 1140, 567, 0.1, 'resetButton');
   resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
-
+  resources.questionButton = new QuestionButton(this, 1140, 507, 0.1, resources.questions, 'questionButton');
   }
 }
 
 var resources = {
   change: '',
   infoText: "What are the changes of puberty?\n\nDifferent parts of the body are \"listening\" for a hormone message.\n\nDrag the hormones to each body part to trigger the changes of puberty.",
-  definitions: {
-    breasts: 'Often, one of the first signs of puberty is a “breast bud,” a small lump behind the nipple that leads to the development of breasts.',
-    genitals: 'The vulva, or the outside part of the genitals (sometimes what gets called the vagina) gets bigger.\n\nThe vagina makes a fluid to clean itself.\n\nPeriods, or the menstrual cycle, also start.',
-    hair: 'More hair starts to grow all around the body, like the arms and legs.\n\nNew hair grows around the genitals (pubic hair), and in the armpits.',
-    growth: 'There is a "growth spurt", or a time when you get taller pretty quickly. You might notice that you need to get new clothes.',
-    hips: 'Females develop wider hips.',
-    sweat: 'Sweat changes and gets more smelly. Many people wear deoderant to stop the smell.\n\nThe new sweat causes acne or pimples, another perfectly normal part of puberty'
-  } 
 };
 
 function infoText (resources) {

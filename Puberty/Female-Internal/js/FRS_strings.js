@@ -1,5 +1,5 @@
 export default class FRSStrings {
-  constructor(getExplanations) {
+  constructor(get) {
     
     var definitions = {
       fTubes: 'The Fallopian tubes are a passage from the ovary to the uterus.',
@@ -17,11 +17,25 @@ export default class FRSStrings {
       cervix: definitions.cervix
     }
 
-    if (!getExplanations) {
-      return definitions;
+    var questions = [
+      [
+        "Q: What is the womb?\n\nA: The 'womb' is another name for uterus. Ususally womb is used when talking about where a baby develops during pregnancy."
+      ],
+      [
+        "\nQ: Does it hurt when the egg leaves the ovary?\n\nA:No, you cannot feel when the egg leaves the ovary."
+      ],
 
-    } else {
+      [
+        "\nQ: Sometimes there's a milky liquid in my underwear. Is that normal?\n\nA: Totally! The vagina makes a fluid to clean itself. Sometimes it ends up in the underwear. The fluid is called discharge. It can look different at different times of the menstrual cycle."
+      ]
+    ]
+
+    if (get === 'definitions') {
+      return definitions;
+    } else if (get === 'explanations') {
       return explanations;
+    } else if (get === 'questions') {
+      return questions;
     }
   }
 }
