@@ -14,7 +14,7 @@ export default class EmotionsStrings {
       'More self confident',
       'More unsure of yourself',
       'Making your own choices'
-    ]
+    ];
 
     var questions = [
       [
@@ -32,7 +32,7 @@ export default class EmotionsStrings {
       [
         "\nAren't some of these emotions contradictory, like 'being confident' and 'being unsure'?\n\nA: Definitely! Humans are complex, and you will feel different things at different times. That is okay, and just another part of being an adult."
       ]
-    ]
+    ];
 
     if (get === 'emotions') {
       return emotions;
