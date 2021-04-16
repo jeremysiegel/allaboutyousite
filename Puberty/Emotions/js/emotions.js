@@ -2,8 +2,7 @@ import SceneButton from '../../../common/js/sceneButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import Popup from '../../../common/js/popup.js';
 import QuestionButton from '../../../common/js/questionButton.js';
-import EmotionsStrings from '../emotionsStrings.js';
-//import FemaleExternalStrings from './femaleExternalStrings.js';
+import EmotionsStrings from './emotionsStrings.js';
 
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
@@ -128,19 +127,3 @@ function infoText(resources) {
     resources.popup = new Popup(resources.scene, screenCenterX - width/2, screenCenterY - height/2, width, height, resources.infoText);
   }
 }
-
-/*
-crushes
-new ways of thinking
-new hobbies
-changing friendships
-discovering who you are
-New likes and dislikes
-express yourself
-Crying
-More self confident
-More unsure of yourself
-Sexuality
-Make your own choices
-Peer pressure
-*/
