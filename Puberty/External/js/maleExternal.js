@@ -3,25 +3,21 @@ import Textbox from '../../../common/js/textbox.js';
 import MaleExternalStrings from './maleExternalStrings.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import QuestionButton from '../../../common/js/questionButton.js';
+import BaseScene from '../../base.js';
+
     
-export default class MaleExternal extends Phaser.Scene {
+export default class MaleExternal extends BaseScene {
   constructor() {
-    super({key: 'maleExternal'})
+    super('maleExternal')
   }
 
   preload () {
-    this.load.image('maleExternal', '../../Puberty/External/images/maleExternal.png');
-    this.load.image('foreskin', '../../Puberty/External/images/foreskin.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
-
     resources.definitions = new MaleExternalStrings('definitions');
     resources.questions = new MaleExternalStrings('questions');
   }
 
   create () {
+    super.create();
     new Textbox(this, 660, 60, 500, 200);
 
     resources.definitionDisplay = this.add.text(680, 80, resources.infoText,

@@ -3,31 +3,22 @@ import InfoButton from '../../../common/js/infoButton.js';
 import Popup from '../../../common/js/popup.js';
 import QuestionButton from '../../../common/js/questionButton.js';
 import PeriodStrings from './periodStrings.js';
+import BaseScene from '../../base.js';
 
-export default class Period extends Phaser.Scene {
+export default class Period extends BaseScene {
   constructor() {
-    super({key: 'period'})
+    super('period');
   }
 
   preload () {
-    this.load.spritesheet('topSpritesheet', '../../Puberty/Menstruation/images/top4 sprite.png', { frameWidth: 300, frameHeight: 69, margin: 0, spacing: 0 });
-    this.load.spritesheet('leftSpritesheet', '../../Puberty/Menstruation/images/left4 sprite.png', { frameWidth: 120, frameHeight: 214.5, margin: 0, spacing: 0 });
-
-    this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
-    this.load.image('uterusMask', '../../Puberty/Menstruation/images/uterus.png');
-    this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
-
     resources.questions = new PeriodStrings();
 
   }
 
   create () {
+    super.create();
     resources.scene = this;
-    resources.femaleInternal = this.add.image(404.25, 290.55, 'FRS');
+    resources.femaleInternal = this.add.image(404.25, 290.55, 'femaleInternal');
 
     // Endometrium spritesheets
     resources.left = this.add.sprite(366.3, 235, 'leftSpritesheet', 0).setScale(0.5);

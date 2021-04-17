@@ -1,6 +1,6 @@
 // config
 
-import Setup from './setup.js';
+import Setup from '../setup/setup.js';
 
 import MainTitle from './mainTitle.js';
 import ReproductiveTitle from './reproductiveTitle.js';

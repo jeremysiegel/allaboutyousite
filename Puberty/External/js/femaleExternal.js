@@ -3,18 +3,16 @@ import Textbox from '../../../common/js/textbox.js';
 import FemaleExternalStrings from './femaleExternalStrings.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import QuestionButton from '../../../common/js/questionButton.js';
+import BaseScene from '../../base.js';
+
     
-export default class FemaleExternal extends Phaser.Scene {
+export default class FemaleExternal extends BaseScene {
   constructor() {
-    super({key: 'femaleExternal'})
+    super('femaleExternal');
   }
 
   preload () {
-    this.load.image('femaleExternal', '../../Puberty/External/images/femaleExternal.png');
 
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
 
     resources.definitions = new FemaleExternalStrings('definitions');
     resources.questions = new FemaleExternalStrings('questions');

@@ -6,28 +6,22 @@ import EmotionsStrings from './emotionsStrings.js';
 
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
+import BaseScene from '../../base.js';
 
 
-export default class Emotions extends Phaser.Scene {
+export default class Emotions extends BaseScene {
   constructor() {
-    super({key: 'emotions'})
+    super('emotions');
   }
 
   preload() {
-    this.load.image('brainEmotions', '../../Puberty/Emotions/images/brainDown.png');
-    this.load.image('brainDown', '../../Puberty/Emotions/images/brainDown2.png');
-    
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
-    this.load.image('resetButton', '../../common/images/buttons/reset.png');
-
-
     resources.emotions = new EmotionsStrings('emotions');
     resources.questions = new EmotionsStrings('questions');
   }
 
   create() {
+    super.create();
+    
     resources.scene = this;
 
     resources.positiveBox = new Textbox(this, 23, 85, 340, 400, '0x7ac7a5', '0x23ba77');

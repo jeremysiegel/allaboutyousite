@@ -4,37 +4,20 @@ import MRSStrings from './MRS_strings.js';
 import DiagramInteractions from '../../../common/js/diagramInteractions.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import QuestionButton from '../../../common/js/questionButton.js';
+import BaseScene from '../../base.js';
     
-export default class MRS extends Phaser.Scene {
+export default class MRS extends BaseScene {
   constructor() {
-    super({key: 'MRS'})
+    super('MRS');
   }
 
-  preload () {
-    this.load.image('bladder', '../../Puberty/Male-internal/images/bladder.png');
-    this.load.image('labels', '../../Puberty/Male-internal/images/labels.png');
-    this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
-    this.load.image('epididymis', '../../Puberty/Male-internal/images/epididymis.png');
-    this.load.image('MRS', '../../Puberty/Male-internal/images/MRS.png');
-    this.load.image('prostate', '../../Puberty/Male-internal/images/prostate.png');
-    this.load.image('svesicle', '../../Puberty/Male-internal/images/svesicle.png');
-    this.load.image('teste', '../../Puberty/Male-internal/images/teste.png');
-    this.load.image('urethra', '../../Puberty/Male-internal/images/urethra.png');
-    this.load.image('vasdeferens', '../../Puberty/Male-internal/images/vasdeferens.png');
-
-    this.load.image('mrsBackground', '../../Puberty/Male-internal/images/MRSbackground.png');
-    this.load.image('mrsInternal', '../../Puberty/Male-internal/images/MRSinternal.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
-
- 
+  preload () { 
     resources.definitions = new MRSStrings('definitions');
     resources.questions = new MRSStrings('questions');
   }
 
   create () {
+    super.create();
     new Textbox(this, 810, 75, 430, 350);
 
     resources.definitionDisplay = this.add.text(830, 95, resources.infoText,

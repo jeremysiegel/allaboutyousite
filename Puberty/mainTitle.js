@@ -11,8 +11,8 @@ export default class MainTitle extends BaseScene {
   preload () {
     super.preload();
 
-    this.load.image('background', '../common/images/backgrounds/lightblue.png');
-    this.load.image('homeButton', '../../common/images/buttons/home.png');
+
+
   }
 
   create () {

@@ -4,32 +4,20 @@ import FRSStrings from './FRS_strings.js';
 import DiagramInteractions from '../../../common/js/diagramInteractions.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import QuestionButton from '../../../common/js/questionButton.js';
+import BaseScene from '../../base.js';
     
-export default class FRS extends Phaser.Scene {
+export default class FRS extends BaseScene {
   constructor() {
-    super({key: 'FRS'})
+    super('FRS');
   }
 
-  preload () {
-    this.load.image('femaleBackground', '../../Puberty/Female-Internal/images/background.png');
-    this.load.image('femaleInternal', '../../Puberty/Female-Internal/images/FRS diagram.png');
-    this.load.image('frsLabels', '../../Puberty/Female-Internal/images/FRS labels.png');
-    this.load.image('frsLabelLines', '../../Puberty/Female-Internal/images/FRS label lines.png');
-    this.load.image('ovaries', '../../Puberty/Female-Internal/images/ovaries.png');
-    this.load.image('fTubes', '../../Puberty/Female-Internal/images/FT.png');
-    this.load.image('uterus', '../../Puberty/Female-Internal/images/uterus.png');
-    this.load.image('vagina', '../../Puberty/Female-Internal/images/vagina.png');
-    this.load.image('cervix', '../../Puberty/Female-Internal/images/cervix.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
-    
+  preload () {    
     resources.definitions = new FRSStrings('explanations');
     resources.questions = new FRSStrings('questions');
   }
 
   create () {
+    super.create();
     resources.background = this.add.image(454.25, 310.35, 'femaleBackground').setAlpha(0.5);
     resources.femaleInternal = this.add.image(454.25, 290.55, 'femaleInternal');
     

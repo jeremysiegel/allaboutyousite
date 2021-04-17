@@ -7,26 +7,14 @@ import ResetButton from '../../../common/js/resetButton.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import FemaleChangesStrings from './femaleChangesStrings.js';
 import QuestionButton from '../../../common/js/questionButton.js';
+import BaseScene from '../../base.js';
 
-
-
-export default class FemaleChanges extends Phaser.Scene {
+export default class FemaleChanges extends BaseScene {
   constructor() {
-    super({key: 'femaleChanges'})
+    super('femaleChanges')
   }
 
   preload () {
-
-    this.load.image('estrogenReceptor', '../../common/images/objects/estrogenReceptor.png');
-    this.load.image('estrogen', '../../common/images/objects/estrogen.png');
-    this.load.image('testosteroneReceptor', '../../common/images/objects/testosteroneReceptor.png');
-    this.load.image('testosterone', '../../common/images/objects/testosterone.png');
-    this.load.image('girlChanges', './Puberty/Changes/images/girl.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('resetButton', '../../common/images/buttons/reset.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
 
     resources.definitions = new FemaleChangesStrings('definitions');
     resources.questions = new FemaleChangesStrings('questions');
@@ -34,6 +22,8 @@ export default class FemaleChanges extends Phaser.Scene {
   }
 
   create () {
+    super.create();
+    
     new Textbox(this, 810, 75, 430, 390);
     
     resources.definitionDisplay = this.add.text(830, 95, resources.infoText,

@@ -1,19 +1,21 @@
 import TitleScreen from '../../../common/js/titleScreen.js';
 import SceneButton from '../../../common/js/sceneButton.js';
+import BaseScene from './base.js';
 
 
-export default class PeriodTitle extends Phaser.Scene {
+export default class PeriodTitle extends BaseScene {
   constructor() {
-    super({key: 'periodTitle'})
+    super('periodTitle')
   }
 
   preload () {
-    this.load.image('homeButton', '../../common/images/buttons/home.png');
+    super.preload();
 
   }
 
   create () {
-    
+    super.create();
+
     var sceneButtons = {
       periodButton: {
         color: '0x7ac7a5',

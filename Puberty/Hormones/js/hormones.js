@@ -5,29 +5,21 @@ import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
 import QuestionButton from '../../../common/js/questionButton.js';
 import HormonesStrings from './hormonesStrings.js';
+import BaseScene from '../../base.js';
 
-export default class Hormones extends Phaser.Scene {
+export default class Hormones extends BaseScene {
   constructor() {
-    super({key: 'hormones'})
+    super('hormones');
   }
 
   preload () {
-    this.load.image('testosterone', '../../common/images/objects/testosterone.png');
-   
-    this.load.image('boy', '../../Puberty/Hormones/images/boy.png');
-    this.load.image('girl', '../../Puberty/Hormones/images/girl.png');
-    this.load.image('brain', '../../Puberty/Hormones/images/brain.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('resetButton', '../../common/images/buttons/reset.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
-
     resources.questions = new HormonesStrings('questions');
 
   }
 
   create () {
+    super.create();
+
     resources.boy = this.add.image(1054.15, 299.95, 'boy');
     resources.girl = this.add.image(200.15, 299.95, 'girl');
     

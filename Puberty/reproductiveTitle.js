@@ -1,17 +1,19 @@
 import TitleScreen from '../../../common/js/titleScreen.js';
 import SceneButton from '../../../common/js/sceneButton.js';
+import BaseScene from './base.js';
 
-export default class ReproductiveTitle extends Phaser.Scene {
+export default class ReproductiveTitle extends BaseScene {
   constructor() {
-    super({key: 'reproductiveTitle'})
+    super('reproductiveTitle');
   }
 
   preload () {
-    this.load.image('homeButton', '../../common/images/buttons/home.png');
 
   }
 
   create () {
+
+    super.create();
     
     var sceneButtons = {
       femaleButton: {

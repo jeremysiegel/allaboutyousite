@@ -1,24 +1,21 @@
 import SceneButton from '../../../common/js/sceneButton.js';
 import ResetButton from '../../../common/js/resetButton.js';
 import Textbox from '../../../common/js/textbox.js';
+import BaseScene from '../../base.js';
 
-export default class RSGame extends Phaser.Scene {
+export default class RSGame extends BaseScene {
   constructor() {
-    super({key: 'rsGame'})
+    super('rsGame');
   }
 
   preload () {
 
-    this.load.image('labelLines', '../../Puberty/Male-internal/images/label lines.png');
-    this.load.image('mrsBackground', '../../Puberty/Male-internal/images/MRSbackground.png');
-    this.load.image('mrsInternal', '../../Puberty/Male-internal/images/MRSinternal.png');
-    this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm4_spritesheet.png', { frameWidth: 28, frameHeight: 215, margin: 10, spacing: 20 });
-    
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('resetButton', '../../common/images/buttons/reset.png');
+
   }
 
   create () {
+    super.create();
+    
     resources.scene = this;
 
     new Textbox(this, 770, 75, 430, 210);

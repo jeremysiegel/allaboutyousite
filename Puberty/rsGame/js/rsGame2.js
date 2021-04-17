@@ -1,28 +1,20 @@
 import SceneButton from '../../../common/js/sceneButton.js';
 import Textbox from '../../../common/js/textbox.js';
 import ResetButton from '../../../common/js/resetButton.js';
+import BaseScene from '../../base.js';
 
     
-export default class RSGame extends Phaser.Scene {
+export default class RSGame extends BaseScene {
   constructor() {
-    super({key: 'rsGame2'})
+    super('rsGame2');
   }
 
   preload () {
-    this.load.image('femaleBackground', '../../Puberty/Female-Internal/images/background.png');
 
-    this.load.image('labelLinesF', '../../Puberty/Female-Internal/images/FRS label lines.png');
-    this.load.image('FRS', '../../Puberty/Female-Internal/images/FRS diagram.png');
-    this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm3_spritesheet.png', { frameWidth: 27, frameHeight: 214, margin: 10, spacing: 20 });
-    this.load.image('egg', '../../Puberty/rsGame/images/egg.png');
-    this.load.image('egg2', '../../Puberty/rsGame/images/egg2.png');
-    this.load.image('uterusMask', '../../Puberty/Menstruation/images/uterus.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('resetButton', '../../common/images/buttons/reset.png');    
   }
 
   create () {
+    super.create();
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     resources.scene = this;
 
@@ -37,8 +29,8 @@ export default class RSGame extends Phaser.Scene {
     );
 
     resources.background = this.add.image(454.25, 310.35, 'femaleBackground').setAlpha(0.3);
-    resources.femaleInternal = this.add.image(454.25, 290.55, 'FRS'); 
-    resources.labelLines = this.add.image(377.6, 299.2, 'labelLinesF');
+    resources.femaleInternal = this.add.image(454.25, 290.55, 'femaleInternal'); 
+    resources.labelLines = this.add.image(377.6, 299.2, 'frsLabelLines');
     resources.egg = this.add.image (249, 224, 'egg2');
 
   //Initial egg tween.

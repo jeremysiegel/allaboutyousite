@@ -3,40 +3,21 @@ import PregnancyStrings from './pregnancyStrings.js';
 import Textbox from '../../../common/js/textbox.js';
 import InfoButton from '../../../common/js/infoButton.js';
 import QuestionButton from '../../../common/js/questionButton.js';
+import BaseScene from '../../base.js';
     
-export default class Pregnancy extends Phaser.Scene {
+export default class Pregnancy extends BaseScene {
   constructor() {
-    super({key: 'pregnancy'})
+    super('pregnancy');
   }
 
   preload () {
-    this.load.image('picture0', '../../Puberty/Pregnancy/images/embryo.png');
-    this.load.image('picture1', '../../Puberty/Pregnancy/images/month 1.jpg');
-    this.load.image('picture2', '../../Puberty/Pregnancy/images/month 2.jpg');
-    this.load.spritesheet('picture3', '../../Puberty/Pregnancy/images/fingers-spritesheet.png', { frameWidth: 600, frameHeight: 338, margin: 0, spacing: 0 });
-    this.load.image('picture4', '../../Puberty/Pregnancy/images/twins.jpg');
-    this.load.spritesheet('picture5', '../../Puberty/Pregnancy/images/yawn-spritesheet.png', { frameWidth: 316, frameHeight: 338, margin: 0, spacing: 0 });
-    this.load.spritesheet('picture6', '../../Puberty/Pregnancy/images/heart-spritesheet.png', { frameWidth: 436, frameHeight: 503, margin: 0, spacing: 0 });
-    this.load.spritesheet('picture7', '../../Puberty/Pregnancy/images/kick-spritesheet.png', { frameWidth: 600, frameHeight: 338, margin: 0, spacing: 0 });
-    this.load.spritesheet('picture8', '../../Puberty/Pregnancy/images/breathe-spritesheet.png', { frameWidth: 600, frameHeight: 338, margin: 0, spacing: 0 });
-    this.load.image('picture9', '../../Puberty/Pregnancy/images/term.png');
-
-    this.load.image('buttonUp', '../../common/images/buttons/grey_button_up.png');
-    this.load.image('buttonDown', '../../common/images/buttons/grey_button_down.png');
-
-    this.load.image('monitor', '../../Puberty/Pregnancy/images/monitor2.png');
-    this.load.image('ultrasound', '../../Puberty/Pregnancy/images/ultrasound2.png');
-
-    this.load.image('backButton', '../../common/images/buttons/back.png');
-    this.load.image('infoButton', '../../common/images/buttons/info.png');
-    this.load.image('questionButton', '../../common/images/buttons/question.png');
-    
     resources.definitions = new PregnancyStrings('definitions');
     resources.questions = new PregnancyStrings('questions');
 
   }
 
   create () {
+    super.create();
     resources.stages = this.add.group();
     resources.scene = this;
 
