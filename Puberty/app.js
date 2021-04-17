@@ -1,3 +1,11 @@
+// config
+
+import Setup from './setup.js';
+
+import MainTitle from './mainTitle.js';
+import ReproductiveTitle from './reproductiveTitle.js';
+import ChangesTitle from './changesTitle.js';
+import PeriodTitle from './periodTitle.js';
 
 import MRS from './Male-internal/js/MRS.js';
 import FRS from './Female-Internal/js/FRS.js';
@@ -12,10 +20,7 @@ import MaleExternal from './External/js/maleExternal.js';
 import FemaleExternal from './External/js/femaleExternal.js';
 import Emotions from './Emotions/js/emotions.js';
 
-import MainTitle from './mainTitle.js';
-import ReproductiveTitle from './reproductiveTitle.js';
-import ChangesTitle from './changesTitle.js';
-import PeriodTitle from './periodTitle.js';
+var setup = new Setup();
 
 var title = new MainTitle();
 var reproductiveTitle = new ReproductiveTitle();
@@ -55,10 +60,13 @@ var config = {
 var game = new Phaser.Game(config);
 
 // load scenes
+game.scene.add('setup', setup);
+
 game.scene.add('mainTitle', title);
 game.scene.add('changesTitle', changesTitle);
 game.scene.add('reproductiveTitle', reproductiveTitle);
 game.scene.add('periodTitle', periodTitle);
+
 game.scene.add('FRS', frs);
 game.scene.add('MRS', mrs);
 game.scene.add('hormones', hormones);
@@ -72,6 +80,7 @@ game.scene.add('maleExternal', maleExternal);
 game.scene.add('femaleExternal', femaleExternal);
 game.scene.add('emotions', emotions);
 
+// start setup scene
+game.scene.start('setup');
 
-// start mainTitle
-game.scene.start('mainTitle');
+

@@ -1,19 +1,20 @@
 import TitleScreen from '../../../common/js/titleScreen.js';
 import SceneButton from '../../../common/js/sceneButton.js';
+import BaseScene from './base.js';
 
-export default class ChangesTitle extends Phaser.Scene {
+export default class ChangesTitle extends BaseScene {
   constructor() {
-   super({key: 'changesTitle'})
+   super('changesTitle');
+    // super({key: 'changesTitle'})
   }
 
   preload () {
-    this.load.image('homeButton', '../../common/images/buttons/home.png');
+    super.preload();
   }
 
   create () {
+    super.create();
 
-    window.addEventListener('hashchange', () => {console.log('change')})
-    
     var sceneButtons = {
       hormoneButton: {
         color: '0x096a92',

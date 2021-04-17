@@ -1,15 +1,16 @@
-export default class Background {
+export default class BaseScene extends Phaser.Scene {
   constructor(scene) {
-    this.scene = scene
+    super({key: scene})
   }
 
   preload () {
-    this.scene.load.image('background', '../common/images/backgrounds/lightblue.png');
+
 
   }
 
-  create () {
-    this.scene.background = this.scene.add.image(this.scene.cameras.main.width/2, this.scene.cameras.main.height/2, 'background');
-    this.scene.background.setScale(this.scene.cameras.main.width/this.scene.background.width, this.scene.cameras.main.height/this.scene.background.height);
+  create () {    
+
+    this.background = this.add.image(this.cameras.main.width/2, this.cameras.main.height/2, 'background');
+    this.background.setScale(this.cameras.main.width/this.background.width, this.cameras.main.height/this.background.height);
   }
 }
