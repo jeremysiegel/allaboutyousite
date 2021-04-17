@@ -3,15 +3,16 @@ import SceneButton from '../../../common/js/sceneButton.js';
 
 export default class ChangesTitle extends Phaser.Scene {
   constructor() {
-    super({key: 'changesTitle'})
+   super({key: 'changesTitle'})
   }
 
   preload () {
     this.load.image('homeButton', '../../common/images/buttons/home.png');
-
   }
 
   create () {
+
+    window.addEventListener('hashchange', () => {console.log('change')})
     
     var sceneButtons = {
       hormoneButton: {
