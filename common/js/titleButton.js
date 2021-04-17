@@ -22,7 +22,7 @@ export default class TitleButton extends Phaser.GameObjects.Container {
 
 
     hitBox.on('pointerup', () => {
-      window.location.hash = '/' + switchScene;
+      window.location.hash = '/' + newScene;
       this.scene.scene.switch(newScene);
     });
 
