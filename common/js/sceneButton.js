@@ -11,6 +11,7 @@ export default class SceneButton {
 
     button.on('pointerup', () => {
       button.setTexture(key);
+      window.location.hash = '/' + switchScene;
       scene.sys.scenePlugin.switch(switchScene);
     });
   }
