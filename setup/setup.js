@@ -12,6 +12,7 @@ export default class Setup extends Phaser.Scene {
     /* Some scenes may use images that were loaded for other scenes*/
     
     // common
+    this.load.image('homeButton', '../../common/images/buttons/home.png');
     this.load.image('backButton', '../../common/images/buttons/back.png');
     this.load.image('resetButton', '../../common/images/buttons/reset.png');
     this.load.image('infoButton', '../../common/images/buttons/info.png');
