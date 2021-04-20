@@ -14,7 +14,7 @@ export default class MainTitle extends BaseScene {
 
   create () {
    
-    super.create('lightBlueBackground');
+    super.create('greenBackground');
 
     var sceneButtons = {
       changesButton: {
