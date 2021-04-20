@@ -9,7 +9,7 @@ export default class MainTitle extends BaseScene {
   }
 
   preload () {
-  //  super.preload();
+    super.preload();
   }
 
   create () {
