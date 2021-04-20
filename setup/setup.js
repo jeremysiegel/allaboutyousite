@@ -20,7 +20,7 @@ export default class Setup extends Phaser.Scene {
 
     // backgrounds
     this.load.image('background', '../../common/images/backgrounds/interactive.png');
-    this.load.image('lightBlueBackground', '../../common/images/backgrounds/lightBlue.png');
+    this.load.image('blueBackground', '../../common/images/backgrounds/blue.png');
     this.load.image('greenBackground', '../../common/images/backgrounds/green.png');
     this.load.image('yellowBackground', '../../common/images/backgrounds/yellow.png');
     this.load.image('purpleBackground', '../../common/images/backgrounds/purple.png');
