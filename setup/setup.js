@@ -18,7 +18,14 @@ export default class Setup extends Phaser.Scene {
     this.load.image('infoButton', '../../common/images/buttons/info.png');
     this.load.image('questionButton', '../../common/images/buttons/question.png');
 
-    this.load.image('background', '../../common/images/backgrounds/lightblue.png');
+    // backgrounds
+    this.load.image('background', '../../common/images/backgrounds/interactive.png');
+    this.load.image('lightBlueBackground', '../../common/images/backgrounds/lightBlue.png');
+    this.load.image('greenBackground', '../../common/images/backgrounds/green.png');
+    this.load.image('yellowBackground', '../../common/images/backgrounds/yellow.png');
+    this.load.image('purpleBackground', '../../common/images/backgrounds/purple.png');
+    
+    this.load.image('titleText', '../../common/images/titleText.png');
 
     // femaleChanges
     this.load.image('estrogenReceptor', '../../common/images/objects/estrogenReceptor.png');

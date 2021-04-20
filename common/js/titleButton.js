@@ -2,34 +2,53 @@ export default class TitleButton extends Phaser.GameObjects.Container {
   constructor(scene, x, y, width, height, color, text, newScene) {
     super(scene);
     this.scene = scene;
-    this.x = x;
-    this.y = y;
+    this.x = 0;
+    this.y = 0;
 
     this.buttonWidth = width;
     this.buttonHeight = height;
 
     // Number added to x, y represent relative offset of text from top left of button box.
 
-    var buttonText = this.scene.add.text(x + 20, y + 20, text, { fontFamily: 'Calibri', fontSize: 48, color: '#ffffff', wordWrap: { width: 250, useAdvancedWrap: false }});
+    var buttonText = this.scene.add.text(this.x, this.y, text, { 
+      fontFamily: 'Calibri', 
+      fontSize: 48, 
+      color: '#ffffff', 
+      align: "center",
+      lineSpacing: 8,
+      shadow: {
+        offsetX: 0,
+        offsetY: 0,
+        color: '#000',
+        blur: 6,
+        fill: true
+    }, 
+      wordWrap: { 
+        width: this.buttonWidth - 50
+      }
+    });
+
+    buttonText.x += this.buttonWidth/2 - buttonText.width/2;
+    buttonText.y += this.buttonHeight/2 - buttonText.height/2;
 
     var button = this.scene.add.graphics();
-    button.fillRoundedRect(x, y, this.buttonWidth, this.buttonHeight, 32);
     button.fillStyle(color, 1);
+    button.fillRoundedRect(this.x, this.y, this.buttonWidth, this.buttonHeight, 32);
     button.lineStyle(4, 0xffffff, 1);
-    button.strokeRoundedRect(x, y, this.buttonWidth, this.buttonHeight, 32);
+    button.strokeRoundedRect(this.x, this.y, this.buttonWidth, this.buttonHeight, 32);
     
-    var hitBox = this.scene.add.rectangle(x + this.buttonWidth/2, y + this.buttonHeight/2, this.buttonWidth, this.buttonHeight).setInteractive({useHandCursor: true});
-
+    var hitBox = this.scene.add.rectangle(this.x + this.buttonWidth/2, this.y + this.buttonHeight/2, this.buttonWidth, this.buttonHeight).setInteractive({useHandCursor: true});
 
     hitBox.on('pointerup', () => {
       window.location.hash = '/' + newScene;
-    //  this.scene.scene.switch(newScene);
     });
 
     this.add(button);
     this.add(buttonText);
     this.add(hitBox);
-    this.scene.add.existing(this);
+    var sceneButton = this.scene.add.existing(this);
+    sceneButton.x = x;
+    sceneButton.y = y;
 
     return this;
 

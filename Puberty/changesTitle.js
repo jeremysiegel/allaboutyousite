@@ -5,7 +5,6 @@ import BaseScene from './base.js';
 export default class ChangesTitle extends BaseScene {
   constructor() {
    super('changesTitle');
-    // super({key: 'changesTitle'})
   }
 
   preload () {
@@ -13,35 +12,35 @@ export default class ChangesTitle extends BaseScene {
   }
 
   create () {
-    super.create();
+    super.create('purpleBackground');
 
     var sceneButtons = {
       hormoneButton: {
-        color: '0x096a92',
-        text: 'Hormones',
+        color: '0x3a86ff',
+        text: 'How does puberty begin?',
         nextScene: 'hormones'
       },
 
       maleButton: {
-        color: '0x7ac7a5',
-        text: 'Male',
+        color: '0xfb5607',
+        text: 'What are the male changes?',
         nextScene: 'maleChanges'
       },
 
       femaleButton: {
-        color: '0xfbae06',
-        text: 'Female',
+        color: '0x11887d',
+        text: 'What are the female changes?',
         nextScene: 'femaleChanges'
       },
 
       emotionsButton: {
-        color: '0xff8736',
-        text: 'New feelings',
+        color: '0xefa929',
+        text: 'Why all these new feelings?',
         nextScene: 'emotions'
       },
     }
     
-    new TitleScreen(this, sceneButtons);
+    new TitleScreen(this, sceneButtons, 400, 250);
 
     this.homeButton = new SceneButton(this, 1200, 567, 0.1, 'mainTitle', 'homeButton');
 
