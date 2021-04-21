@@ -41,15 +41,19 @@ export default class ScrollBox {
     }
 
     //  The rectangle they can 'drag' within
-    var zone = scene.add.zone(x, y - 3, width, text.height + 6).setOrigin(0).setInteractive({useHandCursor: true, draggable: true});
-    scene.input.dragTimeThreshold = 250;
+    var zone = scene.add.zone(x, y - 3, width, height + 6).setOrigin(0).setInteractive({useHandCursor: true, draggable: true});
+    scene.input.dragDistanceThreshold = 250;
 
     zone.on('drag', function (pointer) {
       if (pointer.isDown) {
         text.y += pointer.velocity.y / 10;
         text.y = Phaser.Math.Clamp(text.y, minY, y + 20);
       }
-    });
+    })
+      .on('dragend', () => {
+        zone.x = x;
+        zone.y = y - 3;
+      });
 
     var downKey = scene.input.keyboard.addKey('DOWN'); 
     var upKey = scene.input.keyboard.addKey('UP'); 
