@@ -43,7 +43,7 @@ export default class ScrollBox {
     //  The rectangle they can 'drag' within
     var zone = scene.add.zone(x, y - 3, width, height + 6).setOrigin(0).setInteractive({useHandCursor: true});
 
-    zone.on('pointermove', function (pointer) {
+    zone.on('pointermove', function (pointer, localX, localY, event) {
       if (pointer.isDown) {
         event.stopPropagation();
         text.y += pointer.velocity.y / 10;
