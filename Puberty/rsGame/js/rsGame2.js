@@ -73,12 +73,17 @@ export default class RSGame extends BaseScene {
 
     // Create label containers.
     for (let organ in resources.femaleOrgans) {
-      var rect = this.add.rectangle(0, 0, 145, 28, 0xf4bda8);
-      rect.setStrokeStyle(2, 0xf58b62)
+      var width = 140;
+
+      if (resources.femaleOrgans[organ].includes(' ')) {
+        width = 190;
+      }
+
+      var rect = this.add.rectangle(0, 0, width, 45, 0xf4bda8);
       var text = this.add.text(0, 0, resources.femaleOrgans[organ], {
         fontFamily: 'Open Sans', 
         fontStyle: '', 
-        fontSize: '18px', 
+        fontSize: '25px', 
         color: '#050709'
       }).setOrigin(0.5);
   
@@ -89,10 +94,10 @@ export default class RSGame extends BaseScene {
       resources.labels.add(container);
 
       if (labelCount === Math.ceil(resources.femaleOrgans.length / 2)) {
-        labelX = labelX + rect.width + 20;
+        labelX = labelX + 190 + 20;
         labelY = 350;
       } else {
-        labelY += 35;
+        labelY += 65;
       }
 
       labelCount++; 

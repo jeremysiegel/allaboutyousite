@@ -25,6 +25,9 @@ export default class FemaleChangesStrings {
         "\nQ: What is a bra?\n\nA: A bra is a piece of clothing that supports the breasts. Some people choose to wear one, and others don't. It is up to you if you choose to wear a bra, and when you decide to start."
       ],
       [
+        "\nQ: Sometimes there's a milky liquid in my underwear. Is that normal?\n\nA: Totally! The vagina makes a fluid to clean itself. Sometimes it ends up in the underwear. The fluid is called discharge. It can look different at different times of the menstrual cycle."
+      ],
+      [
         "\nQ: What is the purpose of the new sweat?\n\nA: It is mostly there to protect your skin. Many people like to wear deoderant to stop it from smelling. No reason to wait to get into the habit!"
       ]
     ];

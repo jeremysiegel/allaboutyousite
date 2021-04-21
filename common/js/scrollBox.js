@@ -5,7 +5,7 @@ export default class ScrollBox {
   constructor(scene, content, popup, width, height, x, y) {
    
     if (popup) {
-      this.screen = scene.add.rectangle(scene.cameras.main.width/2, scene.cameras.main.height/2, scene.cameras.main.width, scene.cameras.main.height, 0x000000, 0.85);
+      this.screen = scene.add.rectangle(scene.cameras.main.width/2, scene.cameras.main.height/2, scene.cameras.main.width, scene.cameras.main.height, 0x000000, 0.85).setInteractive();
     }
 
     var widthBuffer = 500;
@@ -83,21 +83,25 @@ export default class ScrollBox {
       scene.add.existing(this.exit);
   
       this.exitCircle.on('pointerup', () => {
-        this.exit.destroy();
-        this.textbox.destroy();
-        this.screen.destroy();
-        text.destroy();
-        mask.destroy();
-        zone.destroy();
-        graphics.destroy();
-        scene.tweens._active.forEach((tween) => {
-          tween.resume();
-        })
+        this.destroyOverlay();
       })
     }
 
     ScrollBox.prototype.isVisible = function() {
       return this.textbox.visible;
+    }
+
+    ScrollBox.prototype.destroyOverlay = function() {
+      this.exit.destroy();
+      this.textbox.destroy();
+      this.screen.destroy();
+      text.destroy();
+      mask.destroy();
+      zone.destroy();
+      graphics.destroy();
+      scene.tweens._active.forEach((tween) => {
+        tween.resume();
+      })
     }
   }
 }

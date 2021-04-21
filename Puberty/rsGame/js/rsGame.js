@@ -71,12 +71,19 @@ export default class RSGame extends BaseScene {
 
     // Create label containers.
     for (let organ in resources.maleOrgans) {
-      var rect = this.add.rectangle(0, 0, 145, 28, 0xf4bda8);
-      rect.setStrokeStyle(2, 0xf58b62)
+      var width = 140;
+
+      if (resources.maleOrgans[organ].includes(' ')) {
+        width = 190;
+      }
+
+      var rect = this.add.rectangle(0, 0, width, 45, 0xf4bda8);
+      rect.setStrokeStyle(2, 0xf58b62);
+
       var text = this.add.text(0, 0, resources.maleOrgans[organ], {
         fontFamily: 'Open Sans', 
         fontStyle: '', 
-        fontSize: '18px', 
+        fontSize: '25px', 
         color: '#050709'
       }).setOrigin(0.5);
   
@@ -87,10 +94,10 @@ export default class RSGame extends BaseScene {
       resources.labels.add(container);
 
       if (labelCount === Math.ceil(resources.maleOrgans.length / 2)) {
-        labelX = labelX + rect.width + 20;
+        labelX = labelX + 190 + 20;
         labelY = 350;
       } else {
-        labelY += 35;
+        labelY += 65;
       }
 
       labelCount++;
@@ -144,8 +151,8 @@ var resources = {
     epididymis: 'This is where the sperm learn to swim.',
     vdeferens: 'This tube brings sperm into the body.',
     bladder: 'Swim around this part, sperm do not go in here.',
-    svesicle: 'This makes fluid to protect the sperm.',
-    prostate: 'The next part makes food for the sperm.',
+    svesicle: 'This makes fluid to feed and protect the sperm.',
+    prostate: 'The next part makes fluid to help the sperm swim.',
     urethra: 'This tube transports sperm out of the body.'
   }
 };
@@ -423,7 +430,7 @@ var organs = {
       },
      {
         x: 284.7,
-        y: 530,    
+        y: 520,    
         duration: 1500,
         angle: -180,
         offset: '-=50',

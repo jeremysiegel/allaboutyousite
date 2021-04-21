@@ -18,7 +18,7 @@ export default class femaleExternalStrings {
         "\nQ: Does the hymen block the vagina? How do periods get through?\n\nA: The hymen usually doesn't cover the entire entrance to the vagina. It is a circle of skin around the outside, and there is a hole in it that lets period flow out. In some women, the hymen is so small that it may be hard to recognize. In others it covers more of the entrance to the vagina. Sometimes it gets stretched during the first sexual intercourse, which can cause it to bleed. But a lot of times this does not happen. In fact, the hymen is being stretched throughout life just from moving around."
       ],
       [
-        "\nQ: How many openings into the body are there?\nA: In the female reproductive system there are three openings: the urethra (for urine), the vagina (for periods), and the anus (for feces)."
+        "\nQ: How many openings into the body are there?\n\nA: There are three openings: the urethra (for urine), the vagina (for periods), and the anus (for feces)."
       ]
     ]
 

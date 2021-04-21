@@ -12,7 +12,7 @@ export default class MRS extends BaseScene {
   }
 
   preload () { 
-    resources.definitions = new MRSStrings('definitions');
+    resources.definitions = new MRSStrings('explanations');
     resources.questions = new MRSStrings('questions');
   }
 
@@ -58,7 +58,7 @@ export default class MRS extends BaseScene {
 var resources = {
   explanations: false,
   organ: '',
-  infoText: "Male Reproductive System.\n\nClick on each part to learn what it does."
+  infoText: "Male reproductive system.\n\nClick on each part to learn what it does."
 };
 
 function infoText (resources) {

@@ -33,13 +33,13 @@ export default class MaleExternal extends BaseScene {
 
     for (let organ in resources.organs) {
 
-      var rect = this.add.rectangle(0, 0, 120, 38, 0xf4bda8);
+      var rect = this.add.rectangle(0, 0, 140, 45, 0xf4bda8);
       rect.setStrokeStyle(2, 0xf58b62)
       
       var text = this.add.text(0, 0, resources.organs[organ].name, {
         fontFamily: 'Open Sans', 
-        fontStyle: '', 
-        fontSize: '24px', 
+        fontStyle: 'bold', 
+        fontSize: '28px', 
         color: '#050709'
       }).setOrigin(0.5);
   

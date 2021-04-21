@@ -12,13 +12,13 @@ export default class FemaleExternal extends BaseScene {
   }
 
   preload () {
-
-
+    super.preload();
     resources.definitions = new FemaleExternalStrings('definitions');
     resources.questions = new FemaleExternalStrings('questions');
   }
 
   create () {
+    super.create();
     new Textbox(this, 840, 60, 400, 270);
 
     resources.definitionDisplay = this.add.text(860, 80, resources.infoText,
@@ -32,14 +32,17 @@ export default class FemaleExternal extends BaseScene {
     this.add.image(383.4, 300.05, 'femaleExternal');
 
     for (let organ in resources.organs) {
-
-      var rect = this.add.rectangle(0, 0, 140, 38, 0xf4bda8);
-      rect.setStrokeStyle(2, 0xf58b62)
+      var width = 140;
+      if (resources.organs[organ].name.includes(' ')) {
+        width = 180;
+      }
+      var rect = this.add.rectangle(0, 0, width, 45, 0xf4bda8);
+      rect.setStrokeStyle(2, 0xf58b62);
       
       var text = this.add.text(0, 0, resources.organs[organ].name, {
         fontFamily: 'Open Sans', 
-        fontStyle: '', 
-        fontSize: '24px', 
+        fontStyle: 'bold', 
+        fontSize: '28px', 
         color: '#050709'
       }).setOrigin(0.5);
   

@@ -19,7 +19,7 @@ export default class MaleChangesStrings {
         "\nQ: I thought only females have estrogen? Do males have it too?\n\nA: Both males and females make both estrogen and testosterone. They are both important for changes during puberty, as you can see in the activity. In fact, that is part of the reason it is normal for some boys to go through what usually get labeled as 'female' changes. For example, some boys grow a small amount of breast tissue during puberty. This usually goes away."
       ],
       [
-        "\nQ: What happens if I get a 'wet dream'?\n\nA: A wet dream is when the body ejaculates, or releases semen. There isn't always a dream with the first ejaculation, but wet dreams are a normal part of puberty. They happen in your sleep, so you won't ejaculate without wanting to when you are awake."
+        "\nQ: What happens if I get a 'wet dream'?\n\nA: A wet dream is when the body ejaculates, or releases semen. There isn't always a dream with the first ejaculation, but wet dreams are a normal part of puberty. They happen in your sleep, so you won't ejaculate without wanting to when you are awake. It might help to know that usually not a lot of semen comes out during the first ejaculation. You'll want to wash your PJs though."
       ],
       [
         "\nQ: What happens if I get an erection when I don't want to?\n\nA: Erections are a normal function of the body. Especially at the beginning of puberty, they can sometimes happen when you don't want them to. It will go away and usually no one else notices. Once your body gets used to making them erections will usually happen only when you want them to. They also happen naturally during sleep."

@@ -10,7 +10,7 @@ export default class PeriodStrings {
         "\nQ: Is there a lot of blood?\n\nA: Every person is different, and some people have heavier period flows than others. It may be helpful to know that the blood doesn't come out all at once, usually less than a teaspoon (3-5 milliliters) at a time. You may notice the blood seems a bit 'chunky', which is normal."
       ],
       [
-      "\nQ: How often will I get my period?\n\nA: It can vary. Every 28 days is just the average (in fact, only around 15% of women actually have cycles that are exactly that long). 'Normal' periods means normal for your body. Especially at the beginning, each cycle may be different and can be anywhere from 20-45 days apart. Later, they will become more regular, and you can keep track in your calendar."
+      "\nQ: How often will I get my period?\n\nA: It can vary. Every 28 days is just the average (in fact, only around 15% of women actually have cycles that are exactly that long). 'Normal' periods means normal for your body. Especially at the beginning, each cycle may be different and can be anywhere from 20-45 days apart. Later they will become more regular. You can keep track of your periods in your calendar to help know when the next one is coming."
       ],
       [
         "\nQ: How long is each period?\n\nA: Again, everyone is different, but they can be anywhere from 2-7 days."

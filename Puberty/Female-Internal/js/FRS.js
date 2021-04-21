@@ -61,7 +61,7 @@ export default class FRS extends BaseScene {
 var resources = {
   explanations: false,
   organ: '',
-  infoText: "Female Reproductive System.\n\nClick on each part to learn what it does."
+  infoText: "Female reproductive system.\n\nClick on each part to learn what it does."
 };
 
 function infoText (resources) {
