@@ -42,7 +42,7 @@ export default class ScrollBox {
 
     //  The rectangle they can 'drag' within
     var zone = scene.add.zone(x, y - 3, width, height + 6).setOrigin(0).setInteractive({useHandCursor: true, draggable: true});
-    scene.input.dragDistanceThreshold = 250;
+    scene.input.dragDistanceThreshold = 200;
 
     zone.on('drag', function (pointer) {
       if (pointer.isDown) {
