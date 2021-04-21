@@ -44,7 +44,7 @@ export default class ScrollBox {
     var zone = scene.add.zone(x, y - 3, width, height + 6).setOrigin(0).setInteractive({useHandCursor: true});
 
     zone.on('pointermove', function (pointer) {
-      if (pointer.isDown && Math.abs(pointer.velocity.y) > 50) {
+      if (pointer.isDown && Math.abs(pointer.velocity.y) > 200) {
         text.y += (pointer.velocity.y / 10);
         text.y = Phaser.Math.Clamp(text.y, minY, y + 20);
       }
