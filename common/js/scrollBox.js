@@ -44,7 +44,7 @@ export default class ScrollBox {
     var zone = scene.add.zone(x, y - 3, width, height + 6).setOrigin(0).setInteractive({useHandCursor: true, draggable: true});
     
     zone.on('drag', function (pointer) {
-      scene.input.dragDistanceThreshold = 150;
+      scene.input.dragDistanceThreshold = 250;
       if (pointer.isDown) {
         text.y += pointer.velocity.y / 10;
         text.y = Phaser.Math.Clamp(text.y, minY, y + 20);
