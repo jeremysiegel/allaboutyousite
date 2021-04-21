@@ -42,9 +42,10 @@ export default class ScrollBox {
 
     //  The rectangle they can 'drag' within
     var zone = scene.add.zone(x, y - 3, width, height + 6).setOrigin(0).setInteractive({useHandCursor: true, draggable: true});
-    
+    scene.input.dragDistanceThreshold = 100;
+
     zone.on('drag', function (pointer) {
-      scene.input.dragDistanceThreshold = 500;
+     
       if (pointer.isDown) {
         text.y += pointer.velocity.y / 10;
         text.y = Phaser.Math.Clamp(text.y, minY, y + 20);
@@ -53,8 +54,6 @@ export default class ScrollBox {
       .on('dragend', () => {
         zone.x = x;
         zone.y = y - 3;
-        scene.input.dragDistanceThreshold = 0;
-
       });
 
     var downKey = scene.input.keyboard.addKey('DOWN'); 
@@ -99,6 +98,8 @@ export default class ScrollBox {
     }
 
     ScrollBox.prototype.destroyOverlay = function() {
+      scene.input.dragDistanceThreshold = 0;
+      
       this.exit.destroy();
       this.textbox.destroy();
       this.screen.destroy();
