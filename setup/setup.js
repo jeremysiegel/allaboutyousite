@@ -148,5 +148,7 @@ export default class Setup extends Phaser.Scene {
       window.location.hash = '/mainTitle';
     }
 
+
+
   }
 }

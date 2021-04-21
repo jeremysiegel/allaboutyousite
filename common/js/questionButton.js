@@ -15,7 +15,11 @@ export default class QuestionButton {
       button.setTexture(key);
       
       if (!this.scrollBox || !this.scrollBox.isVisible()) {
-        this.scrollBox = new ScrollBox(scene, text, true)
+        scene.tweens._active.forEach((tween) => {
+          tween.pause();
+        })
+
+        this.scrollBox = new ScrollBox(scene, text, true);
       }
     });
   }

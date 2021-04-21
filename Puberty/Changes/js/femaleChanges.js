@@ -15,10 +15,8 @@ export default class FemaleChanges extends BaseScene {
   }
 
   preload () {
-
     resources.definitions = new FemaleChangesStrings('definitions');
     resources.questions = new FemaleChangesStrings('questions');
-
   }
 
   create () {
@@ -26,7 +24,7 @@ export default class FemaleChanges extends BaseScene {
     
     new Textbox(this, 810, 75, 430, 390);
     
-    resources.definitionDisplay = this.add.text(830, 95, resources.infoText,
+    resources.definitionDisplay = this.add.text(830, 95, resources.definitions.infoText,
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -120,12 +118,11 @@ export default class FemaleChanges extends BaseScene {
 }
 
 var resources = {
-  change: '',
-  infoText: "What are the changes of puberty?\n\nDifferent parts of the body are \"listening\" for a hormone message.\n\nDrag the hormones to each body part to trigger the changes of puberty.",
+  change: ''
 };
 
 function infoText (resources) {
-  resources.definitionDisplay.setText(resources.infoText);
+  resources.definitionDisplay.setText(resources.definitions.infoText);
 }
 
 

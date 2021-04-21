@@ -2,12 +2,13 @@ export default class FemaleChangesStrings {
   constructor(get) {
     
     var definitions =  {
+      infoText: "Different parts of the body are \"listening\" for hormone messages and waiting to change.\n\nDrag the hormones to each body part to trigger the changes of puberty.",
       breasts: 'Often, one of the first signs of puberty is a “breast bud,” a small lump behind the nipple that leads to the development of breasts.',
       genitals: 'The vulva, or the outside part of the genitals (sometimes what gets called the vagina) gets bigger.\n\nThe vagina makes a fluid to clean itself.\n\nPeriods, or the menstrual cycle, also start.',
-      hair: 'More hair starts to grow all around the body, like the arms and legs.\n\nNew hair grows around the genitals (pubic hair), and in the armpits.',
+      hair: 'More hair starts to grow all around the body, like the arms and legs.\n\nNew hair (called pubic hair) grows around the genitals, and in the armpits.',
       growth: 'There is a "growth spurt", or a time when you get taller pretty quickly. You might notice that you need to get new clothes.',
       hips: 'Females develop wider hips.',
-      sweat: 'Sweat changes and gets more smelly. Many people wear deoderant to stop the smell.\n\nThe new sweat causes acne or pimples, another perfectly normal part of puberty'
+      sweat: 'Sweat changes and gets more smelly. Many people wear deoderant to stop the smell.\n\nThe new sweat causes acne or pimples, another perfectly normal part of puberty.'
     }; 
 
     var questions = [
@@ -22,7 +23,7 @@ export default class FemaleChangesStrings {
       ],
       [
         "\nQ: What is a bra?\n\nA: A bra is a piece of clothing that supports the breasts. Some people choose to wear one, and others don't. It is up to you if you choose to wear a bra, and when you decide to start."
-      ]
+      ],
       [
         "\nQ: What is the purpose of the new sweat?\n\nA: It is mostly there to protect your skin. Many people like to wear deoderant to stop it from smelling. No reason to wait to get into the habit!"
       ]

@@ -21,16 +21,16 @@ export default class ChangesTitle extends BaseScene {
         nextScene: 'hormones'
       },
 
-      maleButton: {
-        color: '0xfb5607',
-        text: 'What are the male changes?',
-        nextScene: 'maleChanges'
-      },
-
       femaleButton: {
         color: '0x11887d',
         text: 'What are the female changes?',
         nextScene: 'femaleChanges'
+      },
+      
+      maleButton: {
+        color: '0xfb5607',
+        text: 'What are the male changes?',
+        nextScene: 'maleChanges'
       },
 
       emotionsButton: {

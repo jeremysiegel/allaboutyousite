@@ -66,6 +66,15 @@ export default class ScrollBox {
       text.y = Phaser.Math.Clamp(text.y + 50, minY, y + 20);
     });
 
+    scene.input.on('wheel', function(pointer, currentlyOver, dx, dy){
+      if (dy < 0) {
+        text.y = Phaser.Math.Clamp(text.y + 50, minY, y + 20);
+      } else {
+        text.y = Phaser.Math.Clamp(text.y - 50, minY, y + 20);
+      }
+    });
+
+
     if (popup) {
       this.exitCircle = scene.add.circle(0, 0, 20, 0xffffff).setInteractive({useHandCursor: true});
       this.exitCircleText = scene.add.text(0, 0, 'X', {fontFamily: 'Arial', fontSize: 16, color:'#000000', fontStyle: 'bold'}).setOrigin(0.5);
@@ -81,6 +90,9 @@ export default class ScrollBox {
         mask.destroy();
         zone.destroy();
         graphics.destroy();
+        scene.tweens._active.forEach((tween) => {
+          tween.resume();
+        })
       })
     }
 

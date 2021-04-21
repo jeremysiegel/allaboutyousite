@@ -18,7 +18,7 @@ export default class PeriodTitle extends BaseScene {
 
     var sceneButtons = {
       pregnancyButton: {
-        color: '0x9a79ff',
+        color: '0x00cc34',
         text: 'Pregnancy:\nHow a Baby\nGets Built',
         nextScene: 'pregnancy'
       },

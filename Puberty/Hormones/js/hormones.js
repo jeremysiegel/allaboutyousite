@@ -14,7 +14,7 @@ export default class Hormones extends BaseScene {
 
   preload () {
     resources.questions = new HormonesStrings('questions');
-
+    resources.instructions = new HormonesStrings('instructions');
   }
 
   create () {
@@ -37,7 +37,7 @@ export default class Hormones extends BaseScene {
     // Center textbox by subtractung half the width and height.
     new Textbox(this, this.cameras.main.width/2 - 255, this.cameras.main.height/2 - 245, 510, 490);
 
-    resources.text = this.add.text(this.cameras.main.width/2 - 235, this.cameras.main.height/2 - 225, resources.startText,
+    resources.text = this.add.text(this.cameras.main.width/2 - 235, this.cameras.main.height/2 - 225, resources.instructions.startText,
       {
         fontFamily: 'Assistant',
         fontSize: '30px',
@@ -47,15 +47,13 @@ export default class Hormones extends BaseScene {
     );
 
     resources.backButton = new SceneButton(this, 1220, 567, 0.1, 'changesTitle', 'backButton');
+    resources.resetButton = new ResetButton(this, 1160, 567, 0.1, 'resetButton');
+
     resources.scene = this;
   }
 }
 
 var resources = {
-  startText: "How does the body know when to start puberty?\n\nIt all starts in the brain. The brain tells the body to start puberty by making a tiny messenger called a hormone.\n\nClick the brain to make a hormone messenger!",
-  hormoneText: "Now click on the hormones to send the message to the body to start puberty.",
-  genitalsText: "The hormones travel from the brain to the genitals: ovaries in females and testicles in males.\n\nThe genitals then send a message to the rest of the body to start the changes of puberty. How do the genitals send the message? By making hormones of their own!\n\nClick anywhere on the body to send out more hormone messengers.",
-  endText: "You're all ready for puberty!\n\nYou'll learn a lot more as you explore the app. Navigate using the buttons below:",
   // Buttons and labels for navigating the app, to be displayed at the end of the scene in the textbox.
   endKey: {
     info: {
@@ -79,7 +77,7 @@ var resources = {
 
 // Callback for when info button is clicked.
 function infoText(resources) {
-  resources.text.setText(resources.genitalsText);
+  resources.text.setText(resources.instructions.genitalsText);
   if (resources.keys) {
     var keys = resources.keys.getChildren();
     for (var i = keys.length - 1; i > -1; i--) {
@@ -97,7 +95,7 @@ function brainClick() {
     alpha: 1,
     duration: 1000,
     onComplete: () => {
-      resources.text.setText(resources.hormoneText);
+      resources.text.setText(resources.instructions.hormoneText);
 
       resources.hormoneKey = new Hormone(resources.scene, 500, 250, 'testosterone', 0.7).setOrigin(0);  
       resources.hormoneLabel = resources.scene.add.text(555, 258, '    Hormone',
@@ -139,7 +137,7 @@ function hormoneClick() {
     alpha: 0,
     duration: 1000,
     onComplete: () => {
-      resources.text.setText(resources.genitalsText);
+      resources.text.setText(resources.instructions.genitalsText);
 
       resources.hormone.destroy();
       resources.hormone2.destroy();
@@ -197,11 +195,10 @@ function personClick(object, pointer) {
       this.data[0].target.destroy();
       
       // Puts end text back up if the info button was clicked at the end of the scene.
-      if (resources.text.text !== resources.endText) {
-        resources.text.setText(resources.endText);
+      if (resources.text.text !== resources.instructions.endText) {
+        resources.text.setText(resources.instructions.endText);
 
         resources.infoButton = new InfoButton(resources.scene, 1220, 507, 0.1, infoText, resources, 'infoButton');
-        resources.resetButton = new ResetButton(resources.scene, 1160, 567, 0.1, 'resetButton');
         resources.questionButton = new QuestionButton(resources.scene, 1160, 507, 0.1, resources.questions, 'questionButton');
 
         var containerY = 292;

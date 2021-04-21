@@ -11,42 +11,42 @@ export default class Period extends BaseScene {
   }
 
   preload () {
-    resources.questions = new PeriodStrings();
-
+    resources.questions = new PeriodStrings('questions');
+    resources.infoText = new PeriodStrings('infoText');
   }
 
   create () {
     super.create();
     resources.scene = this;
-    resources.femaleInternal = this.add.image(404.25, 290.55, 'femaleInternal');
+    resources.femaleInternal = this.add.image(374.25, 295.55, 'femaleInternal').setScale(1.2);
 
     // Endometrium spritesheets
-    resources.left = this.add.sprite(366.3, 235, 'leftSpritesheet', 0).setScale(0.5);
-    resources.right = this.add.sprite(442.2, 235, 'leftSpritesheet', 0);
+    resources.left = this.add.sprite(328.3, 229, 'leftSpritesheet', 0).setScale(0.6);
+    resources.right = this.add.sprite(421.2, 229, 'leftSpritesheet', 0);
     resources.right.flipX = true;
-    resources.right.setScale(0.5);
-    resources.top = this.add.sprite(406, 184, 'topSpritesheet', 0).setScale(0.5);
+    resources.right.setScale(0.6);
+    resources.top = this.add.sprite(376, 167, 'topSpritesheet', 0).setScale(0.6);
 
     // This covers the endometrium animations so they appear to emerge from the uterus.
-    resources.uterus = this.add.image(404.65, 248.6, 'uterusMask');
+    resources.uterus = this.add.image(374.65, 245, 'uterusMask').setScale(1.22);
     
     // This sets up the interactive cycle calendar
-    var circle = new Phaser.Geom.Circle(970, 300, 170);
+    var circle = new Phaser.Geom.Circle(970, 300, 210);
 
-    resources.backgroundCircle = this.add.circle(970, 300, 200, 0xcfcffa).setStrokeStyle(5, 0x8e4ab3, 0.7);
+    resources.backgroundCircle = this.add.circle(970, 300, 245, 0xcfcffa).setStrokeStyle(5, 0x8e4ab3, 0.7);
     
     resources.stage = this.add.text(circle.x, circle.y - 20, 'Period', 
     {
       fontFamily: 'Assistant',
-      fontSize: '50px',
+      fontSize: '70px',
       fill: '#000',
-      wordWrap: { width: 190, useAdvancedWrap: false }
+      wordWrap: { width: 190 }
     }).setOrigin(0.5);
     
     resources.dayLabel = this.add.text(resources.backgroundCircle.x, 360, 'Day 1', 
     {
       fontFamily: 'Assistant',
-      fontSize: '25px',
+      fontSize: '35px',
       fill: '#000'
     }).setOrigin(0.5, 0);
 
@@ -55,9 +55,12 @@ export default class Period extends BaseScene {
     var fillColor = '0xff0000';
     
     for (var i = 1; i < 29; i++) {
-      var dayCircle = this.add.circle(0, 0, 14, fillColor);
+      var dayCircle = this.add.circle(0, 0, 19, fillColor);
 
-      var day = this.add.text(0, 0, i, {fontFamily: 'Arial'}).setOrigin(0.5);
+      var day = this.add.text(0, 0, i, {
+        fontFamily: 'Arial',
+        fontSize: '19px'
+      }).setOrigin(0.5);
 
       var container = this.add.container(0, 0, [dayCircle, day]);
       container
@@ -78,11 +81,12 @@ export default class Period extends BaseScene {
       } 
     }
 
+   
     Phaser.Actions.PlaceOnCircle(resources.circleGroup.getChildren(), circle, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(270));
 
-    resources.infoButton = new InfoButton(this, 1200, 507, 0.1, infoText, resources, 'infoButton');
-    resources.backButton = new SceneButton(this, 1200, 567, 0.1, 'periodTitle', 'backButton');
-    resources.questionButton = new QuestionButton(this, 1140, 507, 0.1, resources.questions, 'questionButton');
+    resources.infoButton = new InfoButton(this, 1220, 507, 0.1, infoText, resources, 'infoButton');
+    resources.backButton = new SceneButton(this, 1220, 567, 0.1, 'periodTitle', 'backButton');
+    resources.questionButton = new QuestionButton(this, 1160, 567, 0.1, resources.questions, 'questionButton');
 
     newEgg();
     changeDay(1);
@@ -92,7 +96,6 @@ export default class Period extends BaseScene {
 var resources = {
   currentDay: 1,
   previousDay: 1,
-  infoText: 'Click on a day of the menstrual cycle on the right and watch what happens on the left.\n\nThe menstrual cycle is a set of changes in the female reproductive system. Each cycle, a lining builds up on the uterus. If there is no pregnancy, the lining is shed, and some of it leaves the body during the period.\n\nJust like a day, week, or year, when one menstrual cycle ends another begins.',
 };
 
 function infoText(resources) {
@@ -189,21 +192,21 @@ function generateAnimation(previousDay, currentDay) {
 
 // Function to create a new egg.
 function newEgg() {
-  resources.egg = resources.scene.add.image(200, 224, 'egg').setScale(1.3);
+  resources.egg = resources.scene.add.image(130, 204, 'egg').setScale(1.5);
 
   resources.eggTimeline = resources.scene.tweens.createTimeline();
 
   resources.eggTimeline.add({
     targets: resources.egg,
-    x: 150.5,
-    y: 172,  
+    x: 70.5,
+    y: 152,  
     duration: 500
   });
 
   resources.eggTimeline.add({
     targets: resources.egg,
-    x: 142,
-    y: 112,
+    x: 55,
+    y: 100,
     duration: 500
   });
 

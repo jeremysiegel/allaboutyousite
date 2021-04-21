@@ -87,7 +87,7 @@ export default class Pregnancy extends BaseScene {
       }
     );
 
-    resources.definitionDisplay.setText(resources.infoText);
+    resources.definitionDisplay.setText(resources.definitions.infoText);
 
     var monthX = 90;
     for (var i = 0; i < 10; i++) {
@@ -158,9 +158,8 @@ export default class Pregnancy extends BaseScene {
 }
 
 var resources = {
-  infoText: "You can watch the baby grow during pregnancy using a device called an ultrasound.\n\nClick on each month to learn what is happening to the baby."
 };
 
 function infoText (resources) {
-  resources.definitionDisplay.setText(resources.infoText);
+  resources.definitionDisplay.setText(resources.definitions.infoText);
 }
