@@ -42,7 +42,7 @@ export default class MainTitle extends BaseScene {
 
     this.add.image(194.5, 165.25, 'titleText');
 
-    new TitleButton(this, this.cameras.main.width/2 - width/2, this.cameras.main.height/2-height-spacing, width, height, sceneButtons.changesButton.color, sceneButtons.changesButton.text, sceneButtons.changesButton.nextScene);
+    new TitleButton(this, this.cameras.main.width/2 - width/2, this.cameras.main.height/2-height-spacing, width, height + 20, sceneButtons.changesButton.color, sceneButtons.changesButton.text, sceneButtons.changesButton.nextScene);
     new TitleButton(this, this.cameras.main.width/2-width-spacing, this.cameras.main.height/2+spacing, width, height, sceneButtons.reproductiveButton.color, sceneButtons.reproductiveButton.text, sceneButtons.reproductiveButton.nextScene);
     new TitleButton(this, this.cameras.main.width/2+spacing, this.cameras.main.height/2+spacing, width, height, sceneButtons.periodButton.color, sceneButtons.periodButton.text, sceneButtons.periodButton.nextScene);
 
