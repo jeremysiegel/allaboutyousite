@@ -106,7 +106,6 @@ export default class Setup extends Phaser.Scene {
     this.load.image('cervix', '../../Puberty/Female-Internal/images/cervix.png');
 
     // hormones
-   
     this.load.image('boy', '../../Puberty/Hormones/images/boy.png');
     this.load.image('girl', '../../Puberty/Hormones/images/girl.png');
     this.load.image('brain', '../../Puberty/Hormones/images/brain.png');
