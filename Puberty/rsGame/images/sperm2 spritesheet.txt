@@ -1,1 +1,0 @@
-this.load.spritesheet('spermSpritesheet', '../../Puberty/rsGame/images/sperm_spritesheet.png', { frameWidth: 104, frameHeight: 277, margin: 10, spacing: 20 });
