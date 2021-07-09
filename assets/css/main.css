@@ -3990,6 +3990,8 @@ input, select, textarea {
 
 			#header {
 				padding: 2em 2em 0.1em 2em ;
+        font-size: 1.4em;
+
 			}
 
 				#header .content {
@@ -4005,6 +4007,7 @@ input, select, textarea {
 					#header .image .inner, #header .image:before, #header .image:after {
 						font-size: 0.8em;
 					}
+        
 
 		}
 
@@ -4012,13 +4015,13 @@ input, select, textarea {
 
 			#header {
 				padding: 3em 1.5em 1em 1.5em ;
+        font-size: 1.75em;
 			}
 
 				#header .image {
 					font-size: 0.6em;
 					max-width: 60vw;
 				}
-
 		}
 
 	@media screen and (max-width: 480px) and (orientation: landscape) {
