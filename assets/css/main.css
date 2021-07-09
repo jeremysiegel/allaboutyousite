@@ -159,7 +159,7 @@ input, select, textarea {
 		}
 
 	body, input, select, textarea {
-		font-family: 'Assistant', Helvetica, sans-serif;
+		font-family: 'Assistant', Arial, Helvetica, sans-serif;
 		font-weight: normal;
 		line-height: 1.5em;
 		letter-spacing: -0.015em;
@@ -3991,6 +3991,7 @@ input, select, textarea {
 			#header {
 				padding: 2em 2em 0.1em 2em ;
         font-size: 1.4em;
+        font-family: 'Assistant';
 
 			}
 
@@ -4016,6 +4017,7 @@ input, select, textarea {
 			#header {
 				padding: 3em 1.5em 1em 1.5em ;
         font-size: 1.75em;
+        font-family: 'Assistant';
 			}
 
 				#header .image {
