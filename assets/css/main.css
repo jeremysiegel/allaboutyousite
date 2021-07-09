@@ -3988,6 +3988,13 @@ input, select, textarea {
 
 		@media screen and (max-width: 736px) and (orientation: landscape) {
 
+      body, input, select, textarea {
+        font-family: 'Assistant', Arial, Helvetica, sans-serif;
+        font-weight: normal;
+        line-height: 1.5em;
+        letter-spacing: -0.015em;
+      }
+      
 			#header {
 				padding: 2em 2em 0.1em 2em ;
         font-size: 1.4em;
@@ -4014,7 +4021,14 @@ input, select, textarea {
 
 		@media screen and (max-width: 736px) and (orientation: portrait) {
 
-			#header {
+      body, input, select, textarea {
+        font-family: 'Assistant', Arial, Helvetica, sans-serif;
+        font-weight: normal;
+        line-height: 1.5em;
+        letter-spacing: -0.015em;
+      }
+
+      #header {
 				padding: 3em 1.5em 1em 1.5em ;
         font-size: 1.75em;
         font-family: 'Assistant';
@@ -4028,6 +4042,7 @@ input, select, textarea {
 
 	@media screen and (max-width: 480px) and (orientation: landscape) {
 
+    
 		#header {
 			padding: 2em 1.5em 0.1em 1.5em ;
 		}
