@@ -173,6 +173,7 @@ input, select, textarea {
 		text-decoration: none;
 		border-bottom: dotted 1px;
 	}
+  /* ******Remove underlines from links for image links******* */
     a:link {
       text-decoration: none;
       border: 0px;
@@ -223,7 +224,7 @@ input, select, textarea {
 			}
 
 		}
-
+  /* ******Adjust font sizes - browser******* */
 	h2 {
 		font-size: 1.75em;
 		line-height: 1.5em;
@@ -235,7 +236,7 @@ input, select, textarea {
 	}
 
 	h4 {
-		font-size: 1.3em;
+		font-size: 1.4em;
 		line-height: 1.5em;
 	}
 
@@ -248,19 +249,20 @@ input, select, textarea {
 		font-size: 0.7em;
 		line-height: 1.5em;
 	}
+  /* ******Adjust font sizes - mobile******* */
 
 	@media screen and (max-width: 736px) {
 
 		h2 {
-			font-size: 1.25em;
+			font-size: 1.75em;
 		}
 
 		h3 {
-			font-size: 1.2em;
+			font-size: 1.75em;
 		}
 
 		h4 {
-			font-size: 1em;
+			font-size: 1.5em;
 		}
 
 	}
@@ -3986,32 +3988,13 @@ input, select, textarea {
 
 		}
 
+    /* ******For mobile devices****** */
+
 		@media screen and (max-width: 736px) and (orientation: landscape) {
-
-      @font-face {
-        font-family: 'Assistant';
-        src: url('../fonts/Assistant-Regular.eot');
-        src: url('../fonts/Assistant-Regular.eot?#iefix') format('embedded-opentype'),
-            url('../fonts/Assistant-Regular.woff2') format('woff2'),
-            url('../fonts/Assistant-Regular.woff') format('woff'),
-            url('../fonts/Assistant-Regular.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      };
-
-      
-      body, input, select, textarea {
-        font-family: 'Assistant', Arial, Helvetica, sans-serif;
-        font-weight: normal;
-        line-height: 1.5em;
-        letter-spacing: -0.015em;
-      }
 
 			#header {
 				padding: 2em 2em 0.1em 2em ;
         font-size: 1.4em;
-        font-family: 'Assistant';
 
 			}
 
@@ -4024,39 +4007,18 @@ input, select, textarea {
 					width: 15em;
 					max-width: 20vw;
 				}
-
+  
 					#header .image .inner, #header .image:before, #header .image:after {
 						font-size: 0.8em;
 					}
-        
 
 		}
 
 		@media screen and (max-width: 736px) and (orientation: portrait) {
 
-      @font-face {
-        font-family: 'Assistant';
-        src: url('../fonts/Assistant-Regular.eot');
-        src: url('../fonts/Assistant-Regular.eot?#iefix') format('embedded-opentype'),
-            url('../fonts/Assistant-Regular.woff2') format('woff2'),
-            url('../fonts/Assistant-Regular.woff') format('woff'),
-            url('../fonts/Assistant-Regular.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      };
-      
-      body, input, select, textarea {
-        font-family: 'Assistant', Arial, Helvetica, sans-serif;
-        font-weight: normal;
-        line-height: 1.5em;
-        letter-spacing: -0.015em;
-      }
-
       #header {
 				padding: 3em 1.5em 1em 1.5em ;
         font-size: 1.75em;
-        font-family: 'Assistant';
 			}
 
 				#header .image {
