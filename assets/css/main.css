@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'Assistant';
-  src: url('../fonts/Assistant-Regular.eot');
-  src: url('../fonts/Assistant-Regular.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/Assistant-Regular.woff2') format('woff2'),
-      url('../fonts/Assistant-Regular.woff') format('woff'),
-      url('../fonts/Assistant-Regular.ttf') format('truetype');
+  src: url('../webfonts/Assistant-Regular.eot');
+  src: url('../webfonts/Assistant-Regular.eot?#iefix') format('embedded-opentype'),
+      url('../webfonts/Assistant-Regular.woff2') format('woff2'),
+      url('../webfonts/Assistant-Regular.woff') format('woff'),
+      url('../webfonts/Assistant-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -159,7 +159,7 @@ input, select, textarea {
 		}
 
 	body, input, select, textarea {
-		/*font-family: 'Assistant', Arial, Helvetica, sans-serif;*/
+		font-family: 'Assistant', Arial, Helvetica, sans-serif;
 		font-weight: normal;
 		line-height: 1.5em;
 		letter-spacing: -0.015em;
