@@ -12,6 +12,18 @@
   font-display: swap;
 };
 
+@font-face {
+  font-family: 'Assistant';
+  src: url('../webfonts/Assistant-SemiBold.eot');
+  src: url('../webfonts/Assistant-SemiBold.eot?#iefix') format('embedded-opentype'),
+      url('../webfonts/Assistant-SemiBold.woff2') format('woff2'),
+      url('../webfonts/Assistant-SemiBold.woff') format('woff'),
+      url('../webfonts/Assistant-SemiBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: bold;
+  font-display: swap;
+};
+
 /*
 	Fractal by HTML5 UP
 	html5up.net | @ajlkn
@@ -173,10 +185,14 @@ input, select, textarea {
 		text-decoration: none;
 		border-bottom: dotted 1px;
 	}
-  /* ******Remove underlines from links for image links******* */
+  /*******Remove underlines from links for image links******* */
     a:link {
       text-decoration: none;
       border: 0px;
+    }
+
+    a.one:link {
+      text-decoration: underline;
     }
     
 		a:hover {
@@ -224,7 +240,7 @@ input, select, textarea {
 			}
 
 		}
-  /* ******Adjust font sizes - browser******* */
+  /*******Adjust font sizes - browser******* */
 	h2 {
 		font-size: 1.75em;
 		line-height: 1.5em;
@@ -249,7 +265,7 @@ input, select, textarea {
 		font-size: 0.7em;
 		line-height: 1.5em;
 	}
-  /* ******Adjust font sizes - mobile******* */
+  /*******Adjust font sizes - mobile******* */
 
 	@media screen and (max-width: 736px) {
 
@@ -3990,7 +4006,7 @@ input, select, textarea {
 
 		}
 
-    /* ******For mobile devices****** */
+    /*******For mobile devices****** */
 
 		@media screen and (max-width: 736px) and (orientation: landscape) {
 
